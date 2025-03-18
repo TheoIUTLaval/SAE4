@@ -4,7 +4,7 @@
     <title>L'étal en ligne</title>
     <meta charset="UTF-8">
     
-    <link rel="stylesheet" type="text/css" href="css/style_template.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
 </head>
 <body>
     <?php
