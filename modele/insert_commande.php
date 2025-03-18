@@ -48,5 +48,5 @@
         $i++;}
     }
     
-    header('Location: achats.php');
+    header('Location: /SAE4/achats.php');
 ?>

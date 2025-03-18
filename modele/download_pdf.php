@@ -50,7 +50,7 @@ $Adr_Prod = $returnQueryGetProducteur[0]["Adr_Uti"];
 $Mail_Prod = $returnQueryGetProducteur[0]["Mail_Uti"];
 $Prof_Prod = $returnQueryGetProducteur[0]["Prof_Prod"];
 
-require('tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
+require('/SAE4/tfpdf/tfpdf.php'); // Assurez-vous d'ajuster le chemin vers le fichier tFPDF
 
 class MonPDF extends tFPDF
 {
