@@ -5,7 +5,7 @@
     include "controller/controllerIndex.php";
     require "language/language.php" ; 
     echo(__DIR__);
-    echo($_POST);
+    
     $htmlFrançais="Français";
     $htmlAnglais="English";
     $htmlEspagnol="Español";
