@@ -25,7 +25,7 @@
 
 #boutonEnvoyerMessage{
     padding: 12px;
-    background: url('/asset/img/paper\ plane.svg') no-repeat #FFFFFF;
+    background: url('/SAE4/asset/img/paper\ plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
     width: 42px;
     height: 42px;
@@ -40,7 +40,7 @@
 
 
 .surContenu {
-    background: url('/asset/img/fond_messagerie.svg') no-repeat #fff;
+    background: url('/SAE4/asset/img/fond_messagerie.svg') no-repeat #fff;
     background-position: center;
     display: flex; 
     flex-direction: column;
