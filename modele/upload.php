@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
-        $targetDir ="/SAE4/asset/img/img_producteur/";
+        $targetDir = $_SERVER['DOCUMENT_ROOT'] . "asset/img/img_producteur/";
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "etu";
         $serveur = "localhost";
@@ -41,8 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Déplacer le fichier téléchargé vers le dossier de destination
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
-            
-        header('Location: /SAE4/index.php');  
+            header('Location: /SAE4/index.php');  
         } else {
             echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
         }
