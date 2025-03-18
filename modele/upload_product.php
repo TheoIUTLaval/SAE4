@@ -1,5 +1,5 @@
 <?php
-    require "/SAE4/language/language.php" ; 
+    require "../language/language.php" ; 
 ?>
 <?php
 // Vérifier si le formulaire a été soumis
