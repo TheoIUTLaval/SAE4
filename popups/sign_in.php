@@ -5,10 +5,10 @@
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
-        require '/SAE4/traitements/traitement_formulaire_sign_in_admin.php';
+        require __DIR__.'/../traitements/traitement_formulaire_sign_in.php';
     }else{
         $_SESSION['debug'][0]=1;
-        require '/SAE4/traitements/traitement_formulaire_sign_in.php';
+        require __DIR__.'/../traitements/traitement_formulaire_sign_in.php';
     }
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
