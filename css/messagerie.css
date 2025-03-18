@@ -25,7 +25,7 @@
 
 #boutonEnvoyerMessage{
     padding: 12px;
-    background: url('../img/paper plane.svg') no-repeat #FFFFFF;
+    background: url('../asset/img/paper\ plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
     width: 42px;
     height: 42px;
