@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newFileName = $Id_Prod . '.' . $extension;
 
         // Créer le chemin complet du fichier de destination
-        $targetPath = $targetDir ;
+        $targetPath = $targetDir . $newFileName;
         
         if (file_exists($targetPath)) {
             unlink($targetPath);
