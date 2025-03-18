@@ -1,5 +1,5 @@
 <?php
-    require "language.php" ; 
+    require "language/language.php"; 
 ?>
 <div class="popup">
     <div class="contenuPopup">

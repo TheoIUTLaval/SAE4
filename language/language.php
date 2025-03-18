@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
  
 if (isset($_POST['language'])) {
     $_SESSION["language"] = $_POST['language'];
-    header("Location: index.php");
+    header("Location: ../index.php");
 
 } 
     if (isset($_SESSION["language"])) {
