@@ -14,7 +14,7 @@
     ?>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
+			<img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
             <div class="contenuBarre">
                 <!-- some code -->
             </div>
