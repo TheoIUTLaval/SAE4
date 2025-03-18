@@ -45,7 +45,7 @@
 }
 
 .boutonQuitPopup{
-    background: url('../img/quit.svg') no-repeat;
+    background: url('asset/img/quit.svg') no-repeat;
     background-size: 30px 30px;
     border: none;
     padding: 0;
