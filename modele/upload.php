@@ -35,7 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Créer le chemin complet du fichier de destination
         $targetPath = $targetDir . $newFileName;
         
-        unlink( $targetPath ); 
+        if (file_exists($targetPath)) {
+            unlink($targetPath);
+        }
         // Déplacer le fichier téléchargé vers le dossier de destination
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
             echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
