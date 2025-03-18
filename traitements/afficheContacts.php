@@ -16,7 +16,7 @@ function dbConnect(){
 }
 
 function afficheContacts($id_user){
-    require "./language.php" ; 
+    require "language/language.php" ; 
     $bdd = dbConnect();
     $query = $bdd->query(('CALL listeContact('.$id_user.');'));
     $contacts = $query->fetchAll(PDO::FETCH_ASSOC);
