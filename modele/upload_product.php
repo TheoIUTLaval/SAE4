@@ -1,5 +1,5 @@
 <?php
-    require "language/language.php" ; 
+    require "/SAE4/language/language.php" ; 
 ?>
 <?php
 // Vérifier si le formulaire a été soumis
@@ -31,13 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<br><?php echo $htmlImgTelecSucces?> $newFileName<br>";
         } else {
             echo "$htmlImgTelecRate " . error_get_last()['message'] . "<br>";
-            header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
+            header('Location: /SAE4/mes_produits.php?erreur='. error_get_last()['message'] );
         }
 
     } else {
         echo $htmlSelecImg."<br>";
     }
     
-    header('Location: produits.php');    
+    header('Location: /SAE4/produits.php');    
 }
 ?>
