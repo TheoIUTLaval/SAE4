@@ -1,5 +1,5 @@
 <?php
-    require "language.php" ; 
+    require "language/language.php" ; 
 ?>
 <!DOCTYPE html>
 <html lang="fr">

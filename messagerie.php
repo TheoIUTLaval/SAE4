@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php
-    require "language.php" ; 
+    require "language/language.php" ; 
 ?> 
 <head>
     <title><?php echo $htmlMarque; ?></title>

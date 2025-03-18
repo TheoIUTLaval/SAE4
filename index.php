@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <?php
-    require "language.php" ; 
+    require "language/language.php" ; 
     $htmlFrançais="Français";
     $htmlAnglais="English";
     $htmlEspagnol="Español";

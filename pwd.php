@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <?php
-    require "language.php" ; 
+    require "language/language.php" ; 
 ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
