@@ -119,7 +119,7 @@
                                 echo "<option value=\"2\">".$htmlLégume."</option>";
                                 echo "<option value=\"4\">".$htmlViande."</option>";
                                 echo "<option value=\"5\">".$htmlVin."</option>";
-                               break;
+                            break;
                         }
                     ?>
 
