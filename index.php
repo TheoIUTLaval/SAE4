@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
-    bite
+    
     <?php
     //var_dump($_SESSION);
         if(!isset($_SESSION)){

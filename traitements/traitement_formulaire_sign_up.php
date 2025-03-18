@@ -1,5 +1,5 @@
 <?php
-    require "/SAE4/language/language.php" ;
+    require "language/language.php" ;
     echo(__DIR__);
     ?>
 <?php
