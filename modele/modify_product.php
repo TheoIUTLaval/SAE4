@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
-        $targetDir = __DIR__ . "/SAE4/asset/img/img_produit/";
+        $targetDir = __DIR__ . "../asset/img/img_produit/";
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "etu";
         $serveur = "localhost";
@@ -61,12 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<br>' $htmlImgTelecSucces  $newFileName<br>";
         } else {
             echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-            header('Location: /SAE4/mes_produits.php?erreur='. error_get_last()['message'] );
+            header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
         }
     } else {
         echo $htmlSelecImg."<br>";
     }
-    header('Location: /SAE4/produits.php');    
+    header('Location: ../produits.php');    
 }
-    header('Location: /SAE4/produits.php');
+    header('Location: ../produits.php');
 ?>
