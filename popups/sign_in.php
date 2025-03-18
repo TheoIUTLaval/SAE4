@@ -1,14 +1,14 @@
 <?php
-    require "language/language.php"; 
+    require "/SAE4/language/language.php"; 
 ?>
 <?php
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
-        require 'traitements/traitement_formulaire_sign_in_admin.php';
+        require '/SAE4/traitements/traitement_formulaire_sign_in_admin.php';
     }else{
         $_SESSION['debug'][0]=1;
-        require 'traitements/traitement_formulaire_sign_in.php';
+        require '/SAE4/traitements/traitement_formulaire_sign_in.php';
     }
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
