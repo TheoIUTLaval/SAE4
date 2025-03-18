@@ -1,5 +1,5 @@
 <?php
-    require "language/language.php" ; 
+    require "../../language/language.php" ; 
 ?>
 <?php
 $pwd1 = $_POST['pwd1'];
