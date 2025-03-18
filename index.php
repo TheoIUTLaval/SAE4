@@ -196,10 +196,8 @@
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
 
             <div class="gallery-container">
-               <?php 
-               
-               
-               if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            <?php 
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if (isset($_GET["categorie"])) {
                     $categorie = htmlspecialchars($_GET["categorie"]);
                     // Connexion à la base de données 

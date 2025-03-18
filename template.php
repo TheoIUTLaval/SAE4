@@ -22,20 +22,40 @@
         <div class="rightColumn">
             <div class="topBanner">
                 <div class="divNavigation">
-                    <a class="bontonDeNavigation" href="index.php">Accueil</a>
-                    <?php
-                        if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">Messagerie</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">Achats</a>';
-                        }
-                        if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
-                            echo'<a class="bontonDeNavigation" href="produits.php">Produits</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">Commandes</a>';
-                        }
-                        if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">Panel Admin</a>';
-                        }
-                    ?>
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#index.php">Accueil</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <?php if (isset($_SESSION["Id_Uti"])): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link active"  href="messagerie.php">Messagerie</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="achats.php">Achats</a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION["isProd"]) && ($_SESSION["isProd"]==true)): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  href="produits.php">Produits</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  href="delivery.php">Commandes</a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION["isAdmin"]) && ($_SESSION["isAdmin"]==true)): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link active"  href="panel_admin.php">Panel Admin</a>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+
+                        </div>
+                    </div>
+                    </nav>
                 </div>
                 <form method="post">
                     <?php
