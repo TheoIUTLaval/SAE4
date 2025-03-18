@@ -1,6 +1,7 @@
 <?php
-    require "/SAE4/language/language.php" ; 
-?>
+    require "/SAE4/language/language.php" ;
+    echo(__DIR__);
+    ?>
 <?php
 // Récupération des données du formulaire
 
