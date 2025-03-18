@@ -1,11 +1,13 @@
 <?php
+    echo(__DIR__);
+    echo('langage/language.php');
     require "language/language.php"; 
 ?>
 <?php
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
-        require 'traitements/traitement_formulaire_sign_in_admin.php';
+        require 'traitements/traitement_formulaire_sign_in.php';
     }else{
         $_SESSION['debug'][0]=1;
         require 'traitements/traitement_formulaire_sign_in.php';

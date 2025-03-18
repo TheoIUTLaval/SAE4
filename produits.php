@@ -170,7 +170,7 @@
                                         echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">'.$htmlModifier.'</button>';
                                         echo '</form>';
-                                        echo '<form action="delete_product.php" method="post">';
+                                        echo '<form action="/SAE4/delete_product.php" method="post">';
                                         echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">'.$htmlSupprimer.'</button>';
                                         echo '</form>';

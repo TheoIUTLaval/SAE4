@@ -1,5 +1,5 @@
 <?php
-    require "language/language.php" ; 
+    require "/SAE4/language/language.php" ; 
 ?>
 <?php
 

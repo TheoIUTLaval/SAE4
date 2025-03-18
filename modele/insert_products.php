@@ -1,5 +1,5 @@
 <?php
-    require "/SAE4/language/language.php" ; 
+    require "../language/language.php" ; 
 ?>
 <?php
      function dbConnect(){
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<br>".$htmlImgTelecSucces, $newFileName."<br>";
             } else {
                 echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-                header('Location: /SAE4/mes_produits.php?erreur='. error_get_last()['message']);
+                header('Location: mes_produits.php?erreur='. error_get_last()['message']);
             }
 
     } else {
@@ -93,5 +93,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bindInsertProduct->bindParam(':Unite_Prix', $Unite_Prix, PDO::PARAM_INT);
     $bindInsertProduct->execute();
 
-    header('Location: /SAE4/produits.php');
+    header('Location: ../produits.php');
 ?>

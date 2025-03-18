@@ -1,9 +1,9 @@
 <?php
-    require "language/language.php" ; 
+    require __DIR__ . '/language/language.php' ; 
 ?>
 <?php
 if (isset($_POST['formClicked'])){
-    require 'traitements/traitement_formulaire_sign_up.php';
+    require __DIR__ . '/traitements/sign_up.php';
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
 }
