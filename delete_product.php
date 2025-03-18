@@ -20,7 +20,7 @@
       $delProduct->execute();
 
       // suppression de l'image (path à changer sur le serveur !!!!)
-      $imgpath = "img_produit/".$Id_Produit.".png";
+      $imgpath = "asset/img/img_produit/".$Id_Produit.".png";
       //echo $imgpath;
       unlink( $imgpath ); 
     header('Location: produits.php');

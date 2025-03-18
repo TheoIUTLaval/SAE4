@@ -48,7 +48,7 @@
     ?>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
+			<img class="logo" href="index.php" src="asset/img/logo.png">
             <div class="contenuBarre">
                 <!-- some code -->
 
@@ -229,7 +229,7 @@
                                         echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
                                         echo $htmlTypeDeuxPoints, $typeProduit . "<br>";
                                         echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 100%; height: 85%;" ><br>';
                                         echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
                                         echo '</div> '; 
                                     }
@@ -257,7 +257,7 @@
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
-                        	<img class="img-test" src="img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
+                        	<img class="img-test" src="asset/imgimg_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
 						</div>
 						<div class="text-info">
                             <?php

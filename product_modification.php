@@ -43,7 +43,7 @@
         ?>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
+			<img class="logo" href="index.php" src="asset/img/logo.png">
             <div class="contenuBarre">
                 
             
@@ -223,7 +223,7 @@
             </form>
             <br>
             <?php
-            //echo '<img class="img-produit" src="/SAE/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+            //echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
             ?>
             <br>
             <br>
@@ -312,7 +312,7 @@
                                         echo '<div class="square1" >';
                                         echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
                                         echo $htmlTypeDeuxPoints, $typeProduit . "<br><br>";
-                                        echo '<img class="img-produit" src="img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
+                                        echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
                                         echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo $htmlStockDeuxPoints, $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         if ($Id_Produit==$Id_Produit_Update){

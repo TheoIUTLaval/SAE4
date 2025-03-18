@@ -19,7 +19,7 @@
     ?>
     <div class="container">
     <div class="leftColumn">
-			<img class="logo" src="img/logo.png">
+			<img class="logo" src="asset/img/logo.png">
             <p><?php echo $htmlContactsRecentsDeuxPoints?></p>
 			<?php
 			require 'traitements/afficheContacts.php';

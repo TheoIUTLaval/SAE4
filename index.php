@@ -135,7 +135,7 @@
     ?>
     <div class="container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="img/logo.png">
+			<img class="logo" href="index.php" src="asset/img/logo.png">
             <div class="contenuBarre">
                 
             <center><strong><p><?php echo $htmlRechercherPar; ?></p></strong></center>
@@ -347,7 +347,7 @@
                                 echo ''.$row["Prof_Prod"]. "<br>";
                                 echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
                                 echo $row["Adr_Uti"] . "<br>";
-                                echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
+                                echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
                                 echo '</a> ';  
                             }    
                             else{
@@ -361,7 +361,7 @@
                                     echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                     echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
                                     echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                     echo '</a> ';  
                                 }    
                             }

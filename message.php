@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="left-column">
-			<img class="logo" src="img/logo.png">
+			<img class="logo" src="asset/img/logo.png">
 			
             <p>Contacts récents :</p>
 			<?php
