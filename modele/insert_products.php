@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<br>".$htmlImgTelecSucces, $newFileName."<br>";
             } else {
                 echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-                header('Location: /SAE4/mes_produits.php?erreur='. error_get_last()['message']);
+                header('Location: mes_produits.php?erreur='. error_get_last()['message']);
             }
 
     } else {
