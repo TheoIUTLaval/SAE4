@@ -1,4 +1,5 @@
 <?php
+    echo(__DIR__);
     require 'language/language.php' ; 
 ?>
 <?php
