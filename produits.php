@@ -42,7 +42,7 @@
 
 
                 <center><p><strong><?php echo $htmlAjouterProduit; ?></strong></p>
-            <form action="insert_products.php" method="post" enctype="multipart/form-data">
+            <form action="modele/insert_products.php" method="post" enctype="multipart/form-data">
                 <label for="pwd"><?php echo $htmlProduitDeuxPoints; ?> </label>
                 <input type="text" pattern="[A-Za-z0-9 ]{0,100}" name="nomProduit" placeholder="<?php echo $htmlNomDuProduit; ?>" required><br><br>
 
