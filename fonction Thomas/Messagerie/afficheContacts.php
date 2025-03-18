@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include 'language/language.php';
 
-include 'fonctions.php';
+include 'controller';
 
 function dbConnect(){
     $host = 'localhost';
