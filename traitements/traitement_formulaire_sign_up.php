@@ -1,5 +1,5 @@
 <?php
-    require "language.php" ; 
+    require "language/language.php" ; 
 ?>
 <?php
 // Récupération des données du formulaire
