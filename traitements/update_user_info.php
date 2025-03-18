@@ -3,10 +3,10 @@
 if (isset($_POST['new_nom'], $_POST['new_prenom'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pwd'])) {
     $adr = $_POST['rue'] .", ". $_POST['code']. " ".mb_strtoupper($_POST['ville']);
 
-    $utilisateur = "inf2pj02";
+    $utilisateur = "etu";
     $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
+    $motdepasse = "Achanger!";
+    $basededonnees = "sae";
     $bdd = new PDO('mysql:host='.$serveur.';dbname='.$basededonnees,$utilisateur,$motdepasse);
 
     if(!isset($_SESSION)){

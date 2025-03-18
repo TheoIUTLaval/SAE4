@@ -17,10 +17,10 @@
         }
 
         function dbConnect(){
-            $utilisateur = "inf2pj02";
+            $utilisateur = "etu";
             $serveur = "localhost";
-            $motdepasse = "ahV4saerae";
-            $basededonnees = "inf2pj_02";
+            $motdepasse = "Achanger!";
+            $basededonnees = "sae";
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
@@ -78,10 +78,10 @@
             <div class="gallery-container">
                         <?php
                             // Connexion à la base de données 
-                            $utilisateur = "inf2pj02";
+                            $utilisateur = "etu";
                             $serveur = "localhost";
-                            $motdepasse = "ahV4saerae";
-                            $basededonnees = "inf2pj_02";
+                            $motdepasse = "Achanger!";
+                            $basededonnees = "sae";
                             $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
                             // Vérifiez la connexion
                             if ($connexion->connect_error) {
@@ -117,10 +117,10 @@
                 <div class="gallery-container">
                 <?php
                     // Connexion à la base de données 
-                    $utilisateur = "inf2pj02";
+                    $utilisateur = "etu";
                     $serveur = "localhost";
-                    $motdepasse = "ahV4saerae";
-                    $basededonnees = "inf2pj_02";
+                    $motdepasse = "Achanger!";
+                    $basededonnees = "sae";
                     $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
                     // Vérifiez la connexion
                     if ($connexion->connect_error) {

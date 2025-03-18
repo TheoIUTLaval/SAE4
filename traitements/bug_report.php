@@ -1,10 +1,10 @@
 <?php
 
 
-$utilisateur = "inf2pj02";
+$utilisateur = "etu";
 $serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
+$motdepasse = "Achanger!";
+$basededonnees = "sae";
 $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {

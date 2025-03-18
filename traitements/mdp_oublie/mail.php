@@ -6,10 +6,10 @@
 $email = $_POST["email"];
 $_SESSION["mailTemp"]=$email;
 
-$utilisateur = "inf2pj02";
+$utilisateur = "etu";
 $serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
+$motdepasse = "Achanger!";
+$basededonnees = "sae";
 $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
 // Vérifiez d'abord si l'adresse e-mail existe déjà dans la table UTILISATEUR

@@ -14,9 +14,9 @@
 <?php
      function dbConnect(){
         $host = 'localhost';
-        $dbname = 'inf2pj_02';
-        $user = 'inf2pj02';
-        $password = 'ahV4saerae';
+        $dbname = 'sae';
+        $user = 'etu';
+        $password = 'Achanger!';
         return new PDO('mysql:host='.$host.';dbname='.$dbname,$user,$password);
       }
       if(!isset($_SESSION)){

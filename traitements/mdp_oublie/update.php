@@ -7,10 +7,10 @@ $pwd2 = $_POST['pwd2'];
 
 if ($pwd1 == $pwd2 && $pwd1 !== null) {
 
-    $utilisateur = "inf2pj02";
+    $utilisateur = "etu";
     $serveur = "localhost";
-    $motdepasse = "ahV4saerae";
-    $basededonnees = "inf2pj_02";
+    $motdepasse = "Achanger!";
+    $basededonnees = "sae";
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
 
     if(!isset($_SESSION)){

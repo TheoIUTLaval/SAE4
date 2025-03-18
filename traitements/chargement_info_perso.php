@@ -1,8 +1,8 @@
 <?php
-$utilisateur = "inf2pj02";
+$utilisateur = "etu";
 $serveur = "localhost";
-$motdepasse = "ahV4saerae";
-$basededonnees = "inf2pj_02";
+$motdepasse = "Achanger!";
+$basededonnees = "sae";
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 
 // Vérifiez la connexion

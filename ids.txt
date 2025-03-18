@@ -1,0 +1,7 @@
+utilisateur    = etu
+serveur        = localhost
+motdepasse     = Achanger!
+basededonnees  = sae
+basedir        = SAE
+
+

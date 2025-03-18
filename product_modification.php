@@ -15,10 +15,10 @@
             session_start();
         }
         function dbConnect(){
-            $utilisateur = "inf2pj02";
+            $utilisateur = "etu";
             $serveur = "localhost";
-            $motdepasse = "ahV4saerae";
-            $basededonnees = "inf2pj_02";
+            $motdepasse = "Achanger!";
+            $basededonnees = "sae";
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
@@ -223,7 +223,7 @@
             </form>
             <br>
             <?php
-            //echo '<img class="img-produit" src="/~inf2pj02/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
+            //echo '<img class="img-produit" src="/SAE/img_produit/' . $Id_Produit_Update  . '.png" alt="Image non fournie" style="width: 100%; height: 85%;" ><br>';
             ?>
             <br>
             <br>

@@ -6,10 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_producteur/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "inf2pj02";
+        $utilisateur = "etu";
         $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
+        $motdepasse = "Achanger!";
+        $basededonnees = "sae";
         session_start();
         // Connect to database
         $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);

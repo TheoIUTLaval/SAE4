@@ -3,10 +3,10 @@
 ?>
 <?php
      function dbConnect(){
-        $utilisateur = "inf2pj02";
+        $utilisateur = "etu";
         $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
+        $motdepasse = "Achanger!";
+        $basededonnees = "sae";
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
         }
         if(!isset($_SESSION)){
@@ -46,10 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/img_produit/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "inf2pj02";
+        $utilisateur = "etu";
         $serveur = "localhost";
-        $motdepasse = "ahV4saerae";
-        $basededonnees = "inf2pj_02";
+        $motdepasse = "Achanger!";
+        $basededonnees = "sae";
 
         // Obtenir l'extension du fichie
         $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
