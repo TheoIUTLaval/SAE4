@@ -4,7 +4,7 @@
 <?php
     include "controller/controllerIndex.php";
     require "language/language.php" ; 
-    echo(__DIR__ +'\n');
+    echo(__DIR__);
     echo($_POST);
     $htmlFrançais="Français";
     $htmlAnglais="English";
@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
+    bite
     <?php
     //var_dump($_SESSION);
         if(!isset($_SESSION)){
