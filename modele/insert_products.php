@@ -13,7 +13,6 @@
             session_start();
             }
     $Id_Uti=htmlspecialchars($_SESSION["Id_Uti"]);
-
     $bdd=dbConnect();
     $queryNbProduits = $bdd->query(('SELECT MAX(Id_Produit) FROM PRODUIT;'));
     $returnqueryNbProduits = $queryNbProduits->fetchAll(PDO::FETCH_ASSOC);
