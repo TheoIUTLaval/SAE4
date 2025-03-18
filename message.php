@@ -15,7 +15,7 @@
 			
             <p>Contacts récents :</p>
 			<?php
-			require 'fonction controller/controllerAfficherContact.php';
+			require 'fonction thomas/Messagerie/afficheContacts.php';
 			?>
         </div>
         <div class="right-column">

@@ -4,6 +4,7 @@
 <?php
 // Récupération des données du formulaire
 
+session_start();
 $_SESSION['test_pwd'] = 5;
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
@@ -34,7 +35,8 @@ $nb = $resultat2->fetch_assoc()['nb'];
 // Exécution de la requête d'insertion si l'adresse mail n'est pas déjà utilisée
 echo($nb);
 if ($nb == 0) {
-    // Connexion à la base de données avec PDO
+    $connexion->close();
+   
     $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees", $utilisateur, $motdepasse);
     
     // Définir le mode d'erreur sur Exception
