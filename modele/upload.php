@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
-        $targetDir = $_SERVER['DOCUMENT_ROOT'] . "asset/img/img_producteur/";
+        $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/SAE4/asset/img/img_producteur/";
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "etu";
         $serveur = "localhost";
