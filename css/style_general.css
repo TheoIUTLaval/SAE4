@@ -116,7 +116,7 @@ body{
     padding: 15px;
     padding-right: 70px;
     border: none;
-    background: url('../img/connexion.svg') no-repeat;
+    background: url('/SAE4/asset/img/connexion.svg') no-repeat;
     background-position: calc(100% - 10px) center;
 
     font-size: 18px;
@@ -221,7 +221,7 @@ body{
 
 #boutonLangue{
     padding: 12px;
-    background: url('../img/paper plane.svg') no-repeat #FFFFFF;
+    background: url('/SAE4/asset/img/paper\ plane.svg') no-repeat #FFFFFF;
     background-position: calc(50% - 3px) center;;
     width: 42px;
     height: 42px;
