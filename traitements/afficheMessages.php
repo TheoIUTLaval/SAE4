@@ -1,5 +1,5 @@
 <?php
-    require "language/language.php" ; 
+    require "../language/language.php" ; 
 ?>
 <?php
 error_reporting(E_ALL);
