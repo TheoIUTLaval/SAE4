@@ -4,7 +4,7 @@
 ?>
 <?php
 if (isset($_POST['formClicked'])){
-    require 'traitements/sign_up.php';
+    require 'popups/sign_up.php';
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
 }
