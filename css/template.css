@@ -53,18 +53,6 @@ body {
     height: 100%;
 }
 
-.topBanner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-}
-
-.divNavigation {
-    width: 45%;
-    min-width: 360px;
-    display: flex;
-}
 
 .boutonDeConnection {
     padding: 15px;
