@@ -22,7 +22,7 @@
 			<img class="logo" src="asset/img/logo.png">
             <p><?php echo $htmlContactsRecentsDeuxPoints?></p>
 			<?php
-			require 'traitements/afficheContacts.php';
+			require '../controller/controllerAfficheContacts.php';
 			?>
         </div>
         <div class="rightColumn">
