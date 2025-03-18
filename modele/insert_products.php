@@ -1,5 +1,5 @@
 <?php
-    require "language/language.php" ; 
+    require "/SAE4/language/language.php" ; 
 ?>
 <?php
      function dbConnect(){
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si le fichier a été correctement téléchargé
     if (isset($_FILES["image"])) {
         // Spécifier le chemin du dossier de destination
-        $targetDir = __DIR__ . "asset/img/img_produit/";
+        $targetDir = __DIR__ . "/img_produit/";
         // Obtenir le nom du fichier téléchargé
         $utilisateur = "etu";
         $serveur = "localhost";
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<br>".$htmlImgTelecSucces, $newFileName."<br>";
             } else {
                 echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-                header('Location: mes_produits.php?erreur='. error_get_last()['message']);
+                header('Location: /SAE4/mes_produits.php?erreur='. error_get_last()['message']);
             }
 
     } else {
@@ -93,5 +93,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bindInsertProduct->bindParam(':Unite_Prix', $Unite_Prix, PDO::PARAM_INT);
     $bindInsertProduct->execute();
 
-    header('Location: produits.php');
+    header('Location: /SAE4/produits.php');
 ?>
