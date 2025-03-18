@@ -48,7 +48,7 @@
                 
             
             <center><p><strong><?php echo $htmlAjouterProduit?></strong></p>
-            <form action="modify_product.php" method="post" enctype="multipart/form-data">
+            <form action="modele/modify_product.php" method="post" enctype="multipart/form-data">
 
                 <label for="pwd"><?php echo $htmlProduitDeuxPoints?> </label>
                 <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
