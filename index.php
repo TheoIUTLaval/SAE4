@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <?php
-    include "/SAE4/controller/controllerIndex.php";
+    include "controller/controllerIndex.php";
     require "language/language.php" ; 
     $htmlFrançais="Français";
     $htmlAnglais="English";
@@ -157,7 +157,7 @@
                     ?>
                 </div>
                 
-                <form action="language.php" method="post" id="languageForm">
+                <form action="language/language.php" method="post" id="languageForm">
                     <select name="language" id="languagePicker" onchange="submitForm()">
                         <option value="fr" <?php if($_SESSION["language"]=="fr") echo 'selected';?>>Français</option>
                         <option value="en" <?php if($_SESSION["language"]=="en") echo 'selected';?>>English</option>
