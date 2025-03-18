@@ -7,10 +7,10 @@
 if (isset($_POST['formClicked'])){
     if((isset($_SESSION['tempIsAdmin']) and $_SESSION['tempIsAdmin'])){
         $_SESSION['debug'][0]=0;
-        require '../traitements/traitement_formulaire_sign_in.php';
+        require 'traitements/traitement_formulaire_sign_in.php';
     }else{
         $_SESSION['debug'][0]=1;
-        require '../traitements/traitement_formulaire_sign_in.php';
+        require 'traitements/traitement_formulaire_sign_in.php';
     }
     unset($_POST['formClicked']);
     $_SESSION['actualiser'] = true;
