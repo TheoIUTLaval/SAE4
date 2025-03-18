@@ -40,7 +40,7 @@
 
 
 .surContenu {
-    background: url('../img/fond_messagerie.svg') no-repeat #fff;
+    background: url('../asset/img/fond_messagerie.svg') no-repeat #fff;
     background-position: center;
     display: flex; 
     flex-direction: column;
