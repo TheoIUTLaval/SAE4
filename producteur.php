@@ -257,7 +257,7 @@
                     ?>
                     <div class="info-container">
 						<div class="img-prod">
-                        	<img class="img-test" src="asset/imgimg_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
+                        	<img class="img-test" src="asset/img/img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
 						</div>
 						<div class="text-info">
                             <?php
