@@ -44,7 +44,7 @@ try {
         if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-                $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
+                $isAdmin = $bdd3->query('CALL isAdmin('.$Id_Uti.');');
                 $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                 $reponse2=$returnIsAdmin[0]["result"];
                 if ($reponse2!=NULL){
