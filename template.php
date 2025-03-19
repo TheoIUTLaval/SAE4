@@ -17,7 +17,7 @@
     <div class="leftColumn">
         <img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
         <div class="contenuBarre">
-            <?php echo $contentLeft; ?>
+            <p>Truc à afficher</p>
         </div>
     </div>
     <div class="rightColumn">
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="contenuPage">
-            <?php echo $content; ?>
+            <p>Contenu de la page</p>
         </div>
         <div class="basDePage">
         
