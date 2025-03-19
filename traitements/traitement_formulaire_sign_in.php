@@ -64,10 +64,10 @@ try {
                         if ($reponse2 != NULL) {
                             $_SESSION['isAdmin'] = true;
                         } else {
-                            $_SESSION['isAdmin'] = true;
+                            $_SESSION['isAdmin'] = false;
                         }
                     } else {
-                        $_SESSION['isAdmin'] = false; // Par défaut, si aucun résultat
+                        $_SESSION['isAdmin'] = true; // Par défaut, si aucun résultat
                     }
                     // Redirection
                 header('Location: index.php');
