@@ -18,5 +18,5 @@ if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
     unset($_POST['content']);
     header("Refresh:0");
 }
-    
+
 ?>

@@ -30,8 +30,6 @@
     $Unite_Prix=$_POST["unitPrix"];
     $Quantite=$_POST["quantite"];
     $Unite_Quantite=$_POST["unitQuantite"];
-    
-    
     $insertionProduit = "INSERT INTO PRODUIT (Id_Produit, Nom_Produit, Id_Type_Produit, Id_Prod, Qte_Produit, Id_Unite_Stock, Prix_Produit_Unitaire, Id_Unite_Prix) VALUES (:nbProduits, :Nom_Produit, :Type_De_Produit, :IdProd, :Quantite, :Unite_Quantite, :Prix, :Unite_Prix)";
     echo $insertionProduit;
     //echo '<br>';
@@ -77,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo $htmlSelecImg."<br>";
     }
-    
+
 }
     $_SESSION["Id_Produit"]=htmlspecialchars($nbProduits);
 
