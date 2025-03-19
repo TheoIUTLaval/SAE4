@@ -52,12 +52,10 @@
                                         <a class="nav-link active" href="panel_admin.php">Panel Admin</a>
                                     </li>
                                 <?php endif; ?>
-                                <li class= "nav-item dropdown">
-                                    <a class ="nav-link dropdown-toggle" herf="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langage</a>
-                                    </a>
-                                    <div class="dropdown-menu" aria_labelledby="navbarDropdown">
+
+                                <li class="nav-item">
                                         <form action="language/language.php" method="post" id="languageForm">
-                                            <select name="language" id="languagePicker" onchange="submitForm()">
+                                            <select name="language" id="languagePicker" onchange="submitForm()" class="form-select" aria-label="Default select example">
                                                 <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
                                                 <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
                                                 <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
@@ -66,9 +64,7 @@
                                                 <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
                                             </select>
                                         </form>
-                                </div>
                                 </li>
-                                    
                             </ul>
                         </div>
                     </div>
