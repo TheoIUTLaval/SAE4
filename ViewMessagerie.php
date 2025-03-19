@@ -86,11 +86,12 @@
                     </nav>
                     <div class="divConnection">
                         <form method="post">
-                            <script>
-                                function submitForm() {
-                                    document.getElementById("languageForm").submit();
-                                }
-                            </script>
+
+                        <script>
+                            function submitForm() {
+                                document.getElementById("languageForm").submit();
+                            }
+                        </script>
                             <?php
                             if(!isset($_SESSION)){
                                 session_start();
@@ -99,9 +100,12 @@
                                 $_POST['popup'] = $_SESSION['tempPopup'];
                                 unset($_SESSION['tempPopup']);
                             }
+                            
                             ?>
-                            <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?> " class="boutonDeConnection">
+
+                            <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?> " class="boutonDeConnection" > <!-- Changer se connecter -->
                             <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                        
                         </form>
                     </div>
                 </div>
