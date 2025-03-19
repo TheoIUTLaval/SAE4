@@ -1,7 +1,7 @@
 <?php
-    require "language/language.php" ;
-    echo(__DIR__);
-    ?>
+require "language/language.php";
+echo(__DIR__);
+?>
 <?php
 // Récupération des données du formulaire
 
@@ -69,28 +69,24 @@ if ($nb == 0) {
     $connexion = null;
 
     $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
-            $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-            $reponse=$returnIsProducteur[0]["result"];
-            if ($reponse!=NULL){
-                $_SESSION["isProd"]=true;
-                //var_dump($_SESSION);
-            }else {
-                $_SESSION["isProd"]=false;
-            }
-            $_SESSION['Mail_Uti'] = $Mail_Uti;
-            $_SESSION['Id_Uti'] = $iduti;
-            $_SESSION['erreur'] = '';
-            if($_SESSION["isProd"]==true){
-                $_POST['popup'] = 'addProfilPicture';
-            }else {
-                
-                $_POST['popup'] = '';
-            }
+    $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
+    $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+    $reponse=$returnIsProducteur[0]["result"];
+    if ($reponse!=NULL){
+        $_SESSION["isProd"]=true;
+    } else {
+        $_SESSION["isProd"]=false;
+    }
+    $_SESSION['Mail_Uti'] = $Mail_Uti;
+    $_SESSION['Id_Uti'] = $iduti;
+    $_SESSION['erreur'] = '';
+    $_SESSION['loggedin'] = true; // Set session variable to indicate user is logged in
+
+    echo "<script>window.location.href = '/index.php';</script>"; // Redirect to index page using JavaScript
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
+    echo "<script>alert('Adresse mail déjà utilisée.'); window.location.href = '/index.php';</script>"; // Redirect to index page with an alert
 }
-
 
 // Fermeture de la connexion
 $connexion->close();
