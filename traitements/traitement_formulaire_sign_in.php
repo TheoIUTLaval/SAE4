@@ -42,38 +42,26 @@ try {
             if ((isset($test[0][1]) && $test[0][1] == 1) || (isset($test[0][0]) && $test[0][0] == 1)) {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
-
+                
                 // Check user role
-                try {
-                    $queryRole = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE Id_Uti = :id');
-                    $queryRole->execute(['id' => $Id_Uti]);
-                    $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
-
-                    if ($roleResult) {
-                        $_SESSION['role'] = 'producteur';
-                    } else {
-                        $_SESSION['role'] = 'client'; // Default role
+                $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                    $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
+                    $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                    $reponse=$returnIsProducteur[0]["result"];
+                    if ($reponse!=NULL){
+                        $_SESSION["isProd"]=true;
+                        var_dump($_SESSION);
+                    }else {
+                        $_SESSION["isProd"]=false;
                     }
-                } catch (Exception $e) {
-                    echo "Erreur lors de la récupération du rôle : " . $e->getMessage();
-                    exit;
-                }
-
-                    // Définir les rôles dans la session
-                    if ($_SESSION['role'] === 'admin') {
-                        $_SESSION["isAdmin"] = true;
-                        $_SESSION["isProd"] = false; // Un admin ne peut pas être producteur
-                    } elseif ($_SESSION['role'] === 'producteur') {
-                        $_SESSION["isProd"] = true;
-                        $_SESSION["isAdmin"] = false;
-                    } else {
-                        $_SESSION["isAdmin"] = false;
-                        $_SESSION["isProd"] = false;
-                    }
+                    $_SESSION['Mail_Uti'] = $Mail_Uti;
+                    $_SESSION['Id_Uti'] = $iduti;
+                    $_SESSION['erreur'] = '';
+                   
 
                     // Redirection
-                    header('Location: ../index.php');
-                    exit;
+                header('Location: ../index.php');
+                exit;
             } else {
                 $_SESSION['test_pwd']--;
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
