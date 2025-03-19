@@ -48,5 +48,5 @@
         $i++;}
     }
     
-    header('Location: /SAE4/achats.php');
+    header('Location: /SAE4/ViewAchats.php?');
 ?>

@@ -36,7 +36,7 @@
                                         <a class="nav-link active" href="messagerie.php">Messagerie</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="achats.php">Achats</a>
+                                        <a class="nav-link active" href="ViewAchats.php">Achats</a>
                                     </li>
                                 <?php endif; ?>
                                 <?php if (isset($_SESSION["isProd"]) && ($_SESSION["isProd"] == true)): ?>

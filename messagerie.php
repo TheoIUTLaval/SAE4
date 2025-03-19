@@ -32,7 +32,7 @@
                     <?php
                         if (isset($_SESSION["Id_Uti"])){
                             echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
-                            echo'<a class="bontonDeNavigation" href="achats.php">'.$htmlAchats.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewAchats.php">'.$htmlAchats.'</a>';
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                             echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
