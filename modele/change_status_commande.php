@@ -15,7 +15,7 @@
 
       if ($Id_Statut==NULL){
         //rien ne se passe
-        header('Location: /SAE4/delivery.php?');
+        header('Location: /SAE4/ViewDelivery.php?');
       }
       else if ($Id_Statut==3){
         // annulation donc on rend les produits et le producteur ne voit plus la commande
@@ -62,5 +62,5 @@
         echo '<br>';
         echo $Id_Commande;*/
       }
-    header('Location: /SAE4/delivery.php?');
+    header('Location: /SAE4/ViewDelivery.php?');
 ?>
