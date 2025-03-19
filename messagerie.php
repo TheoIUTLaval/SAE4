@@ -57,8 +57,8 @@
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
                     <?php
                     if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                    echo'<a class="bontonDeNavigation" href="broadcastuser.php">'.$htmlbroadcastuser.'</a>';
-                    echo'<a class="bontonDeNavigation" href="broadcastprod.php">'.$htmlbroadcastprod.'</a>';
+                    echo'<a class="bontonDeNavigation" href="ViewBroadcastuser.php">'.$htmlbroadcastuser.'</a>';
+                    echo'<a class="bontonDeNavigation" href="ViewBroadcastprod.php">'.$htmlbroadcastprod.'</a>';
                     }
                     ?>
                 </form>
