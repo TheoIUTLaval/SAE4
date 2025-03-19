@@ -59,17 +59,6 @@ try {
                     exit;
                 }
 
-                // Vérification du rôle via la procédure stockée
-                    $isProducteur = $bdd->prepare('CALL isProducteur(:id)');
-                    $isProducteur->execute(['id' => $Id_Uti]);
-                    $returnIsProducteur = $isProducteur->fetch(PDO::FETCH_ASSOC);
-
-                    if ($returnIsProducteur && isset($returnIsProducteur["result"]) && $returnIsProducteur["result"] == 1) {
-                        $_SESSION["isProd"] = true;
-                    } else {
-                        $_SESSION["isProd"] = false;
-                    }
-
                     // Définir les rôles dans la session
                     if ($_SESSION['role'] === 'admin') {
                         $_SESSION["isAdmin"] = true;
@@ -82,12 +71,8 @@ try {
                         $_SESSION["isProd"] = false;
                     }
 
-                    // Debugging output
-                    echo "isProd: " . ($_SESSION["isProd"] ? 'true' : 'false') . "<br>";
-                    echo "isAdmin: " . ($_SESSION["isAdmin"] ? 'true' : 'false') . "<br>";
-
                     // Redirection
-                    header('Location: index.php');
+                    header('Location: ../index.php');
                     exit;
             } else {
                 $_SESSION['test_pwd']--;
