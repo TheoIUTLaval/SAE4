@@ -19,42 +19,9 @@
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
-    
     <?php
     //var_dump($_SESSION);
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if (isset($_GET["rechercheVille"])==true){
-            $rechercheVille=htmlspecialchars($_GET["rechercheVille"]);
-        }
-        else{
-            $rechercheVille="";
-        }
-        if (isset($_GET["categorie"])==false){
-            $_GET["categorie"]="Tout";
-        }
-        if (isset($_SESSION["Id_Uti"])==false){
-            $utilisateur=-1;
-        }
-        else{
-            $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
-        }
-        if (isset($_GET["rayon"])==false){
-            $rayon=100;
-        }
-        else{
-            $rayon=htmlspecialchars($_GET["rayon"]);
-        }
-        if (isset($_GET["tri"])==true){
-            $tri=htmlspecialchars($_GET["tri"]);
-        }
-        else{
-            $tri="nombreDeProduits";
-        }
-        if (isset($_SESSION["language"])==false){
-            $_SESSION["language"]="fr";
-        }
+       
            
     ?>
 <!-- Vue-->
@@ -83,12 +50,7 @@
             <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}"  value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
             <br>
             <?php
-                $mabdd=dbConnect();           
-                $queryAdrUti = $mabdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
-                $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-                $queryAdrUti->execute();
-                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
-
+                $returnQueryAdrUti=AdrUti($utilisateur);
                 if (count($returnQueryAdrUti)>0){
                     $Adr_Uti_En_Cours=$returnQueryAdrUti[0]["Adr_Uti"];
             ?>
@@ -98,16 +60,7 @@
                 <br>
                 <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
                 <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-                <script>
-                    function AfficheRange2(newVal) {
-                        var monCurseurKm = document.getElementById("monCurseurKm");
-                        if ((newVal >= 100)) {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
-                        } else {
-                            monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
-                        }
-                    }
-                </script>
+                <script src="asset/js/range.js"></script>
                 <?php echo $htmlKm?>
                 <br>
                 <br>
