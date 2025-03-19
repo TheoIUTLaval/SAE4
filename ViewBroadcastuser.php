@@ -6,7 +6,8 @@
 ?>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" type="text/css" href="css/style_général.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
             session_start();
         }
     ?>
-    <div class="container">
+    <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png">
         </div>
