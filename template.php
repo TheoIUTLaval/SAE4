@@ -54,7 +54,7 @@
                                 <?php endif; ?>
 
                                 <li class="nav-item">
-                                        <form action="language/language.php" method="post" id="languageForm">
+                                        <form action="language/language.php" method="post" id="languageForm" class="d-flex align-items-center dropdown">
                                             <select name="language" id="languagePicker" onchange="submitForm()" class="form-select" aria-label="Default select example">
                                                 <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
                                                 <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
