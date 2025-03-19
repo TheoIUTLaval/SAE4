@@ -63,7 +63,17 @@ error_reporting(E_ALL);
                         <br>
                         <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
                         <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-                        <script src="asset/js/range.js"></script>
+                        <script>
+                            function AfficheRange2(newVal) {
+                                var monCurseurKm = document.getElementById("monCurseurKm");
+                                if (newVal >= 100) {
+                                    monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                                } else {
+                                    monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                                }
+                            }
+
+                        </script>
                         <?php echo $htmlKm?>
                         <br>
                         <br>
