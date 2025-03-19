@@ -23,7 +23,7 @@
 			<img class="logo" src="asset/img/logo.png">
             <p><?php echo $htmlContactsRecentsDeuxPoints?></p>
 			<?php
-			require 'traitements/afficheContacts.php';
+			require 'controller/controllerMessage.php';
 			?>
         </div>
         <div class="rightColumn">
@@ -65,24 +65,51 @@
                 </form>
             </div>
             <div class="contenuPage">
-				<div class="interlocuteur" 
-				<?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
-				>
+				<div class="interlocuteur" >
+				<?php if (!isset($_GET['Id_Interlocuteur'])) ?>
+				
 				<?php 
-				require "traitements/afficherInterlocuteur.php";
+				if (isset($_GET['Id_Interlocuteur'])){
+					$bdd = dbConnect();
+					$query = $bdd->query('SELECT Nom_Uti, Prenom_Uti FROM UTILISATEUR WHERE Id_Uti='.$_GET['Id_Interlocuteur']);
+					$interlocuteur=$query->fetchAll(PDO::FETCH_ASSOC);
+				
+					$query = $bdd->query('CALL isProducteur('.$_GET['Id_Interlocuteur'].');');
+				
+					echo ($interlocuteur[0]['Nom_Uti'].' '.$interlocuteur[0]['Prenom_Uti'].($query->fetchAll(PDO::FETCH_ASSOC))[0]['result']);
+				
+				}
 				?>
+				
 				</div>
 				<div class="contenuMessagerie">
             	
-            		<?php
-					require 'traitements/afficheMessages.php';
+                <?php
+					if (isset($_SESSION['Id_Uti'])){
+						if (isset($_GET['Id_Interlocuteur'])){
+							afficheMessages($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur']);
+							$formDisabled=false;
+						}else {
+							echo($htmlSelectConversation);
+							$formDisabled=true;
+						}
+					}else{
+						echo($htmlPasAccesPageContactAdmin);
+						$formDisabled=true;
+					}
 					?>
 					<form method="post" id="zoneDEnvoi">
 						<input type="text" name="content" id="zoneDeTexte" <?php if ($formDisabled) { echo 'disabled';} ?>>
 						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
 					</form>
 					<?php
-					require 'controller/controllerMessage.php';
+					if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
+						if ($_POST['content']!=""){
+							envoyerMessage($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], htmlspecialchars($_POST['content']));
+						}
+						unset($_POST['content']);
+						header("Refresh:0");
+					}
 					?>
 				</div>
             </div>
