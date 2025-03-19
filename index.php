@@ -53,7 +53,7 @@ error_reporting(E_ALL);
                     <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}" value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
                     <br>
                     <?php
-                    $returnQueryAdrUti = AdrUti($utilisateur);
+                    $returnQueryAdrUti = AdrUti($bdd,$utilisateur);
                     if (count($returnQueryAdrUti) > 0) {
                         $Adr_Uti_En_Cours = $returnQueryAdrUti[0]["Adr_Uti"];
                     ?>
@@ -147,10 +147,11 @@ error_reporting(E_ALL);
                     $serveur = "localhost";
                     $motdepasse = "Achanger!";
                     $basededonnees = "sae";
-                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                    // Vérifiez la connexion
-                    if ($connexion->connect_error) {
-                        die("Erreur de connexion : " . $connexion->connect_error);
+                    try {
+                        $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees;charset=utf8", $utilisateur, $motdepasse);
+                        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    } catch (PDOException $e) {
+                        die("Erreur de connexion : " . $e->getMessage());
                     }
                     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                     if ($_GET["categorie"] == "Tout") {
@@ -164,10 +165,10 @@ error_reporting(E_ALL);
                         FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
                         LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
                         GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
-                        HAVING PRODUCTEUR.Prof_Prod ="'.$categorie.'"';
+                        HAVING PRODUCTEUR.Prof_Prod = :categorie';
                     }
                     if ($rechercheVille != "") {
-                        $requete = $requete . ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\'';
+                        $requete = $requete . ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\''; 
                     }
                     $requete = $requete . ' ORDER BY ';
                     if ($tri === "nombreDeProduits") {
@@ -184,14 +185,17 @@ error_reporting(E_ALL);
                         $requete = $requete . ' COUNT(PRODUIT.Id_Produit) ASC ;';
                     }
                     $stmt = $connexion->prepare($requete);
+                    if ($_GET["categorie"] != "Tout") {
+                        $stmt->bindParam(':categorie', $categorie, PDO::PARAM_STR);
+                    }
                     $stmt->execute();
-                    $result = $stmt->get_result();
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                     $coordonneesUti = latLongGps($urlUti);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                    if (count($result) > 0) {
+                        foreach ($result as $row) {
                             if ($rayon >= 100) {
                                 echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
                                 echo ''.$row["Prof_Prod"]. "<br>";
@@ -218,8 +222,8 @@ error_reporting(E_ALL);
                     } else {
                         echo $htmlAucunResultat;
                     }
-                    $stmt->close();
-                    $connexion->close();
+                    $stmt->closeCursor();
+                    $connexion = null;
                 }
             }
             ?>
