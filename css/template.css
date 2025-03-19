@@ -61,8 +61,7 @@ body {
 }
 
 .divNavigation {
-    width: 45%;
-    min-width: 360px;
+    
     display: flex;
 }
 
