@@ -60,6 +60,7 @@
     align-self: flex-start;
     color: #305514;
     padding: 4px;
+    margin-top: 10px;
     margin-left: 50px;
     font-weight: bold;
     
@@ -69,6 +70,6 @@
 
 hr{
     color: #305514;
-    padding : 5px !important;
+    margin : 5px !important;
 }
 
