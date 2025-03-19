@@ -1,6 +1,5 @@
 <?php
-// filepath: [traitement_formulaire_sign_in.php](http://_vscodecontentref_/1)
-<?php
+ob_start();
 session_start();
 require "language/language.php";
 
@@ -20,7 +19,6 @@ try {
     $motdepasse = "Achanger!";
     $basededonnees = "sae";
 
-    // Connect to database
     $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -29,12 +27,10 @@ try {
     $queryIdUti->execute(['mail' => $Mail_Uti]);
     $returnQueryIdUti = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
 
-    // Handle invalid email
     if ($returnQueryIdUti == NULL) {
         unset($Id_Uti);
         $_SESSION['erreur'] = $htmlAdresseMailInvalide;
     } else {
-        // Extract user ID
         $Id_Uti = $returnQueryIdUti[0]["Id_Uti"];
 
         // Verify password using stored procedure
@@ -42,37 +38,50 @@ try {
         $query->execute(['id' => $Id_Uti, 'pwd' => $pwd]);
         $test = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        // Handle password verification
         if (isset($_SESSION['test_pwd']) && $_SESSION['test_pwd'] > -10) {
             if ((isset($test[0][1]) && $test[0][1] == 1) || (isset($test[0][0]) && $test[0][0] == 1)) {
-                echo $htmlMdpCorrespondRedirectionAccueil;
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
 
                 // Check user role
-                $queryRole = $bdd->prepare('SELECT Role_Uti FROM UTILISATEUR WHERE Id_Uti = :id');
-                $queryRole->execute(['id' => $Id_Uti]);
-                $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
+                try {
+                    $queryRole = $bdd->prepare('SELECT Role_Uti FROM UTILISATEUR WHERE Id_Uti = :id');
+                    $queryRole->execute(['id' => $Id_Uti]);
+                    $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
 
-                if ($roleResult) {
-                    $_SESSION['role'] = $roleResult['Role_Uti'];
-                } else {
-                    $_SESSION['role'] = 'client'; // Default role
+                    if ($roleResult) {
+                        $_SESSION['role'] = $roleResult['Role_Uti'];
+                    } else {
+                        $_SESSION['role'] = 'client'; // Default role
+                    }
+                } catch (Exception $e) {
+                    echo "Erreur lors de la récupération du rôle : " . $e->getMessage();
+                    exit;
                 }
 
+                // Debugging output
+                echo "Id_Uti: " . $Id_Uti . "<br>";
+                echo "Role_Uti: " . ($_SESSION['role'] ?? 'Aucun rôle trouvé') . "<br>";
+                $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
+                $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                $reponse=$returnIsProducteur[0]["result"];
                 // Redirect based on role
-                if ($_SESSION['role'] === 'admin') {
-                    header('Location: admin_dashboard.php');
-                    exit;
-                } elseif ($_SESSION['role'] === 'producteur') {
-                    header('Location: producteur_dashboard.php');
-                    exit;
-                } else {
-                    header('Location: client_dashboard.php');
-                    exit;
+                if ($reponse!=NULL){
+                    $_SESSION["isProd"]=true;
+                    //var_dump($_SESSION);
+                }else {
+                    $_SESSION["isProd"]=false;
                 }
-
-                $_SESSION['erreur'] = '';
+                if ($_SESSION['role'] === 'admin') {
+                    $_SESSION["isAdmin"] = true;
+                } elseif ($_SESSION['role'] === 'producteur') {
+                    $_SESSION["isProd"] = true;
+                } else {
+                    $_SESSION["isAdmin"] = false;
+                    $_SESSION["isProd"] = false;
+                }
+                header('Location: index.php');
+                exit;
             } else {
                 $_SESSION['test_pwd']--;
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
@@ -82,7 +91,6 @@ try {
         }
     }
 } catch (Exception $e) {
-    // Handle any exceptions
-    echo "An error occurred: " . $e->getMessage();
+    echo "Une erreur est survenue : " . $e->getMessage();
 }
 ?>

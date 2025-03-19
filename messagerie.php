@@ -13,6 +13,7 @@
 </head>
 <body>
     <?php
+    var_dump(__DIR__);
     if(!isset($_SESSION)){
         session_start();
     }
