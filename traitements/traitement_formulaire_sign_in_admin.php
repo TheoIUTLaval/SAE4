@@ -45,7 +45,7 @@ try {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
             $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
-            $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
+            $returnQueryIdAdmin = $queryIdAdmin->fetchAll(PDO::FETCH_ASSOC);
             if(($returnQueryIdAdmin)==null){
                 echo ("
                 <title>".$htmlErreur403."</title>
