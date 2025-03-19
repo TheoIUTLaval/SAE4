@@ -1,4 +1,6 @@
 <?php
+// filepath: [traitement_formulaire_sign_in.php](http://_vscodecontentref_/1)
+<?php
 session_start();
 require "language/language.php";
 
@@ -47,8 +49,28 @@ try {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
 
-                // Additional checks for user roles (Producteur, Admin)
-                // ...
+                // Check user role
+                $queryRole = $bdd->prepare('SELECT Role_Uti FROM UTILISATEUR WHERE Id_Uti = :id');
+                $queryRole->execute(['id' => $Id_Uti]);
+                $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
+
+                if ($roleResult) {
+                    $_SESSION['role'] = $roleResult['Role_Uti'];
+                } else {
+                    $_SESSION['role'] = 'client'; // Default role
+                }
+
+                // Redirect based on role
+                if ($_SESSION['role'] === 'admin') {
+                    header('Location: admin_dashboard.php');
+                    exit;
+                } elseif ($_SESSION['role'] === 'producteur') {
+                    header('Location: producteur_dashboard.php');
+                    exit;
+                } else {
+                    header('Location: client_dashboard.php');
+                    exit;
+                }
 
                 $_SESSION['erreur'] = '';
             } else {
