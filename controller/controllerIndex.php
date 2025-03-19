@@ -72,7 +72,10 @@ if (isset($_SESSION["language"])==false){
         // Fermeture de la session cURL
         curl_close($ch);
     }
-
+    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+    $coordonneesUti = latLongGps($urlUti);
+    $latitudeUti = $coordonneesUti[0];
+    $longitudeUti = $coordonneesUti[1];
 
     /*---------------------------------------------------------------*/
     /*
