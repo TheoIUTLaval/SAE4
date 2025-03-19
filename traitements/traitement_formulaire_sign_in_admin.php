@@ -55,6 +55,7 @@ try {
             }else {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
+                $_SESSION['isAdmin'] = true;
                 $_SESSION['erreur'] = '';
                 header('Location: panel_admin.php');
             }
