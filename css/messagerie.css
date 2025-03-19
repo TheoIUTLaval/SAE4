@@ -52,23 +52,7 @@
     width: auto;
 }
 
-#zoneDEnvoi{
-    margin-top: 10px;
-    background-color: #71B340;
-    display: grid;
-    grid-template-columns:auto 47px;
-    width: 100%;
-}
 
-#zoneDeTexte{
-    border-radius: 17px;
-    margin-left: 50px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    height: 30px;
-    padding-left: 10px;
-}
 
 .interlocuteur {
     align-self: flex-start;
