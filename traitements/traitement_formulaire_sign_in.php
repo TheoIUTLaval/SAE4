@@ -52,9 +52,10 @@ try {
                         $_SESSION["isProd"]=true;
                         //var_dump($_SESSION);
                     }else {
-                        $queryIdAdmin = $bdd2->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
-                        $returnQueryIdAdmin = $queryIdAdmin->fetchAll(PDO::FETCH_ASSOC);
-                        if(($returnQueryIdAdmin)==null){
+                        $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
+                        $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+                        $reponse2=$returnIsAdmin[0]["result"];
+                        if ($reponse2!=NULL){
                             $_SESSION["isProd"]=false;
                         }else {
                             $_SESSION['isAdmin'] = true;
