@@ -2,6 +2,7 @@
 <html lang="fr">
 <?php
     require "language/language.php";
+    
 ?> 
 <head>
     <title><?php echo $htmlMarque; ?></title>
@@ -15,10 +16,8 @@
 
 <body>
     <?php
-        var_dump(__DIR__);
-        if(!isset($_SESSION)){
-            session_start();
-        }
+
+        session_start();
     ?>
     <div class="custom-container">
         <div class="leftColumn">
