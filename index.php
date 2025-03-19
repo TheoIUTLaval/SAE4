@@ -63,7 +63,17 @@ error_reporting(E_ALL);
                         <br>
                         <input name="rayon" type="range" value="<?php echo $rayon;?>" min="1" max="100" step="1" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
                         <span id="monCurseurKm"><?php echo $htmlRayonDe?> <?php echo $rayon; if($rayon>=100) echo '+';?></span>
-                        <script src="asset/js/range.js"></script>
+                        <script>
+                            function AfficheRange2(newVal) {
+                                var monCurseurKm = document.getElementById("monCurseurKm");
+                                if (newVal >= 100) {
+                                    monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                                } else {
+                                    monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                                }
+                            }
+
+                        </script>
                         <?php echo $htmlKm?>
                         <br>
                         <br>
@@ -193,12 +203,12 @@ error_reporting(E_ALL);
                     $stmt->execute();
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                    //$coordonneesUti = latLongGps($urlUti);
-                    //$latitudeUti = $coordonneesUti[0];
-                    //$longitudeUti = $coordonneesUti[1];
+                    $coordonneesUti = latLongGps($urlUti);
+                    $latitudeUti = $coordonneesUti[0];
+                    $longitudeUti = $coordonneesUti[1];
                     
-                    //var_dump($coordonneesUti);
-                    //var_dump($longitudeUti);
+                    var_dump($coordonneesUti);
+                    var_dump($longitudeUti);
                     
                     if (count($result) > 0) {
                         foreach ($result as $row) {

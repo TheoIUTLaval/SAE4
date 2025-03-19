@@ -39,9 +39,9 @@ function latLongGps($url){
     // Configuration de la requête cURL
     $ch = curl_init($url);
     // Si vous avez besoin d'un proxy, décommentez les lignes suivantes et ajustez les paramètres
-    curl_setopt($ch, CURLOPT_PROXY, 'proxy.univ-lemans.fr');
-    curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+    // curl_setopt($ch, CURLOPT_PROXY, 'proxy.univ-lemans.fr');
+    // curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+    // curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
     // Ajout du User Agent
