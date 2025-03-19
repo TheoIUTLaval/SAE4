@@ -55,7 +55,7 @@ try {
                     }else {
                         $_SESSION["isProd"]=false;
                     }
-                    $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                     $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
                     $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                     if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
@@ -66,7 +66,7 @@ try {
                             $_SESSION['isAdmin'] = false;
                         }
                     } else {
-                        $_SESSION['isAdmin'] = true; // Par défaut, si aucun résultat
+                        $_SESSION['isAdmin'] = false; // Par défaut, si aucun résultat
                     }
                     // Redirection
                 header('Location: index.php');
