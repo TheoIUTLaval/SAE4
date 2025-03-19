@@ -401,7 +401,11 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     echo $row["Prenom_Uti"] . " " . mb_strtoupper($row["Nom_Uti"]) . "<br>";
                                     echo $row["Adr_Uti"] . "<br>";
                                     echo '</p>';
-                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514">Voir le producteur</a>';
+                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514;" 
+                                    onmouseover="this.style.backgroundColor=\'#305514\'; this.style.color=\'#FFFFFF\';"
+                                    onmouseout="this.style.backgroundColor=\'\'; this.style.color=\'#305514\';">
+                                    Voir le producteur</a>';
+
                                     echo '</div>';
                                     echo '</a>';
                                     echo '</div>';
@@ -429,7 +433,10 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo '</p>';
-                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514">Voir le producteur</a>';
+                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514;" 
+                                    onmouseover="this.style.backgroundColor=\'#305514\'; this.style.color=\'#FFFFFF\';"
+                                    onmouseout="this.style.backgroundColor=\'\'; this.style.color=\'#305514\';">
+                                    Voir le producteur</a>';
                                         echo '</div>';
                                         echo '</a>';
                                         echo '</div>';
