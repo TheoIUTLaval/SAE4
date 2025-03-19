@@ -104,7 +104,11 @@
             
         <div class="btn-group" role="group" aria-label="Basic outlined example" >
                     <form method="post">
-                    <button type=submit class="btn btn-outline-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"> Signaler un dysfonctionnement
+                    <button type=submit class="btn btn-outline-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"
+                    onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
+                    onmouseout="this.style.backgroundColor=''; this.style.color='#305514';"
+                    > 
+                    Signaler un dysfonctionnement
                             <input type="hidden" name="popup" value="contact_admin">
                     </button>
                     </form>
