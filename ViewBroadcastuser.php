@@ -15,7 +15,7 @@
             session_start();
         }
     ?>
-    <div class="container">
+    <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png">
         </div>
