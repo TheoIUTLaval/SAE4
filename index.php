@@ -387,7 +387,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                         if (count($results) > 0) {
                             foreach ($results as $row) {
                                 if ($rayon >= 100) {
-                                    echo '<div class="card" style="width: 18rem; border: 5px solid #305514; border-radius: 5px; padding: 5px; color: #305514;">';
+                                    echo '<div class="card" style="width: 18rem; border: 3px solid #305514; border-radius: 5px; padding: 5px; color: #305514;">';
                                     echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  
                                     $imagePath = 'asset/img/img_producteur/' . $row["Id_Prod"] . '.png';
                                     $defaultImage = 'asset/img/img_producteur/default_image.png';  
