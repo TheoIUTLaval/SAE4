@@ -53,7 +53,7 @@ try {
                         //var_dump($_SESSION);
                     }else {
                         $queryIdAdmin = $bdd2->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
-                        $returnQueryIdAdmin = $queryIdUti->fetchAll(PDO::FETCH_ASSOC);
+                        $returnQueryIdAdmin = $queryIdAdmin->fetchAll(PDO::FETCH_ASSOC);
                         if(($returnQueryIdAdmin)==null){
                             $_SESSION["isProd"]=false;
                         }else {
