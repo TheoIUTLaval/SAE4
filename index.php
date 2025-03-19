@@ -149,97 +149,33 @@ error_reporting(E_ALL);
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
             <div class="gallery-container">
             <?php
+            
+
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if (isset($_GET["categorie"])) {
                     $categorie = htmlspecialchars($_GET["categorie"]);
-                    // Connexion à la base de données
-                    $utilisateur = "etu";
-                    $serveur = "localhost";
-                    $motdepasse = "Achanger!";
-                    $basededonnees = "sae";
-                    try {
-                        $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees;charset=utf8", $utilisateur, $motdepasse);
-                        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    } catch (PDOException $e) {
-                        die("Erreur de connexion : " . $e->getMessage());
-                    }
-                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                    if ($_GET["categorie"] == "Tout") {
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
-                        FROM PRODUCTEUR 
-                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
-                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
-                        HAVING PRODUCTEUR.Prof_Prod LIKE \'%\''; 
-                    } else {
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
-                        FROM PRODUCTEUR 
-                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
-                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
-                        HAVING PRODUCTEUR.Prof_Prod = :categorie';
-                    }
-                    if ($rechercheVille != "") {
-                        $requete .= ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\''; 
-                    }
-                    $requete .= ' ORDER BY ';
-                    if ($tri === "nombreDeProduits") {
-                        $requete .= ' nombreDeProduits DESC';
-                    } else if ($tri === "ordreNomAlphabétique") {
-                        $requete .= ' Nom_Uti ASC';
-                    } else if ($tri === "ordreNomAntiAlphabétique") {
-                        $requete .= ' Nom_Uti DESC';
-                    } else if ($tri === "ordrePrenomAlphabétique") {
-                        $requete .= ' Prenom_Uti ASC';
-                    } else if ($tri === "ordrePrenomAntiAlphabétique") {
-                        $requete .= ' Prenom_Uti DESC';
-                    } else {
-                        $requete .= ' nombreDeProduits ASC';
-                    }
-                    $stmt = $connexion->prepare($requete);
-                    if ($_GET["categorie"] != "Tout") {
-                        $stmt->bindParam(':categorie', $categorie, PDO::PARAM_STR);
-                    }
-                    $stmt->execute();
-                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
-                    $coordonneesUti = latLongGps($urlUti);
+                    $result = getProducteurs($categorie, $rechercheVille, $tri, $rayon, $Adr_Uti_En_Cours);
+                    $coordonneesUti = getCoordinates($Adr_Uti_En_Cours);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
-                    
-                    var_dump($coordonneesUti);
-                    var_dump($longitudeUti);
-                    
+
                     if (count($result) > 0) {
                         foreach ($result as $row) {
                             if ($rayon >= 100) {
-                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                echo ''.$row["Prof_Prod"]. "<br>";
-                                echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
-                                echo $row["Adr_Uti"] . "<br>";
-                                echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
-                                echo '</a> ';
+                                displayProducteur($row);
                             } else {
-                                $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
-                                $coordonneesProd = latLongGps($urlProd);
+                                $coordonneesProd = getCoordinates($row["Adr_Uti"]);
                                 $latitudeProd = $coordonneesProd[0];
                                 $longitudeProd = $coordonneesProd[1];
-                                $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                $distance = calculateDistance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
                                 if ($distance < $rayon) {
-                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
-                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
-                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
-                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                    echo '</a> ';
+                                    displayProducteur($row);
                                 }
                             }
                         }
                     } else {
                         echo $htmlAucunResultat;
                     }
-                    $stmt->closeCursor();
-                    $connexion = null;
                 }
             }
             ?>
