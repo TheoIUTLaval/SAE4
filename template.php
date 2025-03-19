@@ -56,6 +56,7 @@
                                 <li class="nav-item">
                                         <form action="language/language.php" method="post" id="languageForm" class="d-flex align-items-center dropdown">
                                             <select name="language" id="languagePicker" onchange="submitForm()" class="form-select" aria-label="Default select example">
+                                                <option slected>Language</option>
                                                 <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
                                                 <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
                                                 <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
