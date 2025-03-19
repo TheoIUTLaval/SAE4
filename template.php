@@ -56,6 +56,7 @@
                                     <a class ="nav-link dropdown-toggle" herf="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langage</a>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="language/language.php?language=fr">Français</a></li>
                                         <form action="language/language.php" method="post" id="languageForm">
                                             <select name="language" id="languagePicker" onchange="submitForm()">
                                                 <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
