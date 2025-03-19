@@ -192,10 +192,14 @@ error_reporting(E_ALL);
                     }
                     $stmt->execute();
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
                     $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
                     $coordonneesUti = latLongGps($urlUti);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
+                    var_dump($latitudeUti);
+                    var_dump($longitudeUti);
+                    
                     if (count($result) > 0) {
                         foreach ($result as $row) {
                             if ($rayon >= 100) {
