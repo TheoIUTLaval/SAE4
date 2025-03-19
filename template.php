@@ -109,7 +109,7 @@
                     </button>
                     </form>
                     <button class="btn btn-outline-primary bouton" type="button" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514" 
-                    onmouseover="this.style.borderColor='#FF5733'; this.style.color='#FF5733';"
+                    onmouseover="this.style.backgroundcolor='305514'; this.style.color='#FFFFF';"
                     onmouseout="this.style.borderColor='#305514'; this.style.color='#305514';"
                     data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Conditions générales d'utilisation
