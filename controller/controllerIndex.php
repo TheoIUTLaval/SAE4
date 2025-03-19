@@ -98,4 +98,59 @@ $dlng / 2) * sin($dlng / 2);
 
     return ($miles ? ($km * 0.621371192) : $km);
 }
+function getProducteurs($rechercheVille, $categorie, $rayon, $tri, $utilisateur) {
+    // Connexion à la base de données
+    $db = new PDO('mysql:host=localhost;dbname=nom_de_la_base', 'nom_utilisateur', 'mot_de_passe');
+    
+    // Préparation de la requête SQL
+    $sql = "SELECT * FROM producteurs WHERE 1=1";
+    
+    if (!empty($rechercheVille)) {
+        $sql .= " AND ville LIKE :ville";
+    }
+    if ($categorie != "Tout") {
+        $sql .= " AND categorie = :categorie";
+    }
+    if ($utilisateur != -1) {
+        $sql .= " AND utilisateur_id = :utilisateur";
+    }
+    
+    // Ajout du tri
+    $sql .= " ORDER BY " . $tri;
+    
+    // Préparation de la requête
+    $stmt = $db->prepare($sql);
+    
+    // Liaison des paramètres
+    if (!empty($rechercheVille)) {
+        $stmt->bindValue(':ville', '%' . $rechercheVille . '%', PDO::PARAM_STR);
+    }
+    if ($categorie != "Tout") {
+        $stmt->bindValue(':categorie', $categorie, PDO::PARAM_STR);
+    }
+    if ($utilisateur != -1) {
+        $stmt->bindValue(':utilisateur', $utilisateur, PDO::PARAM_INT);
+    }
+    
+    // Exécution de la requête
+    $stmt->execute();
+    
+    // Récupération des résultats
+    $producteurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Récupération des coordonnées GPS de la ville de recherche
+    $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($rechercheVille) . "&format=json&limit=1";
+    list($latitude, $longitude) = latLongGps($url);
+    
+    // Filtrage des producteurs par distance
+    $filteredProducteurs = [];
+    foreach ($producteurs as $producteur) {
+        $distance = distance($producteur['latitude'], $producteur['longitude'], $latitude, $longitude);
+        if ($distance <= $rayon) {
+            $filteredProducteurs[] = $producteur;
+        }
+    }
+    
+    return $filteredProducteurs;
+}
 ?>
