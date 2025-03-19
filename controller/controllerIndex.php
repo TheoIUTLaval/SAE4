@@ -35,6 +35,46 @@ if (isset($_SESSION["language"])==false){
     $_SESSION["language"]="fr";
 }
 
+function latLongGps($url){
+    // Configuration de la requête cURL
+    $ch = curl_init($url);
+    // Si vous avez besoin d'un proxy, décommentez les lignes suivantes et ajustez les paramètres
+    curl_setopt($ch, CURLOPT_PROXY, 'proxy.univ-lemans.fr');
+    curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+    // Ajout du User Agent
+    $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
+    curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
+    // Ajout du Referrer
+    $customReferrer = "http://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
+    curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
+    // Options de débogage
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    // Exécution de la requête
+    $response = curl_exec($ch);
+    // Vérifier s'il y a eu une erreur cURL
+    if (curl_errno($ch)) {
+        echo 'Erreur cURL : ' . curl_error($ch);
+        curl_close($ch);
+        return [0, 0];
+    } else {
+        // Analyser la réponse JSON
+        $data = json_decode($response);
+        // Vérifier si la réponse a été correctement analysée
+        if (!empty($data) && is_array($data) && isset($data[0])) {
+            // Récupérer la latitude et la longitude
+            $latitude = $data[0]->lat ?? 0;
+            $longitude = $data[0]->lon ?? 0;
+            curl_close($ch);
+            return [$latitude, $longitude];
+        }
+        curl_close($ch);
+        return [0,0];
+    }
+}
 
 /*---------------------------------------------------------------*/
 /*
@@ -49,4 +89,23 @@ if (isset($_SESSION["language"])==false){
     - fonctionnement du code vérifié                                                                                    
 */
 /*---------------------------------------------------------------*/
+
+function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
+{
+    $pi80 = M_PI / 180;
+    $lat1 *= $pi80;
+    $lng1 *= $pi80;
+    $lat2 *= $pi80;
+    $lng2 *= $pi80;
+
+    $r = 6372.797; // rayon moyen de la Terre en km
+    $dlat = $lat2 - $lat1;
+    $dlng = $lng2 - $lng1;
+    $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin(
+$dlng / 2) * sin($dlng / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    $km = $r * $c;
+
+    return ($miles ? ($km * 0.621371192) : $km);
+}
 ?>
