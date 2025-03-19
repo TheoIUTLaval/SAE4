@@ -23,7 +23,7 @@
     <div class="custom-container">
     <div class="leftColumn">
 			<img class="logo" src="asset/img/logo.png">
-            <h3><?php echo $htmlContactsRecentsDeuxPoints?></h3>
+            <h5><?php echo $htmlContactsRecentsDeuxPoints?></h5>
 			<?php
 			require 'controller/controllerMessage.php';
 			?>
