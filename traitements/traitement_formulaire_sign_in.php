@@ -45,12 +45,12 @@ try {
 
                 // Check user role
                 try {
-                    $queryRole = $bdd->prepare('SELECT Role_Uti FROM UTILISATEUR WHERE Id_Uti = :id');
+                    $queryRole = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE Id_Uti = :id');
                     $queryRole->execute(['id' => $Id_Uti]);
                     $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
 
                     if ($roleResult) {
-                        $_SESSION['role'] = $roleResult['Role_Uti'];
+                        $_SESSION['role'] = 'producteur';
                     } else {
                         $_SESSION['role'] = 'client'; // Default role
                     }
@@ -59,29 +59,36 @@ try {
                     exit;
                 }
 
-                // Debugging output
-                echo "Id_Uti: " . $Id_Uti . "<br>";
-                echo "Role_Uti: " . ($_SESSION['role'] ?? 'Aucun rôle trouvé') . "<br>";
-                $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
-                $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-                $reponse=$returnIsProducteur[0]["result"];
-                // Redirect based on role
-                if ($reponse!=NULL){
-                    $_SESSION["isProd"]=true;
-                    //var_dump($_SESSION);
-                }else {
-                    $_SESSION["isProd"]=false;
-                }
-                if ($_SESSION['role'] === 'admin') {
-                    $_SESSION["isAdmin"] = true;
-                } elseif ($_SESSION['role'] === 'producteur') {
-                    $_SESSION["isProd"] = true;
-                } else {
-                    $_SESSION["isAdmin"] = false;
-                    $_SESSION["isProd"] = false;
-                }
-                header('Location: index.php');
-                exit;
+                // Vérification du rôle via la procédure stockée
+                    $isProducteur = $bdd->prepare('CALL isProducteur(:id)');
+                    $isProducteur->execute(['id' => $Id_Uti]);
+                    $returnIsProducteur = $isProducteur->fetch(PDO::FETCH_ASSOC);
+
+                    if ($returnIsProducteur && isset($returnIsProducteur["result"]) && $returnIsProducteur["result"] == 1) {
+                        $_SESSION["isProd"] = true;
+                    } else {
+                        $_SESSION["isProd"] = false;
+                    }
+
+                    // Définir les rôles dans la session
+                    if ($_SESSION['role'] === 'admin') {
+                        $_SESSION["isAdmin"] = true;
+                        $_SESSION["isProd"] = false; // Un admin ne peut pas être producteur
+                    } elseif ($_SESSION['role'] === 'producteur') {
+                        $_SESSION["isProd"] = true;
+                        $_SESSION["isAdmin"] = false;
+                    } else {
+                        $_SESSION["isAdmin"] = false;
+                        $_SESSION["isProd"] = false;
+                    }
+
+                    // Debugging output
+                    echo "isProd: " . ($_SESSION["isProd"] ? 'true' : 'false') . "<br>";
+                    echo "isAdmin: " . ($_SESSION["isAdmin"] ? 'true' : 'false') . "<br>";
+
+                    // Redirection
+                    header('Location: index.php');
+                    exit;
             } else {
                 $_SESSION['test_pwd']--;
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
