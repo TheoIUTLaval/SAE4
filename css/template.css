@@ -93,5 +93,8 @@ body {
 }
 
 h2{
-    
+    align-items: center;
+    text-align: center;
+    margin: 50px;
+    color: #305514;
 }
