@@ -1,6 +1,6 @@
 <?php
 // filepath: [traitement_formulaire_sign_in.php](http://_vscodecontentref_/1)
-<?php
+
 session_start();
 require "language/language.php";
 
