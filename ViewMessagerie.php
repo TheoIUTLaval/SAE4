@@ -16,7 +16,6 @@
 
 <body>
     <?php
-
         session_start();
     ?>
     <div class="custom-container">
@@ -102,8 +101,8 @@
                             
                             ?>
 
-                            <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?> " class="boutonDeConnection" > <!-- Changer se connecter -->
-                            <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                            <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection"> <!-- Changer se connecter -->
+                            <input type="hidden" name="popup" value="<?php if(isset($_SESSION['Mail_Uti'])){echo 'info_perso';}else{echo 'sign_in';}?>">
                         
                         </form>
                     </div>
