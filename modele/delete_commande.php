@@ -37,5 +37,5 @@
       //$bdd->query(('DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';'));
       //echo 'DELETE FROM COMMANDE WHERE Id_Commande='.$Id_Commande.';';
     
-    header('Location: /SAE4/achats.php?');
+    header('Location: /SAE4/ViewAchats.php?');
 ?>
