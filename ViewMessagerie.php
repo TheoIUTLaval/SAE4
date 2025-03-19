@@ -176,31 +176,7 @@
             </div>
         </div>
     </div>
-    <div class="basDePage">
-    <div class="btn-group" role="group" aria-label="Basic outlined example">
-        <form method="post">
-            <button type="submit" class="btn btn-outline-primary" style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"
-            onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
-            onmouseout="this.style.backgroundColor=''; this.style.color='#305514';">
-            Signaler un dysfonctionnement
-            <input type="hidden" name="popup" value="contact_admin">
-            </button>
-        </form>
-        <button class="btn btn-outline-primary bouton" type="button" style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514" 
-        onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
-        onmouseout="this.style.backgroundColor=''; this.style.color='#305514';"
-        data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Conditions générales d'utilisation
-        </button>
-        <!-- New button to send a message to everyone -->
-        <form action="ViewBroadcastuser.php" method="get">
-            <button type="submit" class="btn btn-outline-primary" style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"
-            onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
-            onmouseout="this.style.backgroundColor=''; this.style.color='#305514';">
-            Envoyer un message à tous
-            </button>
-        </form>
-    </div>
+    
     <div class="collapse w-100 mt-2" id="collapseExample">
         <div class="card card-body">
             ...
@@ -208,7 +184,7 @@
     </div>
 </div>
     <?php require "popups/gestion_popups.php"; ?>
-    <?php require "broadcast/broadcast_view.php"; ?>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
