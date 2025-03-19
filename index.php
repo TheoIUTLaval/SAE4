@@ -389,7 +389,15 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                 if ($rayon >= 100) {
                                     echo '<div class="card" style="width: 18rem;">';
                                     echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  // Enlève le souligné du lien
-                                    echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" class="card-img-top" alt="' . $htmlImageUtilisateur . '" style="height: 180px; object-fit: cover;">';
+
+                                    // Vérification de l'existence de l'image
+                                    $imagePath = 'asset/img/img_producteur/' . $row["Id_Prod"] . '.png';
+                                    $defaultImage = 'asset/img/img_producteur/default_image.png';  // Chemin de l'image par défaut
+
+                                    // Si l'image du producteur n'existe pas, on utilise l'image par défaut
+                                    $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
+
+                                    echo '<img src="' . $imageSrc . '" class="card-img-top" alt="' . $htmlImageUtilisateur . '" style="height: 180px; object-fit: cover;">';
                                     echo '<div class="card-body">';
                                     echo '<h5 class="card-title">' . $row["Prof_Prod"] . '</h5>';
                                     echo '<p class="card-text">';
@@ -400,6 +408,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     echo '</div>';
                                     echo '</a>';
                                     echo '</div>';
+
                                 } else {
                                     $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
                                     $coordonneesProd = latLongGps($urlProd);
