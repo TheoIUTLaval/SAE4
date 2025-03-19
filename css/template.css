@@ -81,9 +81,7 @@ body {
 }
 
 .basDePage {
-    display: flex;
-    align-items: flex-end;
-    position: relative;
+    
     right: 0px;
     padding: 10px;
 }
