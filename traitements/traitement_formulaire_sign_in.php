@@ -45,7 +45,7 @@ try {
                 
                 // Check user role
                 $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-                    $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
+                    $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
                     $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
                     if ($returnIsProducteur && isset($returnIsProducteur["result"]) && $returnIsProducteur["result"] == 1) {
                         $_SESSION["isProd"] = true;
@@ -53,7 +53,7 @@ try {
                         $_SESSION["isProd"] = false;
                     }
                     $_SESSION['Mail_Uti'] = $Mail_Uti;
-                    $_SESSION['Id_Uti'] = $iduti;
+                    $_SESSION['Id_Uti'] = $Id_Uti;
                     $_SESSION['erreur'] = '';
                    
 
