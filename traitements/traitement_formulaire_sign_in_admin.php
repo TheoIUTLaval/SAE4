@@ -1,6 +1,7 @@
 <?php
 
-
+ob_start();
+session_start();
 // Error handling with try-catch block
 try {
     // Retrieve form data
