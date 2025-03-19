@@ -27,10 +27,10 @@ if ($pwd1 == $pwd2 && $pwd1 !== null) {
         $update="UPDATE UTILISATEUR SET Pwd_Uti = '".$pwd1."' WHERE Mail_Uti = '".$_SESSION["mailTemp"] ."';";
         echo ($update);
         $bdd->exec($update);
-        header('Location: pwd.php?message==$'.$htmlMessageUrlMdpMajOk);
+        header('Location: ViewPwd.php?message==$'.$htmlMessageUrlMdpMajOk);
 
     } else {
-        header('Location: pwd.php?message='.$htmlMessageUrlAdrInvalide);
+        header('Location: ViewPwd.php?message='.$htmlMessageUrlAdrInvalide);
     }
 }
 ?>

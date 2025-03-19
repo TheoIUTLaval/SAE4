@@ -33,7 +33,7 @@
             <?php echo $htmlStatut; ?> 
             <br>
             
-            <form action="delivery.php" method="post">
+            <form action="ViewDelivery.php" method="post">
                 <label>
                     <input type="radio" name="typeCategorie" value="0" <?php if($filtreCategorie==0) echo 'checked="true"';?>> <?php echo $htmlTOUT; ?>
                 </label>
@@ -75,10 +75,10 @@
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                             echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewDelivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewPanelAdmin.php">'.$htmlPanelAdmin.'</a>';
                         }
                     ?>
                 </div>

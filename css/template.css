@@ -85,3 +85,8 @@ body {
     right: 0px;
     padding: 10px;
 }
+
+.bouton :hover{
+    border-color: #305514; /* Bordure au survol */
+    color: #FFFF; 
+}
