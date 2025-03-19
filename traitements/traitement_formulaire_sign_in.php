@@ -42,30 +42,26 @@ try {
             if ((isset($test[0][1]) && $test[0][1] == 1) || (isset($test[0][0]) && $test[0][0] == 1)) {
                 $_SESSION['Mail_Uti'] = $Mail_Uti;
                 $_SESSION['Id_Uti'] = $Id_Uti;
-
+                $_SESSION["isProd"]=true;
                 // Check user role
                
-                    $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
-                    $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-                    $reponse=$returnIsProducteur[0]["result"];
-                    if ($reponse!=NULL){
-                        $_SESSION["isProd"]=true;
-                        var_dump($_SESSION);
-                    }else {
-                        $_SESSION["isProd"]=false;
-                    }
-                    $_SESSION['Mail_Uti'] = $Mail_Uti;
-                    $_SESSION['Id_Uti'] = $iduti;
-                    $_SESSION['erreur'] = '';
-                    if($_SESSION["isProd"]==true){
-                        $_POST['popup'] = 'addProfilPicture';
-                    }else {
-                        $_POST['popup'] = '';
-                     }
+                 //   $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
+                 //   $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                  //  $reponse=$returnIsProducteur[0]["result"];
+                 //   if ($reponse!=NULL){
+                  //      $_SESSION["isProd"]=true;
+                  //      var_dump($_SESSION);
+                  //  }else {
+                  //      $_SESSION["isProd"]=false;
+                  //  }
+                  //  $_SESSION['Mail_Uti'] = $Mail_Uti;
+                  //  $_SESSION['Id_Uti'] = $iduti;
+                  //  $_SESSION['erreur'] = '';
+                   
 
                     // Redirection
-                    header('Location: ../index.php');
-                    exit;
+                header('Location: ../index.php');
+                exit;
             } else {
                 $_SESSION['test_pwd']--;
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
