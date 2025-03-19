@@ -60,7 +60,7 @@
                 echo $Desc_Statut;
                 echo '</br>';
                 if ($Id_Statut!=3 and $Id_Statut!=4){
-                echo '<form action="delete_commande.php" method="post">';
+                echo '<form action="modele/delete_commande.php" method="post">';
                 echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
                 
                 echo '<button type="submit">'.$htmlAnnulerCommande.'</button>';
