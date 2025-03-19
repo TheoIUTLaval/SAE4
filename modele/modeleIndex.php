@@ -9,8 +9,8 @@ function dbConnect(){
 }
 $bdd = dbConnect();
 
-function AdrUti($utilisateur){
-    $queryAdrUti = $bdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
+function AdrUti($bdd, $utilisateur){
+    $queryAdrUti = $bdd->prepare('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;');
     $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
     $queryAdrUti->execute();
     $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
