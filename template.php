@@ -23,7 +23,7 @@
     <div class="rightColumn">
         <div class="topBanner">
             <div class="divNavigation">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" >
                     <div class="container-fluid">
                         <a class="navbar-brand" href="index.php">Accueil</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,12 @@
                                             document.getElementById("languageForm").submit();
                                         }
                                     </script>
-                                    <?php
+                                    
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <?php
                                     if (!isset($_SESSION)) {
                                         session_start();
                                     }
@@ -82,17 +87,13 @@
                                         echo($htmlSeConnecter);
                                     } else {
                                         echo ''.$_SESSION['Mail_Uti'].'';
-                                    } ?>" class="boutonDeConnection">
+                                    } ?>" class="boutonDeConnection" Connection>
                                     <input type="hidden" name="popup" value=<?php if (isset($_SESSION['Mail_Uti'])) {
                                         echo '"info_perso"';
                                     } else {
                                         echo '"sign_in"';
                                     } ?>>
                                 </form>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
             </div>
         </div>
         <div class="contenuPage">
