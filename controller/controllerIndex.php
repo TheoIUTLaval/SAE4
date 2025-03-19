@@ -43,10 +43,6 @@ function latLongGps($url){
     curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
     curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
-    // Options de débogage
-    curl_setopt($ch, CURLOPT_VERBOSE, true);
-    curl_setopt($ch, CURLOPT_HEADER, true);
     // Exécution de la requête
     $response = curl_exec($ch);
     // Vérifier s'il y a eu une erreur cURL
