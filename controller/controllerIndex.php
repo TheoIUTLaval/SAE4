@@ -63,8 +63,8 @@ if (isset($_SESSION["language"])==false){
             // Vérifier si la réponse a été correctement analysée
             if (!empty($data) && is_array($data) && isset($data[0])) {
                 // Récupérer la latitude et la longitude
-                $latitude = $data[0]->lat;
-                $longitude = $data[0]->lon;
+                $latitude = $data[0]->lat ?? 0;
+                $longitude = $data[0]->lon ?? 0;
                 return [$latitude, $longitude];
             }
             return [0,0];
