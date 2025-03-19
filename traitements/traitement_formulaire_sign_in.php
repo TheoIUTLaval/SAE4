@@ -70,6 +70,9 @@ try {
 
                 // Redirection
                 header('Location: index.php');
+                echo '<script type="text/javascript">',
+                    'window.location.href="index.php";',
+                    '</script>';
                 exit;
             } else {
                 $_SESSION['test_pwd']--;
