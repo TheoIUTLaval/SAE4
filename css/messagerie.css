@@ -60,8 +60,11 @@
     align-self: flex-start;
     color: #305514;
     padding: 4px;
-    border-radius: 0px 0px 15px 0px;
-    border: 1px solid rgba(78, 119, 48, 1);
     
+    
+}
+
+hr{
+    border: solid 1px #305514;
 }
 
