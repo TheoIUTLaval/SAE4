@@ -1,6 +1,7 @@
 .messageEnvoye{
     float: right;
     border-radius: 15px 15px 0px 15px;
+    padding: 2px 5px;
     background: #305514;
     color: white;
 }
