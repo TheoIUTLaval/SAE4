@@ -50,11 +50,12 @@ try {
                     $reponse=$returnIsProducteur[0]["result"];
                     if ($reponse!=NULL){
                         $_SESSION["isProd"]=true;
-                        $_SESSION['isAdmin'] = false;
+                        
                         //var_dump($_SESSION);
                     }else {
                         $_SESSION["isProd"]=false;
                     }
+                    $_SESSION['isAdmin'] = true;
                     $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
                     $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                     $reponse2=$returnIsAdmin[0]["result"];
