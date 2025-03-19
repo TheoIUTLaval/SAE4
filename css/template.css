@@ -86,7 +86,7 @@ body {
     padding: 10px;
 }
 
-.btn-outline-primary:hover{
+.bouton :hover{
     border-color: #305514; /* Bordure au survol */
     color: #FFFF; 
 }
