@@ -141,11 +141,12 @@
 						$formDisabled=true;
 					}
 					?>
-                    <div class="inuput-group nb-3">
+                    <div class="inuput-group nb-3 row" >
                         <form method="post" id="zoneDEnvoi">
                             <input type="text"  name="content" id="zoneDeTexte" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" <?php if ($formDisabled) { echo 'disabled';} ?>>
                             <button  class ="btn btn-outline-secondary" type="submit" id ="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?> >Envoyer</button> 
                         </form>
+                    </div>
 					<?php
 					if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
 						if ($_POST['content']!=""){
