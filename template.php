@@ -109,8 +109,8 @@
                     </button>
                     </form>
                     <button class="btn btn-outline-primary bouton" type="button" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514" 
-                    onmouseover="this.style.background-color='#305514'; this.style.color='#FFFFF';"
-                    onmouseout="this.style.borderColor='#305514'; this.style.color='#305514';"
+                    onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFF';"
+                    onmouseout="this.style.backgroundColor='none'; this.style.color='#305514';"
                     data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Conditions générales d'utilisation
                     </button>
