@@ -1,15 +1,16 @@
 .messageEnvoye{
     float: right;
     border-radius: 15px 15px 0px 15px;
-    border: 1px solid #4E7730;
-    background: #71B340;
+    background: #305514;
+    color: white;
 }
 
 .messageRecu{
     float: left;
     border-radius: 15px 15px 15px 0px;
-    border: 2px solid #71B340;
+    border: 2px solid #305514;
     background: #EBF4EC;
+    color: #305514;
     
 }
 
