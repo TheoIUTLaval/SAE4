@@ -14,9 +14,11 @@ if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
 function afficherContact($contact){
     $str = $contact['Prenom_Uti'].' '.$contact['Nom_Uti'];
     ?>
-    <form method="get">
-        <input type="submit" value="<?php echo($str);?>">
-        <input type="hidden" name="Id_Interlocuteur" value="<?php echo($contact['Id_Uti'])?>">
+    <form method="get" style="margin-left:25px;">
+    <button type="submit" class="btn btn-outline-secondary">
+        <?php echo($str); ?>
+    </button>
+    <input type="hidden" name="Id_Interlocuteur" value="<?php echo($contact['Id_Uti'])?>">
     </form>
     <?php
 }
