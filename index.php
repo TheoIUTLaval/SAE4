@@ -197,7 +197,7 @@ error_reporting(E_ALL);
                     $coordonneesUti = latLongGps($urlUti);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
-                    var_dump($latitudeUti);
+                    var_dump($coordonneesUti);
                     var_dump($longitudeUti);
                     
                     if (count($result) > 0) {
