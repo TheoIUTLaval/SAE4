@@ -106,6 +106,7 @@
         </div>
 
 
+
             <div class="contenuPage">
 				<div class="interlocuteur" >
 				<?php if (!isset($_GET['Id_Interlocuteur'])) ?>
