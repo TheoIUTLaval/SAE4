@@ -100,7 +100,7 @@ $dlng / 2) * sin($dlng / 2);
 }
 function getProducteurs($rechercheVille, $categorie, $rayon, $tri, $utilisateur) {
     // Connexion à la base de données
-    $db = new PDO('mysql:host=localhost;dbname=nom_de_la_base', 'nom_utilisateur', 'mot_de_passe');
+    global $bdd;
     
     // Préparation de la requête SQL
     $sql = "SELECT * FROM producteurs WHERE 1=1";
@@ -119,7 +119,7 @@ function getProducteurs($rechercheVille, $categorie, $rayon, $tri, $utilisateur)
     $sql .= " ORDER BY " . $tri;
     
     // Préparation de la requête
-    $stmt = $db->prepare($sql);
+    $stmt = $bdd->prepare($sql);
     
     // Liaison des paramètres
     if (!empty($rechercheVille)) {
