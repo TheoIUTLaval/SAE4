@@ -44,12 +44,6 @@ function latLongGps($url){
     curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
-    // Ajout du User Agent
-    $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
-    curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
-    // Ajout du Referrer
-    $customReferrer = "https://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
-    curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
     // Options de débogage
     curl_setopt($ch, CURLOPT_VERBOSE, true);
     curl_setopt($ch, CURLOPT_HEADER, true);

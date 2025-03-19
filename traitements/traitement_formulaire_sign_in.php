@@ -58,7 +58,6 @@ try {
                     
                     $isAdmin = $bdd2->query('CALL isAdministrateur('.$Id_Uti.');');
                     $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
-                    var_dump($returnIsAdmin);
                     if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
                         $reponse2 = $returnIsAdmin[0]["result"];
                         if ($reponse2 != NULL) {
