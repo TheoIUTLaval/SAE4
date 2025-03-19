@@ -18,6 +18,45 @@ error_reporting(E_ALL);
     $htmlAllemand = "Deutch";
     $htmlRusse = "русский";
     $htmlChinois = "中國人";
+
+
+    function latLongGps($url){
+        // Configuration de la requête cURL
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_PROXY, 'proxy.univ-lemans.fr');
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+        // Ajout du User Agent
+        $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
+        curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
+        // Ajout du Referrer
+        $customReferrer = "https://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
+        curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
+        // Exécution de la requête
+        $response = curl_exec($ch);
+        // Vérifier s'il y a eu une erreur cURL
+        if (curl_errno($ch)) {
+            echo 'Erreur cURL : ' . curl_error($ch);
+        } else {
+            // Analyser la réponse JSON
+            $data = json_decode($response);
+        
+            // Vérifier si la réponse a été correctement analysée
+            if (!empty($data) && is_array($data) && isset($data[0])) {
+                // Récupérer la latitude et la longitude
+                $latitude = $data[0]->lat;
+                $longitude = $data[0]->lon;
+                return [$latitude, $longitude];
+            }
+            return [0,0];
+        }
+        // Fermeture de la session cURL
+        curl_close($ch);
+    }
+
 ?>
     <title> <?php echo $htmlMarque; ?> </title>
     <meta charset="UTF-8">
