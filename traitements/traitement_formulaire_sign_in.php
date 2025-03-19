@@ -61,6 +61,7 @@ try {
                     $reponse2=$returnIsAdmin[0]["result"];
                     if ($reponse2!=NULL){
                         $_SESSION['isAdmin'] = true;
+                        var_dump($_SESSION['isAdmin']);
                     }else {
                         $_SESSION['isAdmin'] = true;
                         }
