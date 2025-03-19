@@ -123,7 +123,7 @@
 				
 				}
 				?>
-				
+				<hr>
 				</div>
 				<div class="contenuMessagerie">
             	
