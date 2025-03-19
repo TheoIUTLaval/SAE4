@@ -25,5 +25,5 @@ if (isset($_GET["msg"])){
 }
 // Détruisez la session
 session_destroy();
-echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
+echo "<script type='text/javascript'>window.location.href = 'index.php';</script>";
 ?>
