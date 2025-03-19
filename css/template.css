@@ -54,7 +54,7 @@ body {
 }
 
 .topBanner {
-    display: flex;
+    width: 100%;
     
     align-items: center;
     background-color: #fff;

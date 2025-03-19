@@ -52,17 +52,22 @@
                                         <a class="nav-link active" href="panel_admin.php">Panel Admin</a>
                                     </li>
                                 <?php endif; ?>
-
-                                <form action="language/language.php" method="post" id="languageForm">
-                                    <select name="language" id="languagePicker" onchange="submitForm()">
-                                        <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
-                                        <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
-                                        <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
-                                        <option value="al" <?php if ($_SESSION["language"] == "al") echo 'selected'; ?>>Deutsch</option>
-                                        <option value="ru" <?php if ($_SESSION["language"] == "ru") echo 'selected'; ?>>русский</option>
-                                        <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
-                                    </select>
-                                </form>
+                                <li class= "nav-item dropdown">
+                                    <a class ="nav-link dropdown-toggle" herf="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langage</a>
+                                    </a>
+                                    <div class="dropdown-menu" aria_labelledby="navbarDropdown">
+                                        <form action="language/language.php" method="post" id="languageForm">
+                                            <select name="language" id="languagePicker" onchange="submitForm()">
+                                                <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
+                                                <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
+                                                <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
+                                                <option value="al" <?php if ($_SESSION["language"] == "al") echo 'selected'; ?>>Deutsch</option>
+                                                <option value="ru" <?php if ($_SESSION["language"] == "ru") echo 'selected'; ?>>русский</option>
+                                                <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
+                                            </select>
+                                        </form>
+                                </div>
+                                </li>
                                     
                             </ul>
                         </div>
@@ -87,7 +92,7 @@
                     
                     ?>
 
-					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?> Se connecter" class="boutonDeConnection" >
+					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?> " class="boutonDeConnection" > <!-- Changer se connecter -->
                     <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
                 
                 </form>
