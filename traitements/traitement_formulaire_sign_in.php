@@ -44,31 +44,15 @@ try {
                 $_SESSION['Id_Uti'] = $Id_Uti;
 
                 // Check user role
-                try {
-                    $queryRole = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR INNER JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti=UTILISATEUR.Id_Uti WHERE Id_Uti = :id');
-                    $queryRole->execute(['id' => $Id_Uti]);
-                    $roleResult = $queryRole->fetch(PDO::FETCH_ASSOC);
-
-                    if ($roleResult) {
-                        $_SESSION['role'] = 'producteur';
-                    } else {
-                        $_SESSION['role'] = 'client'; // Default role
-                    }
-                } catch (Exception $e) {
-                    echo "Erreur lors de la récupération du rôle : " . $e->getMessage();
-                    exit;
-                }
-
-                    // Définir les rôles dans la session
-                    if ($_SESSION['role'] === 'admin') {
-                        $_SESSION["isAdmin"] = true;
-                        $_SESSION["isProd"] = false; // Un admin ne peut pas être producteur
-                    } elseif ($_SESSION['role'] === 'producteur') {
-                        $_SESSION["isProd"] = true;
-                        $_SESSION["isAdmin"] = false;
-                    } else {
-                        $_SESSION["isAdmin"] = false;
-                        $_SESSION["isProd"] = false;
+               
+                    $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
+                    $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                    $reponse=$returnIsProducteur[0]["result"];
+                    if ($reponse!=NULL){
+                        $_SESSION["isProd"]=true;
+                        //var_dump($_SESSION);
+                    }else {
+                        $_SESSION["isProd"]=false;
                     }
 
                     // Redirection
