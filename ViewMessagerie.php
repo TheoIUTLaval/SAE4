@@ -142,7 +142,7 @@
 					}
 					?>
                     <div class="inuput-group nb-3 row" >
-                        <form method="post" id="zoneDEnvoi">
+                        <form method="post" id="zoneDEnvoi" class="d-flex">
                             <input type="text"  name="content" id="zoneDeTexte" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" <?php if ($formDisabled) { echo 'disabled';} ?>>
                             <button  class ="btn btn-outline-secondary" type="submit" id ="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?> >Envoyer</button> 
                         </form>
