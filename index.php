@@ -155,7 +155,7 @@ error_reporting(E_ALL);
                 if (isset($_GET["categorie"])) {
                     $categorie = htmlspecialchars($_GET["categorie"]);
                     $result = getProducteurs($categorie, $rechercheVille, $tri, $rayon, $Adr_Uti_En_Cours);
-                    $coordonneesUti = getCoordinates($Adr_Uti_En_Cours);
+                    $coordonneesUti = latLongGps($Adr_Uti_En_Cours);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
 
