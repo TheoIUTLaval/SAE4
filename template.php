@@ -101,12 +101,12 @@
         </div>
         <div class="basDePage">
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type=button class="btn btn-outline-primary" > Signaler un dysfonctionnement 
-                    <form method="post">
+                <form method="post">
+                <button type=submit class="btn btn-outline-primary" > Signaler un dysfonctionnement >
                         <input type="submit" value="Signaler un dysfonctionnement" class="lienPopup">
                         <input type="hidden" name="popup" value="contact_admin">
-                    </form>
                 </button>
+                </form>
                 <button type=button class="btn btn-outline-primary">CGU </button>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
