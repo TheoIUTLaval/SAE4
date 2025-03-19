@@ -58,6 +58,8 @@ function latLongGps($url){
     // Vérifier s'il y a eu une erreur cURL
     if (curl_errno($ch)) {
         echo 'Erreur cURL : ' . curl_error($ch);
+        curl_close($ch);
+        return [0, 0];
     } else {
         // Analyser la réponse JSON
         $data = json_decode($response);
@@ -66,12 +68,12 @@ function latLongGps($url){
             // Récupérer la latitude et la longitude
             $latitude = $data[0]->lat ?? 0;
             $longitude = $data[0]->lon ?? 0;
+            curl_close($ch);
             return [$latitude, $longitude];
         }
+        curl_close($ch);
         return [0,0];
     }
-    // Fermeture de la session cURL
-    curl_close($ch);
 }
 
 /*---------------------------------------------------------------*/
