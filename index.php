@@ -53,7 +53,7 @@ error_reporting(E_ALL);
                     <input type="text" name="rechercheVille" pattern="[A-Za-z0-9 ]{0,100}" value="<?php echo $rechercheVille?>" placeholder="<?php echo $htmlVille; ?>">
                     <br>
                     <?php
-                    $returnQueryAdrUti = AdrUti($utilisateur);
+                    $returnQueryAdrUti = AdrUti($bdd,$utilisateur);
                     if (count($returnQueryAdrUti) > 0) {
                         $Adr_Uti_En_Cours = $returnQueryAdrUti[0]["Adr_Uti"];
                     ?>
