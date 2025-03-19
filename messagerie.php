@@ -66,7 +66,7 @@
             </div>
             <div class="contenuPage">
 				<div class="interlocuteur" >
-				<?php if (!isset($_GET['Id_Interlocuteur'])) { echo 'disabled';} ?>
+				<?php if (!isset($_GET['Id_Interlocuteur'])) ?>
 				
 				<?php 
 				if (isset($_GET['Id_Interlocuteur'])){
