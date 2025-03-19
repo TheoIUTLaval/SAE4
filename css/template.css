@@ -61,8 +61,13 @@ body {
 }
 
 .divNavigation {
-    
     display: flex;
+}
+
+.divConnection{
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
 }
 
 .boutonDeConnection {
