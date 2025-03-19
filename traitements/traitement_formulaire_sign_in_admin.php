@@ -49,7 +49,7 @@ try {
                 $reponse2=$returnIsAdmin[0]["result"];
                 if ($reponse2!=NULL){
                     $_SESSION["isProd"]=false;
-                    $_SESSION['isAdmin'] = false;
+                    $_SESSION['isAdmin'] = true;
                 }else {
                     $_SESSION['Mail_Uti'] = $Mail_Uti;
                     $_SESSION['Id_Uti'] = $Id_Uti;
