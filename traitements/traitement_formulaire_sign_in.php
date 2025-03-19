@@ -64,15 +64,15 @@ try {
 
                 // Redirect based on role
                 if ($_SESSION['role'] === 'admin') {
-                    header('Location: admin_dashboard.php');
-                    exit;
+                    $_SESSION["isAdmin"] = true;
                 } elseif ($_SESSION['role'] === 'producteur') {
-                    header('Location: producteur_dashboard.php');
-                    exit;
+                    $_SESSION["isProd"] = true;
                 } else {
-                    header('Location: client_dashboard.php');
-                    exit;
+                    $_SESSION["isAdmin"] = false;
+                    $_SESSION["isProd"] = false;
                 }
+                header('Location: index.php');
+                exit;
             } else {
                 $_SESSION['test_pwd']--;
                 $_SESSION['erreur'] = $htmlMauvaisMdp . $_SESSION['test_pwd'] . $htmlTentatives;
