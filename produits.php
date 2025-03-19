@@ -163,14 +163,14 @@
                                         echo '<div class="square1" >';
                                         echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
                                         echo $htmlTypeDeuxPoints, $typeProduit . "<br><br>";
-                                        echo '<img class="img-produit" src="asset/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
+                                        echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
                                         echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
                                         echo $htmlStockDeuxPoints, $QteProduit .' '.$Nom_Unite_Stock. "<br>";
                                         echo '<form action="product_modification.php" method="post">';
                                         echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">'.$htmlModifier.'</button>';
                                         echo '</form>';
-                                        echo '<form action="/SAE4/delete_product.php" method="post">';
+                                        echo '<form action="/SAE4/modele/delete_product.php" method="post">';
                                         echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
                                         echo '<button type="submit" name="action">'.$htmlSupprimer.'</button>';
                                         echo '</form>';
