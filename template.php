@@ -63,37 +63,35 @@
                                         <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
                                     </select>
                                 </form>
-                                <form method="post">
-                                    <script>
-                                        function submitForm() {
-                                            document.getElementById("languageForm").submit();
-                                        }
-                                    </script>
                                     
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <?php
-                                    if (!isset($_SESSION)) {
-                                        session_start();
-                                    }
-                                    if (isset($_SESSION, $_SESSION['tempPopup'])) {
-                                        $_POST['popup'] = $_SESSION['tempPopup'];
-                                        unset($_SESSION['tempPopup']);
-                                    }
-                                    ?>
-                                    <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])) {
-                                        echo($htmlSeConnecter);
-                                    } else {
-                                        echo ''.$_SESSION['Mail_Uti'].'';
-                                    } ?>" class="boutonDeConnection" Connection>
-                                    <input type="hidden" name="popup" value=<?php if (isset($_SESSION['Mail_Uti'])) {
-                                        echo '"info_perso"';
-                                    } else {
-                                        echo '"sign_in"';
-                                    } ?>>
-                                </form>
+                
+                <form method="post">
+
+                <script>
+                    function submitForm() {
+                        document.getElementById("languageForm").submit();
+                    }
+                </script>
+                    <?php
+                    if(!isset($_SESSION)){
+                        session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    
+                    ?>
+
+					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo($htmlSeConnecter);} else {echo ''.$_SESSION['Mail_Uti'].'';}?>" class="boutonDeConnection">
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                
+                </form>
+
             </div>
         </div>
         <div class="contenuPage">
