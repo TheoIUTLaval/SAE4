@@ -159,7 +159,7 @@ function getProducteurs($rechercheVille, $categorie, $rayon, $tri, $utilisateur)
     $producteurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Récupération des coordonnées GPS de la ville de recherche
-    $url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($rechercheVille) . "&format=json&limit=1";
+    $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
     list($latitude, $longitude) = latLongGps($url);
 
     // Filtrage des producteurs par distance
