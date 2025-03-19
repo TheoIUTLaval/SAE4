@@ -12,20 +12,7 @@
 <body>
 
     <?php
-    if(!isset($_SESSION)){
-        session_start();
-        }
-
-        function dbConnect(){
-            $utilisateur = "etu";
-            $serveur = "localhost";
-            $motdepasse = "Achanger!";
-            $basededonnees = "sae";
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        }
-
-        $bdd=dbConnect();
+    
         $utilisateur=htmlspecialchars($_SESSION["Id_Uti"]);
         
         $filtreCategorie=0;
@@ -53,10 +40,10 @@
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
                             echo'<a class="bontonDeNavigation" href="produits.php">'.$htmlProduits.'</a>';
-                            echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewDelivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewPanelAdmin.php">'.$htmlPanelAdmin.'</a>';
                         }
                     ?>
                 </div>

@@ -57,7 +57,7 @@ try {
                 $_SESSION['Id_Uti'] = $Id_Uti;
                 $_SESSION['isAdmin'] = true;
                 $_SESSION['erreur'] = '';
-                header('Location: panel_admin.php');
+                header('Location: ViewPanelAdmin.php');
             }
         } else {
             $_SESSION['test_pwd']--;

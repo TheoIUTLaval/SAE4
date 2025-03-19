@@ -44,12 +44,12 @@
                                         <a class="nav-link" href="produits.php">Produits</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="delivery.php">Commandes</a>
+                                        <a class="nav-link" href="ViewDelivery.php">Commandes</a>
                                     </li>
                                 <?php endif; ?>
                                 <?php if (isset($_SESSION["isAdmin"]) && ($_SESSION["isAdmin"] == true)): ?>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="panel_admin.php">Panel Admin</a>
+                                        <a class="nav-link active" href="ViewPanelAdmin.php">Panel Admin</a>
                                     </li>
                                 <?php endif; ?>
 

@@ -155,7 +155,7 @@
                             echo'<a class="bontonDeNavigation" href="delivery.php">'.$htmlCommandes.'</a>';
                         }
                         if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"]==true)){
-                            echo'<a class="bontonDeNavigation" href="panel_admin.php">'.$htmlPanelAdmin.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewPanelAdmin.php">'.$htmlPanelAdmin.'</a>';
                         }
                     ?>
                 </div>

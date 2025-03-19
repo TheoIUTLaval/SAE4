@@ -131,7 +131,7 @@ if (isset($_POST["Id_Uti"])){
       header('Location: log_out.php'.$msg);
     }
     else{
-      header('Location: ../panel_admin.php');
+      header('Location: ../ViewPanelAdmin.php');
     }
 
     
