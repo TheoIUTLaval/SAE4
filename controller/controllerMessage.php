@@ -15,7 +15,7 @@ function afficherContact($contact){
     $str = $contact['Prenom_Uti'].' '.$contact['Nom_Uti'];
     ?>
     <form method="get" style="margin-left:25px;">
-    <button type="submit" class="btn btn-secondary" style="background-color:#305514;">
+    <button type="submit" class="btn btn-secondary" style="background-color:#305514; border-color:#305514; margin-bottom:10px;">
         <?php echo($str); ?>
     </button>
     <input type="hidden" name="Id_Interlocuteur" value="<?php echo($contact['Id_Uti'])?>">
