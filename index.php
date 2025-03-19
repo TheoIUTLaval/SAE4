@@ -33,7 +33,7 @@ error_reporting(E_ALL);
         $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
         curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
         // Ajout du Referrer
-        $customReferrer = "https://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
+        $customReferrer = "http://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
         curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
         // Exécution de la requête
         $response = curl_exec($ch);
