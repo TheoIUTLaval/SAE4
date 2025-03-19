@@ -44,26 +44,26 @@ try {
         if ((isset($test[0][1]) and $test[0][1] == 1) or (isset($test[0][0]) and $test[0][0] == 1)) {
             //bon mdp
             $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-            $queryIdAdmin = $bdd3->query('SELECT Id_Uti FROM ADMINISTRATEUR WHERE ADMINISTRATEUR.Id_Uti=\'' . $Id_Uti . '\'');
-            $returnQueryIdAdmin = $queryIdAdmin->fetchAll(PDO::FETCH_ASSOC);
-            if(($returnQueryIdAdmin)==null){
-                echo ("
-                <title>".$htmlErreur403."</title>
-                <h1>".$htmlErreur403."</h1>
-                <p>".$htmlPasAcces."</p>
-                " );
-            }else {
-                $_SESSION['Mail_Uti'] = $Mail_Uti;
-                $_SESSION['Id_Uti'] = $Id_Uti;
-                $_SESSION['isAdmin'] = true;
-                $_SESSION['erreur'] = '';
+                $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
+                $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+                $reponse2=$returnIsAdmin[0]["result"];
+                if ($reponse2!=NULL){
+                    $_SESSION["isProd"]=false;
+                    $_SESSION['isAdmin'] = false;
+                }else {
+                    $_SESSION['Mail_Uti'] = $Mail_Uti;
+                    $_SESSION['Id_Uti'] = $Id_Uti;
+                    $_SESSION['isAdmin'] = true;
+                    $_SESSION['erreur'] = '';
+                    }
+                
                 header('Location: ViewPanelAdmin.php');
-            }
+            
         } else {
             $_SESSION['test_pwd']--;
             $_SESSION['erreur'] = $htmlMauvaisMdp.  $_SESSION['test_pwd'] .$htmlTentatives;
         }
-    }else {
+    } else {
         $_SESSION['erreur'] = $htmlErreurMaxReponsesAtteintes;
     }
     }

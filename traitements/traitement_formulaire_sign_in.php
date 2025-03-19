@@ -50,6 +50,7 @@ try {
                     $reponse=$returnIsProducteur[0]["result"];
                     if ($reponse!=NULL){
                         $_SESSION["isProd"]=true;
+                        $_SESSION['isAdmin'] = false;
                         //var_dump($_SESSION);
                     }else {
                         $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
@@ -57,8 +58,10 @@ try {
                         $reponse2=$returnIsAdmin[0]["result"];
                         if ($reponse2!=NULL){
                             $_SESSION["isProd"]=false;
+                            $_SESSION['isAdmin'] = false;
                         }else {
                             $_SESSION['isAdmin'] = true;
+                            $_SESSION["isProd"]=false;
                          }
                     }
                     // Redirection
