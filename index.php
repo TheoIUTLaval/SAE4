@@ -408,12 +408,21 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
 
                                     if ($distance < $rayon) {
-                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="square1">';
+                                        echo '<div class="card" style="width: 18rem;">';
+                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  // Enlève le souligné du lien
+                                        echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" class="card-img-top" alt="Image utilisateur" style="height: 180px; object-fit: cover;">';
+                                        echo '<div class="card-body">';
+                                        echo '<h5 class="card-title">Producteur</h5>';  // Titre fixe
+                                        echo '<p class="card-text">';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
-                                        echo '</a> ';
+                                        echo '</p>';
+                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary">Voir le producteur</a>';
+                                        echo '</div>';
+                                        echo '</a>';
+                                        echo '</div>';
+
                                     }
                                 }
                             }
