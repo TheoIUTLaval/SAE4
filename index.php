@@ -130,7 +130,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
 ?>
 <div class="container">
     <div class="leftColumn">
-        <img class="logo" href="index.php" src="img/logo.png">
+        <img class="logo" href="index.php" src="asset/img/logo.png">
         <div class="contenuBarre">
 
             <center><strong><p><?php echo $htmlRechercherPar; ?></p></strong></center>
@@ -218,15 +218,15 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                 <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil ?></a>
                 <?php
                 if (isset($_SESSION["Id_Uti"])) {
-                    echo '<a class="bontonDeNavigation" href="messagerie.php">' . $htmlMessagerie . '</a>';
-                    echo '<a class="bontonDeNavigation" href="achats.php">' . $htmlAchats . '</a>';
+                    echo '<a class="bontonDeNavigation" href="ViewMessagerie.php">' . $htmlMessagerie . '</a>';
+                    echo '<a class="bontonDeNavigation" href="ViewAchats.php">' . $htmlAchats . '</a>';
                 }
                 if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"] == true)) {
                     echo '<a class="bontonDeNavigation" href="produits.php">' . $htmlProduits . '</a>';
-                    echo '<a class="bontonDeNavigation" href="delivery.php">' . $htmlCommandes . '</a>';
+                    echo '<a class="bontonDeNavigation" href="ViewDelivery.php">' . $htmlCommandes . '</a>';
                 }
                 if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"] == true)) {
-                    echo '<a class="bontonDeNavigation" href="panel_admin.php">' . $htmlPanelAdmin . '</a>';
+                    echo '<a class="bontonDeNavigation" href="ViewPanelAdmin.php">' . $htmlPanelAdmin . '</a>';
                 }
                 ?>
             </div>
@@ -374,7 +374,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     echo $row["Prof_Prod"] . "<br>";
                                     echo $row["Prenom_Uti"] . " " . mb_strtoupper($row["Nom_Uti"]) . "<br>";
                                     echo $row["Adr_Uti"] . "<br>";
-                                    echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="' . $htmlImageUtilisateur . '" style="width: 100%; height: 85%;" ><br>';
+                                    echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" alt="' . $htmlImageUtilisateur . '" style="width: 100%; height: 85%;" ><br>';
                                     echo '</a> ';
                                 } else {
                                     $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
@@ -388,7 +388,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
-                                        echo '<img src="img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                        echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
                                         echo '</a> ';
                                     }
                                 }
