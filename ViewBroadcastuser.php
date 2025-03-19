@@ -23,14 +23,16 @@
         <div class="rightColumn">
             <div class="contenuPage">
 
-                <form action="traitements/traitement_broadcast_user.php" method="post">
-                    <label for="message"><?php echo $htmlVotreMessage; ?></label>
-                    <textarea id="message" name="message" rows="5" maxlength="5000" required></textarea>
+            <form action="traitements/traitement_broadcast_user.php" method="post">
+                <div class="mb-3">
+                    <label for="message" class="form-label"><?php echo $htmlVotreMessage; ?></label>
+                    <textarea id="message" name="message" rows="5" maxlength="5000" class="form-control" required></textarea>
+                </div>
 
-                    <br>
-
-                    <input type="submit" value="<?php echo $htmlEnvoyerMessageATousUti; ?>">
-                </form>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary"><?php echo $htmlEnvoyerMessageATousUti; ?></button>
+                </div>
+            </form>
 
             </div>
             <div class="basDePage">
