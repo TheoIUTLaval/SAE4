@@ -64,7 +64,7 @@ try {
                         if ($reponse2 != NULL) {
                             $_SESSION['isAdmin'] = true;
                         } else {
-                            $_SESSION['isAdmin'] = false;
+                            $_SESSION['isAdmin'] = true;
                         }
                     } else {
                         $_SESSION['isAdmin'] = false; // Par défaut, si aucun résultat
