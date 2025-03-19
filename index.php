@@ -25,6 +25,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_general.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
 </head>
 <body>
 <?php
@@ -128,7 +130,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
 }
 
 ?>
-<div class="container">
+<div class="custom-container">
     <div class="leftColumn">
         <img class="logo" href="index.php" src="asset/img/logo.png">
         <div class="contenuBarre">
@@ -213,65 +215,80 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
         </div>
     </div>
     <div class="rightColumn">
-        <div class="topBanner">
+    <div class="topBanner">
             <div class="divNavigation">
-                <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil ?></a>
-                <?php
-                if (isset($_SESSION["Id_Uti"])) {
-                    echo '<a class="bontonDeNavigation" href="ViewMessagerie.php">' . $htmlMessagerie . '</a>';
-                    echo '<a class="bontonDeNavigation" href="ViewAchats.php">' . $htmlAchats . '</a>';
-                }
-                if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"] == true)) {
-                    echo '<a class="bontonDeNavigation" href="produits.php">' . $htmlProduits . '</a>';
-                    echo '<a class="bontonDeNavigation" href="ViewDelivery.php">' . $htmlCommandes . '</a>';
-                }
-                if (isset($_SESSION["isAdmin"]) and ($_SESSION["isAdmin"] == true)) {
-                    echo '<a class="bontonDeNavigation" href="ViewPanelAdmin.php">' . $htmlPanelAdmin . '</a>';
-                }
-                ?>
-            </div>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="index.php">Accueil</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <?php if (isset($_SESSION["Id_Uti"])): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="ViewMessagerie.php">Messagerie</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="ViewAchats.php">Achats</a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION["isProd"]) && ($_SESSION["isProd"] == true)): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="produits.php">Produits</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ViewDelivery.php">Commandes</a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION["isAdmin"]) && ($_SESSION["isAdmin"] == true)): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="ViewPanelAdmin.php">Panel Admin</a>
+                                    </li>
+                                <?php endif; ?>
 
-            <form action="language.php" method="post" id="languageForm">
-                <select name="language" id="languagePicker" onchange="submitForm()">
-                    <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
-                    <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
-                    <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
-                    <option value="al" <?php if ($_SESSION["language"] == "al") echo 'selected'; ?>>Deutsch</option>
-                    <option value="ru" <?php if ($_SESSION["language"] == "ru") echo 'selected'; ?>>русский</option>
-                    <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
-                </select>
-            </form>
-            <form method="post">
+                                <li class="nav-item">
+                                        <form action="language/language.php" method="post" id="languageForm" class="d-flex align-items-center dropdown">
+                                            <select name="language" id="languagePicker" onchange="submitForm()" class="form-select" aria-label="Default select example">
+                                                <option slected disabled>Language</option>
+                                                <option value="fr" <?php if ($_SESSION["language"] == "fr") echo 'selected'; ?>>Français</option>
+                                                <option value="en" <?php if ($_SESSION["language"] == "en") echo 'selected'; ?>>English</option>
+                                                <option value="es" <?php if ($_SESSION["language"] == "es") echo 'selected'; ?>>Español</option>
+                                                <option value="al" <?php if ($_SESSION["language"] == "al") echo 'selected'; ?>>Deutsch</option>
+                                                <option value="ru" <?php if ($_SESSION["language"] == "ru") echo 'selected'; ?>>русский</option>
+                                                <option value="ch" <?php if ($_SESSION["language"] == "ch") echo 'selected'; ?>>中國人</option>
+                                            </select>
+                                        </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="divConnection">
+                <form method="post">
 
                 <script>
                     function submitForm() {
                         document.getElementById("languageForm").submit();
                     }
                 </script>
-                <?php
-                if (!isset($_SESSION)) {
-                    session_start();
-                }
-                if (isset($_SESSION, $_SESSION['tempPopup'])) {
-                    $_POST['popup'] = $_SESSION['tempPopup'];
-                    unset($_SESSION['tempPopup']);
-                }
+                    <?php
+                    if(!isset($_SESSION)){
+                        session_start();
+                    }
+                    if(isset($_SESSION, $_SESSION['tempPopup'])){
+                        $_POST['popup'] = $_SESSION['tempPopup'];
+                        unset($_SESSION['tempPopup']);
+                    }
+                    
+                    ?>
 
-                ?>
-
-                <input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])) {/*$_SESSION = array()*/;
-                    echo($htmlSeConnecter);
-                } else {
-                    echo '' . $_SESSION['Mail_Uti'] . '';
-                } ?>" class="boutonDeConnection">
-                <input type="hidden" name="popup" value=<?php if (isset($_SESSION['Mail_Uti'])) {
-                    echo '"info_perso"';
-                } else {
-                    echo '"sign_in"';
-                } ?>>
-
-            </form>
-
+					<input type="submit" value="<?php if (!isset($_SESSION['Mail_Uti'])){/*$_SESSION = array()*/; echo("Se connecter");} else {echo ''.$_SESSION['Mail_Uti'].'';}?> " class="boutonDeConnection" > <!-- Changer se connecter -->
+                    <input type="hidden" name="popup" value=<?php if(isset($_SESSION['Mail_Uti'])){echo '"info_perso"';}else{echo '"sign_in"';}?>>
+                
+                </form>
+                </div>
+            </div>
         </div>
 
         <h1> <?php echo $htmlProducteursEnMaj ?> </h1>
@@ -418,4 +435,5 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
     </div>
 </div>
 <?php require "popups/gestion_popups.php"; ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
