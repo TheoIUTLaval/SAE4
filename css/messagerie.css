@@ -60,12 +60,13 @@
     align-self: flex-start;
     color: #305514;
     padding: 4px;
+    margin-left: 50px;
     
     
 }
 
 hr{
-    border: solid 1px #305514;
-    margin : 5px
+    color: #305514;
+    margin : 5px;
 }
 
