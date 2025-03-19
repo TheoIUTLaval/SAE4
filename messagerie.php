@@ -81,7 +81,7 @@
 						<input type="submit" value="" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>>
 					</form>
 					<?php
-					require 'traitements/envoyerMessage.php';
+					require 'controller/controllerMessage.php';
 					?>
 				</div>
             </div>

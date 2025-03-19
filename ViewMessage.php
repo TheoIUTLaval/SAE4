@@ -24,7 +24,7 @@
                 <div class="banner-left">
                     <div class="button-container">
                         <button class="button"><a href="index.php">accueil</a></button>
-                        <button class="button"><a href="message.php">messagerie</a></button>
+                        <button class="button"><a href="ViewMessage.php">messagerie</a></button>
                         <button class="button"><a href="commandes.php">commandes</a></button>
                     </div>
                 </div>
