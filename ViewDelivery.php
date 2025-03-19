@@ -70,7 +70,7 @@
                 <a class="bontonDeNavigation" href="index.php"><?php echo $htmlAccueil?></a>
                     <?php
                         if (isset($_SESSION["Id_Uti"])){
-                            echo'<a class="bontonDeNavigation" href="messagerie.php">'.$htmlMessagerie.'</a>';
+                            echo'<a class="bontonDeNavigation" href="ViewMessagerie.php">'.$htmlMessagerie.'</a>';
                             echo'<a class="bontonDeNavigation" href="ViewAchats.php">'.$htmlAchats.'</a>';
                         }
                         if (isset($_SESSION["isProd"]) and ($_SESSION["isProd"]==true)){
@@ -159,7 +159,7 @@
 						}
 
 						if ($nbProduit>0){
-                            echo '<input type="button" onclick="window.location.href=\'messagerie.php?Id_Interlocuteur='.$Id_Uti.'\'" value="'.$htmlEnvoyerMessage.'"><br>';
+                            echo '<input type="button" onclick="window.location.href=\'ViewMessagerie.php?Id_Interlocuteur='.$Id_Uti.'\'" value="'.$htmlEnvoyerMessage.'"><br>';
                             ?>
                             <form action="download_pdf.php" method="post">
                                 <input type="hidden" name="idCommande" value="<?php echo $Id_Commande?>">

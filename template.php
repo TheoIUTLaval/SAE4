@@ -33,7 +33,7 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <?php if (isset($_SESSION["Id_Uti"])): ?>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="messagerie.php">Messagerie</a>
+                                        <a class="nav-link active" href="ViewMessagerie.php">Messagerie</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" href="ViewAchats.php">Achats</a>
