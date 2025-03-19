@@ -1,21 +1,23 @@
 .messageEnvoye{
     float: right;
     border-radius: 15px 15px 0px 15px;
-    border: 1px solid #4E7730;
-    background: #71B340;
+    padding: 10px;
+    background: #305514;
+    color: white;
 }
 
 .messageRecu{
     float: left;
     border-radius: 15px 15px 15px 0px;
-    border: 2px solid #71B340;
+    border: 2px solid #305514;
     background: #EBF4EC;
+    color: #305514;
     
 }
 
 .message{
     width: fit-content;
-    padding: 5px;
+    
     margin: 10px;
     margin-left: 30px;
     margin-right: 30px;
@@ -56,10 +58,18 @@
 
 .interlocuteur {
     align-self: flex-start;
-    background-color: #A3E373;
+    color: #305514;
     padding: 4px;
-    border-radius: 0px 0px 15px 0px;
-    border: 1px solid rgba(78, 119, 48, 1);
-    width: 250px;
+    margin-top: 10px;
+    margin-left: 50px;
+    font-weight: bold;
+    
+    
+    
+}
+
+hr{
+    color: #305514;
+    margin : 5px !important;
 }
 

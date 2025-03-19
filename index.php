@@ -18,6 +18,45 @@ error_reporting(E_ALL);
     $htmlAllemand = "Deutch";
     $htmlRusse = "русский";
     $htmlChinois = "中國人";
+
+
+    function latLongGps($url){
+        // Configuration de la requête cURL
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_PROXY, 'proxy.univ-lemans.fr');
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
+        // Ajout du User Agent
+        $customUserAgent = "LEtalEnLigne/1.0"; // Remplacez par le nom et la version de votre application
+        curl_setopt($ch, CURLOPT_USERAGENT, $customUserAgent);
+        // Ajout du Referrer
+        $customReferrer = "https://proxy.univ-lemans.fr:3128"; // Remplacez par l'URL de votre application
+        curl_setopt($ch, CURLOPT_REFERER, $customReferrer);
+        // Exécution de la requête
+        $response = curl_exec($ch);
+        // Vérifier s'il y a eu une erreur cURL
+        if (curl_errno($ch)) {
+            echo 'Erreur cURL : ' . curl_error($ch);
+        } else {
+            // Analyser la réponse JSON
+            $data = json_decode($response);
+        
+            // Vérifier si la réponse a été correctement analysée
+            if (!empty($data) && is_array($data) && isset($data[0])) {
+                // Récupérer la latitude et la longitude
+                $latitude = $data[0]->lat;
+                $longitude = $data[0]->lon;
+                return [$latitude, $longitude];
+            }
+            return [0,0];
+        }
+        // Fermeture de la session cURL
+        curl_close($ch);
+    }
+
 ?>
     <title> <?php echo $htmlMarque; ?> </title>
     <meta charset="UTF-8">
@@ -71,7 +110,7 @@ error_reporting(E_ALL);
                                 } else {
                                     monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
                                 }
-                            }
+                                }
 
                         </script>
                         <?php echo $htmlKm?>
@@ -149,33 +188,98 @@ error_reporting(E_ALL);
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
             <div class="gallery-container">
             <?php
-            
-
+            $tri = isset($_GET['tri']) ? $_GET['tri'] : 'nombreDeProduits';
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if (isset($_GET["categorie"])) {
                     $categorie = htmlspecialchars($_GET["categorie"]);
-                    $result = getProducteurs($categorie, $rechercheVille, $tri, $rayon, $Adr_Uti_En_Cours);
-                    $coordonneesUti = latLongGps($Adr_Uti_En_Cours);
+                    // Connexion à la base de données
+                    $utilisateur = "etu";
+                    $serveur = "localhost";
+                    $motdepasse = "Achanger!";
+                    $basededonnees = "sae";
+                    try {
+                        $connexion = new PDO("mysql:host=$serveur;dbname=$basededonnees;charset=utf8", $utilisateur, $motdepasse);
+                        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    } catch (PDOException $e) {
+                        die("Erreur de connexion : " . $e->getMessage());
+                    }
+                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
+                    if ($_GET["categorie"] == "Tout") {
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
+                        FROM PRODUCTEUR 
+                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
+                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
+                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
+                        HAVING PRODUCTEUR.Prof_Prod LIKE \'%\''; 
+                    } else {
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
+                        FROM PRODUCTEUR 
+                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
+                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
+                        GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
+                        HAVING PRODUCTEUR.Prof_Prod = :categorie';
+                    }
+                    if ($rechercheVille != "") {
+                        $requete .= ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\''; 
+                    }
+                    $requete .= ' ORDER BY ';
+                    if ($tri === "nombreDeProduits") {
+                        $requete .= ' nombreDeProduits DESC';
+                    } else if ($tri === "ordreNomAlphabétique") {
+                        $requete .= ' Nom_Uti ASC';
+                    } else if ($tri === "ordreNomAntiAlphabétique") {
+                        $requete .= ' Nom_Uti DESC';
+                    } else if ($tri === "ordrePrenomAlphabétique") {
+                        $requete .= ' Prenom_Uti ASC';
+                    } else if ($tri === "ordrePrenomAntiAlphabétique") {
+                        $requete .= ' Prenom_Uti DESC';
+                    } else {
+                        $requete .= ' nombreDeProduits ASC';
+                    }
+                    $stmt = $connexion->prepare($requete);
+                    if ($_GET["categorie"] != "Tout") {
+                        $stmt->bindParam(':categorie', $categorie, PDO::PARAM_STR);
+                    }
+                    $stmt->execute();
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $urlUti = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($Adr_Uti_En_Cours);
+                    $coordonneesUti = latLongGps($urlUti);
                     $latitudeUti = $coordonneesUti[0];
                     $longitudeUti = $coordonneesUti[1];
-
+                    
+                    var_dump($coordonneesUti);
+                    var_dump($longitudeUti);
+                    
                     if (count($result) > 0) {
                         foreach ($result as $row) {
                             if ($rayon >= 100) {
-                                displayProducteur($row);
+                                echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
+                                echo ''.$row["Prof_Prod"]. "<br>";
+                                echo $row["Prenom_Uti"] ." ".mb_strtoupper($row["Nom_Uti"]). "<br>";
+                                echo $row["Adr_Uti"] . "<br>";
+                                echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="'.$htmlImageUtilisateur.'" style="width: 100%; height: 85%;" ><br>';
+                                echo '</a> ';
                             } else {
-                                $coordonneesProd = getCoordinates($row["Adr_Uti"]);
+                                $urlProd = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+                                $coordonneesProd = latLongGps($urlProd);
                                 $latitudeProd = $coordonneesProd[0];
                                 $longitudeProd = $coordonneesProd[1];
-                                $distance = calculateDistance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
+                                $distance = distance($latitudeUti, $longitudeUti, $latitudeProd, $longitudeProd);
                                 if ($distance < $rayon) {
-                                    displayProducteur($row);
+                                    echo '<a href="producteur.php?Id_Prod='. $row["Id_Prod"] . '" class="square1"  >';
+                                    echo "Nom : " . $row["Nom_Uti"] . "<br>";
+                                    echo "Prénom : " . $row["Prenom_Uti"]. "<br>";
+                                    echo "Adresse : " . $row["Adr_Uti"] . "<br>";
+                                    echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"]  . '.png" alt="Image utilisateur" style="width: 100%; height: 85%;" ><br>';
+                                    echo '</a> ';
                                 }
                             }
                         }
                     } else {
                         echo $htmlAucunResultat;
                     }
+                    $stmt->closeCursor();
+                    $connexion = null;
                 }
             }
             ?>
