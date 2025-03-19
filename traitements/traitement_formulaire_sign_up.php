@@ -82,10 +82,10 @@ if ($nb == 0) {
     $_SESSION['erreur'] = '';
     $_SESSION['loggedin'] = true; // Set session variable to indicate user is logged in
 
-    echo "<script>window.location.href = '/index.php';</script>"; // Redirect to index page using JavaScript
+    echo "<script>window.location.href = 'index.php';</script>"; // Redirect to index page using JavaScript
 } else {
     $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee; 
-    echo "<script>alert('Adresse mail déjà utilisée.'); window.location.href = '/index.php';</script>"; // Redirect to index page with an alert
+    echo "<script>alert('Adresse mail déjà utilisée.'); window.location.href = 'index.php';</script>"; // Redirect to index page with an alert
 }
 
 // Fermeture de la connexion
