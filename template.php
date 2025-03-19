@@ -102,9 +102,9 @@
         <div class="basDePage">
         
             
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <div class="btn-group" role="group" aria-label="Basic outlined example" >
                     <form method="post">
-                    <button type=submit class="btn btn-outline-primary" > Signaler un dysfonctionnement
+                    <button type=submit class="btn btn-outline-primary" style ="border: 1px solid #b0f2b6; border-radius: 5px; padding: 5px;"> Signaler un dysfonctionnement
                             <input type="hidden" name="popup" value="contact_admin">
                     </button>
                     </form>
