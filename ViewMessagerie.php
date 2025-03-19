@@ -7,11 +7,12 @@
 <head>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style_general.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
     <link rel="stylesheet" type="text/css" href="css/messagerie.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- name of the page -->
-
+</head>
 
     <?php
         var_dump(__DIR__);
@@ -19,7 +20,7 @@
             session_start();
         }
     ?>
-    <div class="container">
+    <div class="custom-container">
     <div class="leftColumn">
 			<img class="logo" src="asset/img/logo.png">
             <p><?php echo $htmlContactsRecentsDeuxPoints?></p>
@@ -134,6 +135,7 @@
         </div>
     </div>
     <?php require "popups/gestion_popups.php" ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
 </body>
