@@ -271,7 +271,7 @@
                     //bloquer les 2 boutons pour les visiteurs non connectés
                     if (isset($_SESSION["Id_Uti"])  and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
-                    <input type="button" onclick="window.location.href='messagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                    <input type="button" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
                     <br>
                     <?php 
                     }?>
