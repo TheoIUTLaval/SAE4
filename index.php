@@ -155,34 +155,36 @@ error_reporting(E_ALL);
                     }
                     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                     if ($_GET["categorie"] == "Tout") {
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit)
-                        FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
+                        FROM PRODUCTEUR 
+                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
+                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
                         GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
                         HAVING PRODUCTEUR.Prof_Prod LIKE \'%\''; 
                     } else {
-                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit)
-                        FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
-                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod=PRODUIT.Id_Prod
+                        $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
+                        FROM PRODUCTEUR 
+                        JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
+                        LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
                         GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
                         HAVING PRODUCTEUR.Prof_Prod = :categorie';
                     }
                     if ($rechercheVille != "") {
-                        $requete = $requete . ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\''; 
+                        $requete .= ' AND Adr_Uti LIKE \'%, _____ %'.$rechercheVille.'%\''; 
                     }
-                    $requete = $requete . ' ORDER BY ';
+                    $requete .= ' ORDER BY ';
                     if ($tri === "nombreDeProduits") {
-                        $requete = $requete . ' COUNT(PRODUIT.Id_Produit) DESC ;';
+                        $requete .= ' nombreDeProduits DESC';
                     } else if ($tri === "ordreNomAlphabétique") {
-                        $requete = $requete . ' Nom_Uti ASC ;';
+                        $requete .= ' Nom_Uti ASC';
                     } else if ($tri === "ordreNomAntiAlphabétique") {
-                        $requete = $requete . ' Nom_Uti DESC ;';
+                        $requete .= ' Nom_Uti DESC';
                     } else if ($tri === "ordrePrenomAlphabétique") {
-                        $requete = $requete . ' Prenom_Uti ASC ;';
+                        $requete .= ' Prenom_Uti ASC';
                     } else if ($tri === "ordrePrenomAntiAlphabétique") {
-                        $requete = $requete . ' Prenom_Uti DESC ;';
+                        $requete .= ' Prenom_Uti DESC';
                     } else {
-                        $requete = $requete . ' COUNT(PRODUIT.Id_Produit) ASC ;';
+                        $requete .= ' nombreDeProduits ASC';
                     }
                     $stmt = $connexion->prepare($requete);
                     if ($_GET["categorie"] != "Tout") {
