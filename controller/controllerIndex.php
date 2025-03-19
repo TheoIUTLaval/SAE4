@@ -1,5 +1,5 @@
 <?php
-require "../model/modelIndex.php";
+include "model/modelIndex.php";
 
 
  if(!isset($_SESSION)){
