@@ -188,6 +188,7 @@ error_reporting(E_ALL);
             <h1> <?php echo $htmlProducteursEnMaj?> </h1>
             <div class="gallery-container">
             <?php
+            $tri = isset($_GET['tri']) ? $_GET['tri'] : 'nombreDeProduits';
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if (isset($_GET["categorie"])) {
                     $categorie = htmlspecialchars($_GET["categorie"]);
