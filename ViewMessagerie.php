@@ -123,8 +123,9 @@
 				
 				}
 				?>
-				<hr>
+				
 				</div>
+                <hr>
 				<div class="contenuMessagerie">
             	
                 <?php
