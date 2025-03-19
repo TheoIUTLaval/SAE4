@@ -45,30 +45,30 @@ try {
                 
                 // Check user role
                 $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-                    $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
-                    $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-                    $reponse=$returnIsProducteur[0]["result"];
-                    if ($reponse!=NULL){
-                        $_SESSION["isProd"]=true;
-                        
-                        //var_dump($_SESSION);
-                    }else {
-                        $_SESSION["isProd"]=false;
-                    }
+                $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
+                $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                $reponse = $returnIsProducteur[0]["result"];
+                if ($reponse != NULL) {
+                    $_SESSION["isProd"] = true;
+                } else {
+                    $_SESSION["isProd"] = false;
+                }
+
                 $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-                    $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
-                    $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
-                    if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
-                        $reponse2 = $returnIsAdmin[0]["result"];
-                        if ($reponse2 != NULL) {
-                            $_SESSION['isAdmin'] = true;
-                        } else {
-                            $_SESSION['isAdmin'] = false;
-                        }
+                $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
+                $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
+                if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
+                    $reponse2 = $returnIsAdmin[0]["result"];
+                    if ($reponse2 != NULL) {
+                        $_SESSION['isAdmin'] = true;
                     } else {
-                        $_SESSION['isAdmin'] = false; 
+                        $_SESSION['isAdmin'] = false;
                     }
-                    // Redirection
+                } else {
+                    $_SESSION['isAdmin'] = false; 
+                }
+
+                // Redirection
                 header('Location: index.php');
                 exit;
             } else {
