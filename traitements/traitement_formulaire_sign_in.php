@@ -56,15 +56,19 @@ try {
                         $_SESSION["isProd"]=false;
                     }
                     
-                    $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
+                    $isAdmin = $bdd2->query('CALL isAdministrateur('.$Id_Uti.');');
                     $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
-                    $reponse2=$returnIsAdmin[0]["result"];
-                    if ($reponse2!=NULL){
-                        $_SESSION['isAdmin'] = true;
-                        var_dump($_SESSION['isAdmin']);
-                    }else {
-                        $_SESSION['isAdmin'] = true;
+                    var_dump($returnIsAdmin);
+                    if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
+                        $reponse2 = $returnIsAdmin[0]["result"];
+                        if ($reponse2 != NULL) {
+                            $_SESSION['isAdmin'] = true;
+                        } else {
+                            $_SESSION['isAdmin'] = false;
                         }
+                    } else {
+                        $_SESSION['isAdmin'] = true; // Par défaut, si aucun résultat
+                    }
                     // Redirection
                 header('Location: index.php');
                 exit;
