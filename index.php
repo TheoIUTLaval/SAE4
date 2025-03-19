@@ -130,7 +130,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
 }
 
 ?>
-<div class="container">
+<div class="custom-container">
     <div class="leftColumn">
         <img class="logo" href="index.php" src="asset/img/logo.png">
         <div class="contenuBarre">
