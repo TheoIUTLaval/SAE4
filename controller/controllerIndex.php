@@ -43,10 +43,6 @@ function latLongGps($url){
     curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
     curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Permet de suivre les redirections
-    // Options de débogage
-    curl_setopt($ch, CURLOPT_VERBOSE, true);
-    curl_setopt($ch, CURLOPT_HEADER, true);
     // Exécution de la requête
     $response = curl_exec($ch);
     // Vérifier s'il y a eu une erreur cURL
@@ -101,5 +97,80 @@ $dlng / 2) * sin($dlng / 2);
     $km = $r * $c;
 
     return ($miles ? ($km * 0.621371192) : $km);
+}
+function getProducteurs($rechercheVille, $categorie, $rayon, $tri, $utilisateur) {
+    // Connexion à la base de données
+    $utilisateurDb = "etu";
+    $serveur = "localhost";
+    $motdepasse = "Achanger!";
+    $basededonnees = "sae";
+    try {
+        $bdd = new PDO("mysql:host=$serveur;dbname=$basededonnees;charset=utf8", $utilisateurDb, $motdepasse);
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
+    }
+
+    // Préparation de la requête SQL
+    $sql = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti, COUNT(PRODUIT.Id_Produit) AS nombreDeProduits
+            FROM PRODUCTEUR 
+            JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti
+            LEFT JOIN PRODUIT ON PRODUCTEUR.Id_Prod = PRODUIT.Id_Prod
+            GROUP BY UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti';
+    
+    if ($categorie != "Tout") {
+        $sql .= ' HAVING PRODUCTEUR.Prof_Prod = :categorie';
+    } else {
+        $sql .= ' HAVING PRODUCTEUR.Prof_Prod LIKE \'%\'';
+    }
+
+    if (!empty($rechercheVille)) {
+        $sql .= ' AND Adr_Uti LIKE \'%, _____ %' . $rechercheVille . '%\'';
+    }
+
+    // Ajout du tri
+    $sql .= ' ORDER BY ';
+    if ($tri === "nombreDeProduits") {
+        $sql .= ' nombreDeProduits DESC';
+    } else if ($tri === "ordreNomAlphabétique") {
+        $sql .= ' Nom_Uti ASC';
+    } else if ($tri === "ordreNomAntiAlphabétique") {
+        $sql .= ' Nom_Uti DESC';
+    } else if ($tri === "ordrePrenomAlphabétique") {
+        $sql .= ' Prenom_Uti ASC';
+    } else if ($tri === "ordrePrenomAntiAlphabétique") {
+        $sql .= ' Prenom_Uti DESC';
+    } else {
+        $sql .= ' nombreDeProduits ASC';
+    }
+
+    // Préparation de la requête
+    $stmt = $bdd->prepare($sql);
+
+    // Liaison des paramètres
+    if ($categorie != "Tout") {
+        $stmt->bindValue(':categorie', $categorie, PDO::PARAM_STR);
+    }
+
+    // Exécution de la requête
+    $stmt->execute();
+
+    // Récupération des résultats
+    $producteurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupération des coordonnées GPS de la ville de recherche
+    $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($row["Adr_Uti"]);
+    list($latitude, $longitude) = latLongGps($url);
+
+    // Filtrage des producteurs par distance
+    $filteredProducteurs = [];
+    foreach ($producteurs as $producteur) {
+        $distance = distance($producteur['latitude'], $producteur['longitude'], $latitude, $longitude);
+        if ($distance <= $rayon) {
+            $filteredProducteurs[] = $producteur;
+        }
+    }
+
+    return $filteredProducteurs;
 }
 ?>
