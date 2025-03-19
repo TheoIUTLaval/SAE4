@@ -55,7 +55,7 @@ try {
                     }else {
                         $_SESSION["isProd"]=false;
                     }
-                    $_SESSION['isAdmin'] = true;
+                    
                     $isAdmin = $bdd2->query('CALL isAdmin('.$Id_Uti.');');
                     $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                     $reponse2=$returnIsAdmin[0]["result"];
