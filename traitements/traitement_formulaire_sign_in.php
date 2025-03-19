@@ -62,8 +62,16 @@ try {
                 // Debugging output
                 echo "Id_Uti: " . $Id_Uti . "<br>";
                 echo "Role_Uti: " . ($_SESSION['role'] ?? 'Aucun rôle trouvé') . "<br>";
-
+                $isProducteur = $bdd->query('CALL isProducteur('.$iduti.');');
+                $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
+                $reponse=$returnIsProducteur[0]["result"];
                 // Redirect based on role
+                if ($reponse!=NULL){
+                    $_SESSION["isProd"]=true;
+                    //var_dump($_SESSION);
+                }else {
+                    $_SESSION["isProd"]=false;
+                }
                 if ($_SESSION['role'] === 'admin') {
                     $_SESSION["isAdmin"] = true;
                 } elseif ($_SESSION['role'] === 'producteur') {
