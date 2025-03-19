@@ -104,11 +104,11 @@
             
         <div class="btn-group" role="group" aria-label="Basic outlined example" >
                     <form method="post">
-                    <button type=submit class="btn btn-outline-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #3055"> Signaler un dysfonctionnement
+                    <button type=submit class="btn btn-outline-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"> Signaler un dysfonctionnement
                             <input type="hidden" name="popup" value="contact_admin">
                     </button>
                     </form>
-                    <button class="btn btn-outline-primary" type="button" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-outline-primary" type="button" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"> data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Conditions générales d'utilisation
                     </button>
                 

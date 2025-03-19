@@ -85,3 +85,8 @@ body {
     right: 0px;
     padding: 10px;
 }
+
+.btn-outline-primary:hover{
+    border-color: #305514; /* Bordure au survol */
+    color: #FFFF; 
+}
