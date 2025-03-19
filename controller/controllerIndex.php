@@ -1,7 +1,7 @@
 <?php
-include_once("modele/modeleIndex.php");
+include("modele/modeleIndex.php");
 
- if(!isset($_SESSION)){
+if(!isset($_SESSION)){
     session_start();
 }
 if (isset($_GET["rechercheVille"])==true){
@@ -106,4 +106,5 @@ $dlng / 2) * sin($dlng / 2);
     
         return ($miles ? ($km * 0.621371192) : $km);
 }
+
 ?>
