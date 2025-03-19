@@ -388,13 +388,10 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                             foreach ($results as $row) {
                                 if ($rayon >= 100) {
                                     echo '<div class="card" style="width: 18rem;">';
-                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  // Enlève le souligné du lien
-
-                                    // Vérification de l'existence de l'image
+                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  
                                     $imagePath = 'asset/img/img_producteur/' . $row["Id_Prod"] . '.png';
-                                    $defaultImage = 'asset/img/img_producteur/default_image.png';  // Chemin de l'image par défaut
+                                    $defaultImage = 'asset/img/img_producteur/default_image.png';  
 
-                                    // Si l'image du producteur n'existe pas, on utilise l'image par défaut
                                     $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
 
                                     echo '<img src="' . $imageSrc . '" class="card-img-top" alt="' . $htmlImageUtilisateur . '" style="height: 180px; object-fit: cover;">';
@@ -404,7 +401,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     echo $row["Prenom_Uti"] . " " . mb_strtoupper($row["Nom_Uti"]) . "<br>";
                                     echo $row["Adr_Uti"] . "<br>";
                                     echo '</p>';
-                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary">Voir le producteur</a>';
+                                    echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514">Voir le producteur</a>';
                                     echo '</div>';
                                     echo '</a>';
                                     echo '</div>';
@@ -418,16 +415,16 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
 
                                     if ($distance < $rayon) {
                                         echo '<div class="card" style="width: 18rem;">';
-                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  // Enlève le souligné du lien
+                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  
                                         echo '<img src="asset/img/img_producteur/' . $row["Id_Prod"] . '.png" class="card-img-top" alt="Image utilisateur" style="height: 180px; object-fit: cover;">';
                                         echo '<div class="card-body">';
-                                        echo '<h5 class="card-title">Producteur</h5>';  // Titre fixe
+                                        echo '<h5 class="card-title">Producteur</h5>';  
                                         echo '<p class="card-text">';
                                         echo "Nom : " . $row["Nom_Uti"] . "<br>";
                                         echo "Prénom : " . $row["Prenom_Uti"] . "<br>";
                                         echo "Adresse : " . $row["Adr_Uti"] . "<br>";
                                         echo '</p>';
-                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary">Voir le producteur</a>';
+                                        echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="btn btn-outline-secondary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514">Voir le producteur</a>';
                                         echo '</div>';
                                         echo '</a>';
                                         echo '</div>';
