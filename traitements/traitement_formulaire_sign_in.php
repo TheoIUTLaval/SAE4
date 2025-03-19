@@ -47,18 +47,15 @@ try {
                 $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                     $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
                     $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-                    if ($returnIsProducteur && isset($returnIsProducteur["result"]) && $returnIsProducteur["result"] == 1) {
-                        $_SESSION["isProd"] = true;
-                    } else {
-                        $_SESSION["isProd"] = false;
+                    $reponse=$returnIsProducteur[0]["result"];
+                    if ($reponse!=NULL){
+                        $_SESSION["isProd"]=true;
+                        //var_dump($_SESSION);
+                    }else {
+                        $_SESSION["isProd"]=false;
                     }
-                    $_SESSION['Mail_Uti'] = $Mail_Uti;
-                    $_SESSION['Id_Uti'] = $Id_Uti;
-                    $_SESSION['erreur'] = '';
-                   
-
                     // Redirection
-                header('Location: ../index.php');
+                header('Location: index.php');
                 exit;
             } else {
                 $_SESSION['test_pwd']--;
