@@ -2,17 +2,12 @@
     require '../vendor/autoload.php';
     
     function dbConnect(){
-        $utilisateur = getenv('DB_USER');
-        $serveur = getenv('DB_HOST');
-        $motdepasse = getenv('DB_PASSWORD');
-        $basededonnees = getenv('DB_NAME');
-        try {
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        } catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
-            return null;
-        }
+        $utilisateur = "etu";
+        $serveur = "localhost";
+        $motdepasse = "Achanger!";
+        $basededonnees = "sae";
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
 
     $bdd=dbConnect();
