@@ -6,10 +6,7 @@ $dotenv->load();
 
 $bdd=dbConnect();
 
-// Vérifiez la connexion
-if ($connexion->connect_error) {
-    die("Erreur de connexion : " . $connexion->connect_error);  
-}
+
 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
 $requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
 $stmt = $connexion->prepare($requete);
