@@ -26,7 +26,7 @@
 
             <form action="traitements/traitement_broadcast_user.php" method="post">
                 <div class="mb-3">
-                    <label for="message" class="form-label"><?php echo $htmlVotreMessage; ?></label>
+                    <label for="message" class="form-label"><h4><?php echo $htmlVotreMessage; ?></h4></label>
                     <textarea id="message" name="message" rows="5" maxlength="5000" class="form-control" required></textarea>
                 </div>
                 
