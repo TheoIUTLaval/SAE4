@@ -164,6 +164,7 @@
                             $stmt->close();
                             $connexion->close();
                         ?>
+                        <hr>
                 <div class="gallery-container">
                 <?php
                     // Connexion à la base de données 
