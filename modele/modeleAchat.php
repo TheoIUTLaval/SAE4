@@ -2,10 +2,10 @@
     require '../vendor/autoload.php';
     
     function dbConnect(){
-        $utilisateur = getenv('DB_USER');
-        $serveur = getenv('DB_HOST');
-        $motdepasse = getenv('DB_PASSWORD');
-        $basededonnees = getenv('DB_NAME');
+        $utilisateur = 'etu';
+        $serveur = 'localhost';
+        $motdepasse = 'Achanger!';
+        $basededonnees = 'SAE';
         try {
             // Connect to database
             return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
