@@ -2,6 +2,7 @@
 
 if (!isset($_SESSION)) {
   session_start();
+}
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
@@ -117,5 +118,5 @@ if ($delParAdmin == false) {
 } else {
   header('Location: ../ViewPanelAdmin.php');
 }
-}
+
 ?>
