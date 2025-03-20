@@ -8,12 +8,12 @@ $bdd=dbConnect();
 
 
 // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-$requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti=?';
+$requete = 'SELECT * FROM UTILISATEUR WHERE UTILISATEUR.Mail_Uti = :mail';
 $stmt = $bdd->prepare($requete);
-$stmt->bindValue(1, $_SESSION['Mail_Uti'], PDO::PARAM_STR); // "1" indique le premier paramètre, PDO::PARAM_STR indique une chaîne de caractères
+$stmt->bindParam(':mail', $_SESSION['Mail_Uti'], PDO::PARAM_STR);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt->close();
+$stmt = null;
 $bdd = null;
 ?>
