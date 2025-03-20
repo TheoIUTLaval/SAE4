@@ -59,7 +59,7 @@
             $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
             $iterateurProduit=0;
             $nbProduit=count($returnQueryGetProduitCommande);
-
+//Commande
             if ($nbProduit>0){
                 echo '<div class="commande" >';
                 echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
