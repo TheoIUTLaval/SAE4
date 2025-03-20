@@ -222,7 +222,7 @@
 
                     <!-- partie de gauche avec les produits -->
                     <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
-                    <div class="gallery-container row row-clos-1 row-clos-md-3 g-4 mt-3">
+                    <div class="gallery-container row g-4 mt-3">
                         <?php
                             $bdd=dbConnect();
                             $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
@@ -253,7 +253,7 @@
                                     
                                     if ($QteProduit>0){
                                         echo '
-                                            <div class="col">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
                                                 <div class="card shadow-sm h-100">
                                                     <img src="asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
                                                     <div class="card-body">
@@ -283,7 +283,8 @@
                             }
                         ?>
                     </div>
-
+                </div>
+            </div>
 
 
 
