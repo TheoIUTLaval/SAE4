@@ -1,5 +1,5 @@
 <?php
-    require 'vendor/autoload.php';
+    require '../vendor/autoload.php';
     
     function dbConnect(){
         $utilisateur = getenv('DB_USER');
