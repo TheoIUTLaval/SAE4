@@ -1,6 +1,9 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
 
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
 function dbConnect(){
   $utilisateur = $_ENV['DB_USER'];
   $serveur = $_ENV['DB_HOST'];
