@@ -222,7 +222,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                 </div>
             </form>
 
-            </div>
+            
         </div>
     </div>
     <div class="rightColumn">
