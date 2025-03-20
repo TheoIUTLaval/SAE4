@@ -222,7 +222,7 @@
 
                     <!-- partie de gauche avec les produits -->
                     <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
-                    <div class="row g-4 mt-3"> <!-- Grille avec espacement entre les éléments -->
+                    <div class="galerie-produit row g-4 mt-3"> <!-- Grille avec espacement entre les éléments -->
         <?php
             $bdd = dbConnect();
             $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
