@@ -179,7 +179,7 @@
                     <p><center><U><?php echo $htmlMesProduitsEnStock; ?></U></center></p>
                     <div class="exist">
                     <?php if (isset($_SESSION['erreur'])): ?>
-                        <div class="d-flex justify-content-center " style="height: 100vh;">
+                        <div class="d-flex justify-content-center " style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
                                 <?php echo htmlspecialchars($_SESSION['erreur']); ?>
                             </div>
