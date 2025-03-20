@@ -1,5 +1,8 @@
 <?php
-    
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     echo(__DIR__);
     echo('langage/language.php');
     require "language/language.php"; 
@@ -32,7 +35,7 @@ if (isset($_POST['formClicked'])){
                 <div>
                     <label for="mail"><?php echo $htmlMailDeuxPoints; ?></label>
                     <input class="zoneDeTextePopup" type="text" pattern="[A-Za-z0-9._-]{1,20}@[A-Za-z0-9.-]{1,16}\.[A-Za-z]{1,4}"name="mail" required>
-                </div>
+                    <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}" title="<?php echo $htmlConditionsMdp; ?>" name="pwd" required>
                 <div>
                     <label for="pwd"><?php echo $htmlMdpDeuxPoints; ?></label>
                     <input class="zoneDeTextePopup" type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}".{8,50}" title="<?php echo $htmlConditionsMdp; ?>" name="pwd" required>
