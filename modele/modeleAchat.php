@@ -82,7 +82,7 @@
                     $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
                     $Nom_Unite_Prix = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
                     $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
-                    echo '<p class="card-text"> <strong> ' . $Nom_Produit . ' </strong> ' . $Qte_Produit_Commande . ' ' . $Nom_Unite_Prix . ' * ' . $Prix_Produit_Unitaire . '€ = ' . intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande) . '€</p>';
+                    echo '<br><p class="card-text"> <strong> ' . $Nom_Produit . ' </strong> ' . $Qte_Produit_Commande . ' ' . $Nom_Unite_Prix . ' * ' . $Prix_Produit_Unitaire . '€ = ' . intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande) . '€</p>';
                     $total += intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande);
                     $iterateurProduit++;
                 }
