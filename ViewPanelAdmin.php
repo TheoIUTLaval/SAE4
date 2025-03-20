@@ -189,7 +189,7 @@
                     if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
                         <div class="container">
                             <div class="titre">
-                                <label><h4><?php echo $htmlUtilisateurs; ?></h4></label><br>
+                                <h4><?php echo $htmlUtilisateurs; ?></h4>
                             </div>
                             <div class="row">
                                 <?php while ($row = $result->fetch_assoc()) { ?>
