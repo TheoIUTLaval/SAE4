@@ -64,7 +64,7 @@
                 echo '<div class="card mb-3">'; // carte principale avec une marge en bas
                 echo '<div class="card-header"><strong>Commande ' . ($iterateurCommande + 1) . ' :</strong> ' . $htmlChez . ' ' . $Prenom_Prod . ' ' . $Nom_Prod . ' - ' . $Adr_Uti . '</div>';
                 echo '<div class="card-body">';
-                echo '<p class="card-text">' . $Desc_Statut . '</p>';
+                echo '<p class="card-text"> <strong>' . $Desc_Statut . '</strong></p>';
     
                 if ($Id_Statut != 3 && $Id_Statut != 4) {
                     echo '<form action="modele/delete_commande.php" method="post">';
@@ -82,7 +82,7 @@
                     $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
                     $Nom_Unite_Prix = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
                     $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
-                    echo '<p class="card-text">- ' . $Nom_Produit . ' - ' . $Qte_Produit_Commande . ' ' . $Nom_Unite_Prix . ' * ' . $Prix_Produit_Unitaire . '€ = ' . intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande) . '€</p>';
+                    echo '<p class="card-text"> <strong> ' . $Nom_Produit . ' </strong> ' . $Qte_Produit_Commande . ' ' . $Nom_Unite_Prix . ' * ' . $Prix_Produit_Unitaire . '€ = ' . intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande) . '€</p>';
                     $total += intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande);
                     $iterateurProduit++;
                 }
