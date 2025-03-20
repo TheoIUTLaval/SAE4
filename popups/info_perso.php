@@ -1,6 +1,8 @@
 <?php
     require "language/language.php" ; 
 ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <?php
         if (isset($_POST['formClicked'])){
             unset($_POST['formClicked']);
@@ -73,14 +75,32 @@
                     </div>
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
-                <button onclick="confirmDeleteAccount()"><?php echo $htmlSupprimerCompte?></button>
+                <button class="btn btn-danger mt-3" onclick="confirmDeleteAccount()">
+                    
+                </button>
+
                 <script>
-                    function confirmDeleteAccount() {
-                        if (confirm("<?php echo $htmlConfirmerSuppressionCompte; ?>")) {
-                            window.location.href = 'traitements/del_acc.php';
+                function confirmDeleteAccount() {
+                    Swal.fire({
+                        title: "<?php echo $htmlConfirmerSuppressionCompte; ?>",
+                        text: "Cette action est irréversible ! Êtes-vous sûr de vouloir supprimer votre compte ?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Oui, supprimer",
+                        cancelButtonText: "Annuler"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('deleteAccountForm').submit();
                         }
-                    }
+                    });
+                }
                 </script>
+
+                <form id="deleteAccountForm" action="traitements/del_acc.php" method="post" style="display:none;">
+                <input type="hidden" name="deleteAccount" value="true">
+                </form>
                 
                 <?php if((isset($_SESSION['isProd']) and $_SESSION['isProd'])){?> 
                 <a href="./ViewAddProfilPicture.php"><button><?php echo 'ajouter une photo de profil'?></button></a>
