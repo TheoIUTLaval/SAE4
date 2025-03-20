@@ -392,7 +392,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                         if (count($results) > 0) {
                             foreach ($results as $row) {
                                 if ($rayon >= 100) {
-                                    echo '<div class="card" style="width: 18rem; ">';
+                                    echo '<div class="card" style="width: 18rem; color: #305514;">';
                                     echo '<a href="producteur.php?Id_Prod=' . $row["Id_Prod"] . '" class="text-decoration-none">';  
                                     $imagePath = 'asset/img/img_producteur/' . $row["Id_Prod"] . '.png';
                                     $defaultImage = 'asset/img/img_producteur/default_image.png';  
