@@ -34,7 +34,8 @@
 
 
     $Produit_exist = false;
-    $Noms_Produits= $bdd->prepare('SELECT Nom_Produit FROM PRODUIT WHERE Id_Prod = $IdProd;');
+    $Noms_Produits = $bdd->prepare('SELECT Nom_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;');
+    $Noms_Produits->bindParam(':IdProd', $IdProd, PDO::PARAM_INT);
     $Noms_Produits->execute();
 
     foreach ($Noms_Produits as $nomproduit){
