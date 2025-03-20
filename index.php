@@ -17,7 +17,7 @@
         // Connect to database
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
-    $bdd=dbConnect();
+    $db=dbConnect();
     $htmlMarque = "L'Étal en Ligne";
     $htmlFrançais = "Français";
     $htmlAnglais = "English";
