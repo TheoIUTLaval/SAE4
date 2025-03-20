@@ -123,13 +123,11 @@
                                 $serveur = $_ENV['DB_HOST'];
                                 $motdepasse = $_ENV['DB_PASSWORD'];
                                 $basededonnees = $_ENV['DB_NAME'];
-                                // Connect to database
+                                // Connect to s
                                 return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                             }
                             $bdd=dbConnect();
-                            if ($bdd->connect_error) {
-                                die("Erreur de connexion : " . $bdd->connect_error);
-                            }
+                            
                             // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                             $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                             $stmt = $bdd->prepare($requete);
@@ -169,8 +167,7 @@
                                 <?php echo $htmlErrorDevTeam; ?>
                             <?php } 
                             
-                            $stmt->close();
-                            $bdd->close();
+                            
                         ?>
                         <hr>
                 <div class="gallery-container">
@@ -181,9 +178,7 @@
                     $dotenv->load();
                     
                     $bdd=dbConnect();
-                    if ($bdd->connect_error) {
-                        die("Erreur de connexion : " . $bdd->connect_error);
-                    }
+                    
                     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                     $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
                     $stmt = $bdd->prepare($requete);
@@ -221,8 +216,6 @@
                     <?php } else { ?>
                         <?php echo $htmlErrorDevTeam; ?>
                     <?php } 
-                    $stmt->close();
-                    $bdd->close();
                     ?>
             <br>
             <div class="basDePage">
