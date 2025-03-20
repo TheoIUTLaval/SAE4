@@ -25,11 +25,10 @@ try {
     $serveur = $_ENV['DB_HOST'];
     $motdepasse = $_ENV['DB_PASSWORD'];
     $basededonnees = $_ENV['DB_NAME'];
-    function dbConnect(){
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    }
-    $bdd=dbConnect();
+    
+       
+    
+    $bdd= new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Check if user email exists
@@ -54,7 +53,7 @@ try {
                 $_SESSION['Id_Uti'] = $Id_Uti;
                 
                 // Check user role
-                $bdd2= dbConnect();
+                $bdd2= new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                 $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
                 $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
                 $reponse = $returnIsProducteur[0]["result"];
@@ -64,7 +63,7 @@ try {
                     $_SESSION["isProd"] = false;
                 }
 
-                $bdd3= dbConnect();
+                $bdd3= new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                 $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
                 $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                 if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
