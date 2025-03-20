@@ -7,15 +7,14 @@ if(!isset($_SESSION)){
 
   $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
   $dotenv->load();
-  function dbConnect(){
-      $utilisateur = $_ENV['DB_USER'];
-      $serveur = $_ENV['DB_HOST'];
-      $motdepasse = $_ENV['DB_PASSWORD'];
-      $basededonnees = $_ENV['DB_NAME'];
-      // Connect to database
-      return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-  }
-  $bdd = dbConnect();
+    $utilisateur = $_ENV['DB_USER'];
+    $serveur = $_ENV['DB_HOST'];
+    $motdepasse = $_ENV['DB_PASSWORD'];
+    $basededonnees = $_ENV['DB_NAME'];
+     
+ 
+  $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+  
 
 if (isset($_POST["Id_Uti"])){
   $utilisateur=htmlspecialchars($_POST["Id_Uti"]);// l'admin supprime
@@ -27,8 +26,6 @@ if (isset($_POST["Id_Uti"])){
 }
 
   $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
-
-  $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur)');
   $isProducteur->bindParam(':utilisateur', $utilisateur, PDO::PARAM_STR);
   $isProducteur->execute();
   $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
