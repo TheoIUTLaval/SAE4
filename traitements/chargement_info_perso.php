@@ -1,10 +1,10 @@
+@@ -1,22 +1,30 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
-$connexion=dbConnect();
+$utilisateur = "etu";
+$serveur = "localhost";
+$motdepasse = "Achanger!";
+$basededonnees = "sae";
+$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 
 // Vérifiez la connexion
 if ($connexion->connect_error) {
