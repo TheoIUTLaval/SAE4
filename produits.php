@@ -268,7 +268,7 @@
                         }
 
                         echo '
-                            <form action="SAE4/modele/delete_product.php" method="post">
+                            <form action="modele/delete_product.php" method="post">
                                 <input type="hidden" name="deleteIdProduct" value="' . $Id_Produit . '">
                                 <button type="submit" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> ' . $htmlSupprimer . '
