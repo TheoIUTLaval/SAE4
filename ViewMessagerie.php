@@ -152,29 +152,6 @@
         </div>
     </div>
     
-    <div class="collapse w-100 mt-2" id="collapseExample">
-        <div class="card card-body">
-            ...
-        </div>
-    </div>
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        function sendMessage(event) {
-            event.preventDefault();
-            const form = document.getElementById('zoneDEnvoi');
-            const formData = new FormData(form);
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'ViewMessagerie.php?Id_Interlocuteur=<?php echo $_GET['Id_Interlocuteur']; ?>', true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    document.getElementById('contenuMessagerie').innerHTML = xhr.responseText;
-                    form.reset();
-                }
-            };
-            xhr.send(formData);
-        }
-    </script>
     <div class="basDePage">
         
             
@@ -203,5 +180,24 @@
                     </div>
                 </div>
         </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            const form = document.getElementById('zoneDEnvoi');
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ViewMessagerie.php?Id_Interlocuteur=<?php echo $_GET['Id_Interlocuteur']; ?>', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('contenuMessagerie').innerHTML = xhr.responseText;
+                    form.reset();
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+    
 </body>
 </html>
