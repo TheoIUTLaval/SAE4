@@ -287,7 +287,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="producteur">
+                <div class="producteur mt-4">
                     <!-- partie de droite avec les infos producteur -->
                     <?php
                         $bdd=dbConnect();
@@ -303,14 +303,19 @@
                         $prenom = $returnQueryInfoProd[0]["Prenom_Uti"];
                         $profession = $returnQueryInfoProd[0]["Prof_Prod"];
                     ?>
-                    <div class="info-container">
-						<div class="img-prod">
-                        	<img class="img-test" src="asset/img/img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
-						</div>
-						<div class="text-info">
-                            <?php
-                                echo '</br>'.$prenom . ' ' . strtoupper($nom) . '</br></br><strong>' . $profession.'</strong></br></br>'.$address.'</br></br>';
-                            ?>
+                    <div class="row">
+						<div class="col-md-4">
+                            <div class='card'>
+                        	    <img class="card-img-top" src="asset/img/img_producteur/<?php echo $Id_Prod; ?>.png" alt="<?php echo $htmlImgProducteur; ?>" style="width: 99%; height: 99%;">
+                            </div>
+                        </div>
+
+						<div class="col-md-8">
+                            <div class="col p-3">
+                                <h4 class="card-title"><?php echo $prenom . ' ' . strtoupper($nom); ?></h4>
+                                <p class="card-text"><strong><?php echo $profession; ?></strong></p>
+                                <p class="card-text"><?php echo $address; ?></p>
+                            </div>
                         </div>
                     </div>
                     
@@ -319,8 +324,9 @@
                     //bloquer les 2 boutons pour les visiteurs non connectés
                     if (isset($_SESSION["Id_Uti"])  and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
-                    <input type="button" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-                    <br>
+                    <div class="mt-3">
+                        <input type="button" class="btn btn-primary" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
+                    </div>
                     <?php 
                     }?>
 
@@ -329,15 +335,16 @@
                         if (isset($address)) {
                             $address = str_replace(" ", "+", $address);
                     ?>
-                    <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed " 
-                        width="100%" height="100%" 
-                    ></iframe>
+                    <div class="mt-4">
+                        <iframe class="map-frame" src="https://maps.google.com/maps?&q=<?php echo $address; ?>&output=embed" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+                    </div>
                     <?php } 
 
                     if (sizeof($returnQueryGetProducts)>0 and isset($_SESSION["Id_Uti"]) and $idUti!=$_SESSION["Id_Uti"]){
                     ?>
-                <br>
-                <button type="submit"><?php echo $htmlPasserCommande; ?></button>
+                        <div class="mt-3">
+                            <button class="btn btn-success" type="submit"><?php echo $htmlPasserCommande; ?></button>
+                        </div>
                 <?php }?>
             </form>
                 </div>
