@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
     $basededonnees = $_ENV['DB_NAME'];
      
  
-  $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+  $bdd =new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
   
 
 if (isset($_POST["Id_Uti"])){
@@ -51,7 +51,7 @@ if (isset($_POST["Id_Uti"])){
           $bindUpdateProduit->execute();
           
           //echo $updateProduit;
-          $test=$bdd->prepare('DELETE FROM CONTENU WHERE Id_Produit= :Id_Produit;');
+          $test=$bdd->prepare(('DELETE FROM CONTENU WHERE Id_Produit= :Id_Produit;'));
           $test->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
           $test->execute();
           
@@ -81,7 +81,7 @@ if (isset($_POST["Id_Uti"])){
 
 
 
-        $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;');
+        $queryGetProduitCommande = $bdd->prepare(('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;'));
         
         $queryGetProduitCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
@@ -93,33 +93,33 @@ if (isset($_POST["Id_Uti"])){
           $Id_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
           //echo $updateProduit;
           //echo $Id_Produit;
-          $delContenu=$bdd->prepare('DELETE FROM CONTENU WHERE Id_Produit=:Id_Produit;');
+          $delContenu=$bdd->prepare(('DELETE FROM CONTENU WHERE Id_Produit=:Id_Produit;'));
           $delContenu->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
           $delContenu->execute();
 
-          $delProduit=$bdd->prepare('DELETE FROM PRODUIT WHERE Id_Produit=:Id_Produit;');
+          $delProduit=$bdd->prepare(('DELETE FROM PRODUIT WHERE Id_Produit=:Id_Produit;'));
           $delProduit->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
           $delProduit->execute();
 
           $iterateurProduit++;
       }
-        $delCommande=$bdd->prepare('DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;');
+        $delCommande=$bdd->prepare(('DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;'));
         $delCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $delCommande->execute();
 
 
-        $delCommande=$bdd->prepare('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd;');
+        $delCommande=$bdd->prepare(('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd;'));
         $delCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
         $delCommande->execute();
 
 
-        $delMessage=$bdd->prepare('DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;');
+        $delMessage=$bdd->prepare(('DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;'));
         $delMessage->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $delMessage->execute();
-        $delProducteur=$bdd->prepare('DELETE FROM PRODUCTEUR WHERE Id_Uti=:utilisateur;');
+        $delProducteur=$bdd->prepare(('DELETE FROM PRODUCTEUR WHERE Id_Uti=:utilisateur;'));
         $delProducteur->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $delProducteur->execute();
-        $delUtilisateur=$bdd->prepare('DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;');
+        $delUtilisateur=$bdd->prepare(('DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;'));
         $delUtilisateur->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $delUtilisateur->execute();
 
