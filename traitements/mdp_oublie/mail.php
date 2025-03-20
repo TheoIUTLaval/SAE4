@@ -22,11 +22,13 @@ $emailCount = $checkEmailStmt->fetch(PDO::FETCH_ASSOC)['count'];
 if ($emailCount > 0) {  
     // Génération d'un code aléatoire à 6 chiffres
     $code = rand(100000, 999999);
-    $_SESSION["code"]=$code;
+    $_SESSION["code"] = $code;
+    
     // Envoi du code par e-mail
     $subject = $htmlReinVotreMdp;
-    $message = $htmlTonMdpEst.$code;
-    $headers = "From: no-reply@letalenligne.com";
+    $message = $htmlTonMdpEst . $code;
+    $headers = "From: no-reply@letalenligne.com\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     // Envoi de l'e-mail
     $mailSent = mail($email, $subject, $message, $headers);
@@ -37,7 +39,7 @@ if ($emailCount > 0) {
     } else {
         $_SESSION['erreur'] = $htmlErreurMailIncorrect;
     }
-}else {
+} else {
     $_SESSION['erreur'] = $htmlPasMailDansBDD;
 }
 ?>
