@@ -1,18 +1,11 @@
 <?php
-    
-    
     function dbConnect(){
-        $utilisateur = getenv('DB_USER');
-        $serveur = getenv('DB_HOST');
-        $motdepasse = getenv('DB_PASSWORD');
-        $basededonnees = getenv('DB_NAME');
-        try {
-            // Connect to database
-            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-        } catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
-            return null;
-        }
+        $utilisateur = "etu";
+        $serveur = "localhost";
+        $motdepasse = "Achanger!";
+        $basededonnees = "sae";
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
 
     $bdd=dbConnect();
@@ -59,7 +52,7 @@
             $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
             $iterateurProduit=0;
             $nbProduit=count($returnQueryGetProduitCommande);
-//Commande
+
             if ($nbProduit>0){
                 echo '<div class="commande" >';
                 echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
