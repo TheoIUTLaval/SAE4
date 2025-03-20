@@ -41,11 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // Déplacer le fichier téléchargé vers le dossier de destination
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
-            echo "<br>L'image a été téléchargée avec succès. Nouveau nom du fichier : $newFileName<br>";
-            header('Location: /SAE4/index.php');  
+            echo "<script>
+            window.location.href = '/SAE4/index.php';
+            </script>";
         } else {
             echo "Le déplacement du fichier a échoué. Erreur : " . error_get_last()['message'] . "<br>";
         }
+        
 
     } else {
         echo "Veuillez sélectionner une image.<br>";
