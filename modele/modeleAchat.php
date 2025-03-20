@@ -53,42 +53,45 @@
             $iterateurProduit=0;
             $nbProduit=count($returnQueryGetProduitCommande);
 
-            if ($nbProduit>0){
-                echo '<div class="commande" >';
-                echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
-                echo '</br>';
-                echo $Desc_Statut;
-                echo '</br>';
-                if ($Id_Statut!=3 and $Id_Statut!=4){
-                echo '<form action="modele/delete_commande.php" method="post">';
-                echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
-                
-                echo '<button type="submit">'.$htmlAnnulerCommande.'</button>';
-                echo '</form>';
-                }
-            }
-
-            ?>
-            <input type="button" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-            <br>
-            <?php
-
-            while ($iterateurProduit<$nbProduit){
-                $Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
-                $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
-                $Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
-                $Prix_Produit_Unitaire=$returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
-                echo "- " . $Nom_Produit ." - ".$Qte_Produit_Commande.' '.$Nom_Unite_Prix.' * '.$Prix_Produit_Unitaire.'€ = '.intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande).'€';
-                echo "</br>";
-                $total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
-                $iterateurProduit++;
-            }
-            $iterateurCommande++;
-            if ($nbProduit>0){
-                echo '<div class="aDroite">'.$htmlTotalDeuxPoints, $total.'€</div>';
-                echo '<br> '; 
-                echo '</div> '; 
-            }
+            if ($nbProduit > 0) { ?>
+                <div class="container">
+                    <div class="card mb-3">
+                        <h5 class="card-header">Commande <?php echo $iterateurCommande + 1; ?> : <?php echo $htmlChez . " " . $Prenom_Prod . " " . $Nom_Prod . " - " . $Adr_Uti; ?></h5>
+                        <div class="card-body">
+                            <p class="card-text"> <?php echo $Desc_Statut; ?> </p>
+                            
+                            <?php if ($Id_Statut != 3 && $Id_Statut != 4) { ?>
+                                <form action="modele/delete_commande.php" method="post">
+                                    <input type="hidden" name="deleteValeur" value="<?php echo $Id_Commande; ?>">
+                                    <button type="submit" class="btn btn-danger"> <?php echo $htmlAnnulerCommande; ?> </button>
+                                </form>
+                            <?php } ?>
+                            
+                            <button class="btn btn-primary mt-2" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'">
+                                <?php echo $htmlEnvoyerMessage; ?>
+                            </button>
+                            
+                            <ul class="list-group mt-3">
+                                <?php while ($iterateurProduit < $nbProduit) { 
+                                    $Nom_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
+                                    $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+                                    $Nom_Unite_Prix = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
+                                    $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
+                                    $totalProduit = intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande);
+                                    $total += $totalProduit;
+                                ?>
+                                    <li class="list-group-item">
+                                        <?php echo "- " . $Nom_Produit . " - " . $Qte_Produit_Commande . " " . $Nom_Unite_Prix . " * " . $Prix_Produit_Unitaire . "€ = " . $totalProduit . "€"; ?>
+                                    </li>
+                                <?php $iterateurProduit++; } ?>
+                            </ul>
+                            
+                            <div class="text-end mt-3">
+                                <h5><?php echo $htmlTotalDeuxPoints . " " . $total . "€"; ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } 
         }
     }
-            ?>
