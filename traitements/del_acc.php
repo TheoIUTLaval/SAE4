@@ -15,7 +15,7 @@ if(!isset($_SESSION)){
       // Connect to database
       return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
   }
-  $bdd=dbConnect();
+  $bdd = dbConnect();
 
 if (isset($_POST["Id_Uti"])){
   $utilisateur=htmlspecialchars($_POST["Id_Uti"]);// l'admin supprime
@@ -37,8 +37,6 @@ if (isset($_POST["Id_Uti"])){
     
 
     if ($reponse==NULL){
-        //echo 'non producteur';
-        $bdd=dbConnect();
         $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti = :utilisateur;');
         $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
         $queryGetProduitCommande->execute();
@@ -75,8 +73,6 @@ if (isset($_POST["Id_Uti"])){
         $test->execute();
     }
     else{
-        //echo ' producteur';
-        $bdd=dbConnect();
 
 
       //id prod
