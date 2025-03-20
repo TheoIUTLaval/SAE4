@@ -132,19 +132,34 @@
                             $result = $stmt->get_result();
 
                             if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
-                                echo"<label>- producteurs :</label><br>";
+                                echo"<label><h4> producteurs :</h4></label><br>";
 
                                 while ($row = $result->fetch_assoc()) {
-                                    echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
-                                        <input type="submit" name="submit" id="submit" value="'.$htmlSupprimerCompte.'"><br>
-                                        <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                                    echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
-                                    echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
-                                    echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
-                                    echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br>";
-                                    echo $htmlProfessionDeuxPoints, $row["Prof_Prod"] . "<br></form>";
+                                    echo '<div class="row mb-3">'; // Début de la ligne pour chaque utilisateur
+
+                                    echo '<div class="col-sm-12">'; // Chaque utilisateur sera dans une seule colonne (sur toute la largeur)
+                                    echo '<div class="card">'; // Début de la carte
+                                    echo '<div class="card-body">'; // Début du contenu de la carte
+
+                                    // Formulaire pour supprimer le compte de l'utilisateur
+                                    echo '<form method="post" action="traitements/del_acc.php">';
+                                    echo '<input type="submit" name="submit" id="submit" class="btn btn-danger" value="'.$htmlSupprimerCompte.'"><br>';
+                                    echo '<input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
+                                    echo '</form>';
+
+                                    // Informations de l'utilisateur affichées sous forme de texte dans la carte
+                                    echo '<h5 class="card-title">'.$htmlNomDeuxPoints.' '.$row["Nom_Uti"].'</h5>';
+                                    echo '<p class="card-text">'.$htmlPrénomDeuxPoints.' '.$row["Prenom_Uti"].'</p>';
+                                    echo '<p class="card-text">'.$htmlMailDeuxPoints.' '.$row["Mail_Uti"].'</p>';
+                                    echo '<p class="card-text">'.$htmlAdresseDeuxPoints.' '.$row["Adr_Uti"].'</p>';
+                                    echo '<p class="card-text">'.$htmlProfessionDeuxPoints.' '.$row["Prof_Prod"].'</p>';
+
+                                    echo '</div>'; // Fin du card-body
+                                    echo '</div>'; // Fin du card
+                                    echo '</div>'; // Fin de la colonne (col-sm-12)
+                                    
+                                    echo '</div>'; // Fin de la ligne (row)
                                 }
-                                echo '</div>'; 
                             } else {
                                 echo $htmlErrorDevTeam;
                             }
