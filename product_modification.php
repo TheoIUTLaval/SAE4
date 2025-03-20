@@ -54,7 +54,7 @@
             <div class="barretache">
             <div class="card shadow-lg">
                 <div class="card-header text-center">
-                <h4><?php echo $htmlAjouterProduit; ?></h4>
+                <h4>Modifier votre produit</h4>
                 </div>
                 <div class="card-body">
                 <form action="modele/modify_product.php" method="post" enctype="multipart/form-data">
