@@ -1,9 +1,9 @@
 <?php
     function dbConnect(){
-        $utilisateur = "etu";
-        $serveur = "localhost";
-        $motdepasse = "Achanger!";
-        $basededonnees = "sae";
+        $utilisateur = getenv('DB_USER');
+        $serveur = getenv('DB_HOST');
+        $motdepasse = getenv('DB_PASSWORD');
+        $basededonnees = getenv('DB_NAME');
         // Connect to database
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
