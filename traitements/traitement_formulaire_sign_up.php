@@ -76,7 +76,11 @@ try {
         $_SESSION['erreur'] = '';
         $_SESSION['loggedin'] = true; // Set session variable to indicate user is logged in
 
-        echo "<script>window.location.href = 'index.php';</script>"; // Redirect to index page using JavaScript
+        header('Location: index.php');
+                echo '<script type="text/javascript">',
+                    'window.location.href="index.php";',
+                    '</script>';
+                exit;
     } else {
         $_SESSION['erreur'] = $htmlAdrMailDejaUtilisee;
         echo "<script>alert('Adresse mail déjà utilisée.'); window.location.href = 'index.php';</script>"; // Redirect to index page with an alert
