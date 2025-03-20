@@ -218,7 +218,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                 </div>
 
                 <div class='texte-center mt-4'>
-                    <input type="submit" class="btn btn-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #EBF4EC background-color: #305514;"
+                    <input type="submit" class="btn btn-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #EBF4EC; background-color: #305514;"
                     value="<?php echo $htmlRechercher ?>">
                 </div>
             </form>
