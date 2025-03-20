@@ -43,7 +43,7 @@
         If ($Nom_Produit == $nomproduit){
             $Produit_exist = true;
             // Redirection avec message d'erreur
-            header('Location: produits.php?erreur=' . urlencode($htmlNomProduitExiste));
+            header('Location: ../produits.php?erreur=' . urlencode($htmlNomProduitExiste));
             exit; // Arrêter l'exécution après la redirection
           
         }
