@@ -46,79 +46,79 @@
 			<img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
             <div class="contenuBarre mt-5">
 
-                <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
+            <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
 
-                <div class="row g-4 mt-3">
-                    <?php
-                        $bdd = dbConnect();
-                        $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
-                        $queryIdProd->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
-                        $queryIdProd->execute();
-                        $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
-                        $Id_Prod = $returnQueryIdProd[0]["Id_Prod"];
+            <div class="row g-4 mt-3">
+                <?php
+                    $bdd = dbConnect();
+                    $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
+                    $queryIdProd->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+                    $queryIdProd->execute();
+                    $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+                    $Id_Prod = $returnQueryIdProd[0]["Id_Prod"];
 
-                        $queryGetProducts = $bdd->prepare('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd');
-                        $queryGetProducts->bindParam(':idProd', $Id_Prod, PDO::PARAM_INT);
-                        $queryGetProducts->execute();
-                        $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
+                    $queryGetProducts = $bdd->prepare('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd');
+                    $queryGetProducts->bindParam(':idProd', $Id_Prod, PDO::PARAM_INT);
+                    $queryGetProducts->execute();
+                    $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
-                        if (count($returnQueryGetProducts) == 0) {
-                            echo "<p class='text-center text-muted fs-5'>$htmlAucunProduitEnStock</p>";
-                        } else {
-                            foreach ($returnQueryGetProducts as $product) {
-                                $Id_Produit = $product["Id_Produit"];
-                                $nomProduit = $product["Nom_Produit"];
-                                $typeProduit = $product["Desc_Type_Produit"];
-                                $prixProduit = $product["Prix_Produit_Unitaire"];
-                                $QteProduit = $product["Qte_Produit"];
-                                $unitePrixProduit = $product["Nom_Unite_Prix"];
-                                $Nom_Unite_Stock = $product["Nom_Unite_Stock"];
+                    if (count($returnQueryGetProducts) == 0) {
+                        echo "<p class='text-center text-muted fs-5'>$htmlAucunProduitEnStock</p>";
+                    } else {
+                        foreach ($returnQueryGetProducts as $product) {
+                            $Id_Produit = $product["Id_Produit"];
+                            $nomProduit = $product["Nom_Produit"];
+                            $typeProduit = $product["Desc_Type_Produit"];
+                            $prixProduit = $product["Prix_Produit_Unitaire"];
+                            $QteProduit = $product["Qte_Produit"];
+                            $unitePrixProduit = $product["Nom_Unite_Prix"];
+                            $Nom_Unite_Stock = $product["Nom_Unite_Stock"];
 
-                                if ($QteProduit > 0) {
+                            if ($QteProduit > 0) {
+                                echo '
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="card shadow-sm h-100">
+                                        <img src="asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">' . $nomProduit . '</h5>
+                                            <p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>
+                                            <p class="card-text"><strong>' . $htmlPrix . '</strong> ' . $prixProduit . ' €/ ' . $unitePrixProduit . '</p>
+                                            <p class="card-text"><strong>' . $htmlStockDeuxPoints . '</strong> ' . $QteProduit . ' ' . $Nom_Unite_Stock . '</p>
+                                            <div class="d-flex justify-content-between">
+                                ';
+
+                                if ($Id_Produit == $Id_Produit_Update) {
+                                    echo '<button class="btn btn-secondary" disabled>' . $htmlModification . '</button>';
+                                } else {
                                     echo '
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="card shadow-sm h-100">
-                                            <img src="asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">' . $nomProduit . '</h5>
-                                                <p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>
-                                                <p class="card-text"><strong>' . $htmlPrix . '</strong> ' . $prixProduit . ' €/ ' . $unitePrixProduit . '</p>
-                                                <p class="card-text"><strong>' . $htmlStockDeuxPoints . '</strong> ' . $QteProduit . ' ' . $Nom_Unite_Stock . '</p>
-                                                <div class="d-flex justify-content-between">
-                                    ';
+                                    <form action="product_modification.php" method="post">
+                                        <input type="hidden" name="modifyIdProduct" value="' . $Id_Produit . '">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-pencil-square"></i> ' . $htmlModifier . '
+                                        </button>
+                                    </form>';
+                                }
 
-                                    if ($Id_Produit == $Id_Produit_Update) {
-                                        echo '<button class="btn btn-secondary" disabled>' . $htmlModification . '</button>';
-                                    } else {
-                                        echo '
-                                        <form action="product_modification.php" method="post">
-                                            <input type="hidden" name="modifyIdProduct" value="' . $Id_Produit . '">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-pencil-square"></i> ' . $htmlModifier . '
-                                            </button>
-                                        </form>';
-                                    }
+                                echo '
+                                    <form action="SAE4/modele/delete_product.php" method="post">
+                                        <input type="hidden" name="deleteIdProduct" value="' . $Id_Produit . '">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i> ' . $htmlSupprimer . '
+                                        </button>
+                                    </form>
+                                ';
 
-                                    echo '
-                                        <form action="SAE4/modele/delete_product.php" method="post">
-                                            <input type="hidden" name="deleteIdProduct" value="' . $Id_Produit . '">
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="bi bi-trash"></i> ' . $htmlSupprimer . '
-                                            </button>
-                                        </form>
-                                    ';
-
-                                    echo '
-                                                </div>
+                                echo '
                                             </div>
                                         </div>
-                                    </div>';
-                                }
+                                    </div>
+                                </div>';
                             }
                         }
-                    ?>
-                </div>
+                    }
+                ?>
             </div>
+        </div>
 
         <div class="rightColumn">
         <div class="topBanner">
