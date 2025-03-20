@@ -50,41 +50,41 @@
         ?>
     <div class="custom-container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="asset/img/logo.png">
+                <img class="logo" href="index.php" src="asset/img/logo.png">
             <div class="barretache">
-    <div class="card shadow-lg">
-        <div class="card-header text-center">
-            <h4><?php echo $htmlAjouterProduit; ?></h4>
-        </div>
-        <div class="card-body">
-            <form action="modele/modify_product.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
+            <div class="card shadow-lg">
+                <div class="card-header text-center">
+                <h4><?php echo $htmlAjouterProduit; ?></h4>
+                </div>
+                <div class="card-body">
+                <form action="modele/modify_product.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="IdProductAModifier" value="<?php echo $Id_Produit_Update ?>">
 
-                <!-- Nom du produit -->
-                <div class="mb-3">
+                    <!-- Nom du produit -->
+                    <div class="mb-3">
                     <label class="form-label"><?php echo $htmlProduitDeuxPoints; ?></label>
                     <input type="text" class="form-control" name="nomProduit" value="<?php echo $Nom_Produit ?>" required>
-                </div>
+                    </div>
 
-                <!-- Catégorie -->
-                <div class="mb-3">
+                    <!-- Catégorie -->
+                    <div class="mb-3">
                     <label class="form-label">Catégorie</label>
                     <select name="categorie" class="form-select">
                         <?php
                         $categories = [
-                            1 => $htmlFruit, 2 => $htmlLégume, 3 => $htmlGraine, 
-                            4 => $htmlViande, 5 => $htmlVin, 6 => $htmlAnimaux, 7 => $htmlPlanche
+                        1 => $htmlFruit, 2 => $htmlLégume, 3 => $htmlGraine, 
+                        4 => $htmlViande, 5 => $htmlVin, 6 => $htmlAnimaux, 7 => $htmlPlanche
                         ];
                         foreach ($categories as $key => $value) {
-                            $selected = ($Id_Type_Produit == $key) ? "selected" : "";
-                            echo "<option value=\"$key\" $selected>$value</option>";
+                        $selected = ($Id_Type_Produit == $key) ? "selected" : "";
+                        echo "<option value=\"$key\" $selected>$value</option>";
                         }
                         ?>
                     </select>
-                </div>
+                    </div>
 
-                <!-- Prix -->
-                <div class="mb-3">
+                    <!-- Prix -->
+                    <div class="mb-3">
                     <label class="form-label"><?php echo $htmlPrix; ?></label>
                     <div class="input-group">
                         <input type="number" class="form-control" name="prix" value="<?php echo $Prix_Produit_Unitaire ?>" min="0" required>
@@ -98,10 +98,10 @@
                         <input class="form-check-input" type="radio" name="unitPrix" value="4" <?php echo ($Id_Unite_Prix == 4) ? "checked" : ""; ?>>
                         <label class="form-check-label"><?php echo $htmlLaPiece; ?></label>
                     </div>
-                </div>
+                    </div>
 
-                <!-- Stock -->
-                <div class="mb-3">
+                    <!-- Stock -->
+                    <div class="mb-3">
                     <label class="form-label">Stock :</label>
                     <div class="input-group">
                         <input type="number" class="form-control" name="quantite" value="<?php echo $Qte_Produit ?>" min="0" required>
@@ -118,24 +118,24 @@
                         echo "</div>";
                     }
                     ?>
-                </div>
+                    </div>
 
-                <!-- Image -->
-                <div class="mb-3">
+                    <!-- Image -->
+                    <div class="mb-3">
                     <label class="form-label">Image du produit :</label>
                     <input type="file" class="form-control" name="image" accept=".png">
-                </div>
+                    </div>
 
-                <!-- Boutons d'action -->
-                <div class="d-flex justify-content-between">
+                    <!-- Boutons d'action -->
+                    <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-success"><?php echo $htmlConfirmerModifProd; ?></button>
                     <a href="produits.php" class="btn btn-secondary"><?php echo $htmlAnnulerModifProd; ?></a>
+                    </div>
+                </form>
                 </div>
-            </form>
+            </div>
+            </div>
         </div>
-    </div>
-</div>
-
 
 
 
