@@ -237,7 +237,8 @@
                         ?>
                     </div>
                     
-                    <div class="basDePage">
+                    <div class="basDePage" style="margin-top: 10px;">
+                        
         
             
         <div class="btn-group" role="group" aria-label="Basic outlined example" >
