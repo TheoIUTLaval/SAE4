@@ -22,7 +22,7 @@
 			<img class="logo" href="index.php" src="asset/img/logo.png">
         </div>
         <div class="rightColumn">
-            <div class="contenuPage d-flex justify-content-center style= margin-top : 10%>
+            <div class="contenuPage formulaire d-flex justify-content-center" >
 
             <form action="traitements/traitement_broadcast_user.php" method="post">
                 <div class="mb-3">
