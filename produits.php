@@ -230,7 +230,7 @@
                             echo '
                             <form action="product_modification.php" method="post">
                                 <input type="hidden" name="modifyIdProduct" value="' . $Id_Produit . '">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #EBF4EC; background-color: #305514;">
                                     <i class="bi bi-pencil-square"></i> ' . $htmlModifier . '
                                 </button>
                             </form>';
