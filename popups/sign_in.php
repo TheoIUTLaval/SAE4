@@ -1,7 +1,4 @@
 <?php
-    
-    echo(__DIR__);
-    echo('langage/language.php');
     require "language/language.php"; 
 ?>
 <?php
