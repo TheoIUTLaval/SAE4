@@ -17,7 +17,7 @@
         // Connect to database
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
-    $db=dbConnect();
+    $bdd=dbConnect();
     $htmlMarque = "L'Étal en Ligne";
     $htmlFrançais = "Français";
     $htmlAnglais = "English";
@@ -161,7 +161,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                        value="<?php echo $rechercheVille ?>" placeholder="<?php echo $htmlVille; ?>">
                 <br>
                 <?php
-                $queryAdrUti = $db->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
+                $queryAdrUti = $bdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
                 $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
                 $queryAdrUti->execute();
                 $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
@@ -305,7 +305,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                     $categorie = htmlspecialchars($_GET["categorie"]);
                     try {
                         // Use the existing database connection from the top of the file
-                        // $db was already established earlier
+                        // $bdd was already established earlier
 
                         // Prepare the appropriate SQL query based on category
                         if ($_GET["categorie"] == "Tout") {
@@ -317,7 +317,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                         UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
                         HAVING PRODUCTEUR.Prof_Prod LIKE :profession';
 
-                            $stmt = $db->prepare($requete);
+                            $stmt = $bdd->prepare($requete);
                             $profession = '%';
                             $stmt->bindParam(':profession', $profession);
                         } else {
@@ -329,14 +329,14 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                         UTILISATEUR.Nom_Uti, UTILISATEUR.Adr_Uti
                         HAVING PRODUCTEUR.Prof_Prod = :categorie';
 
-                            $stmt = $db->prepare($requete);
+                            $stmt = $bdd->prepare($requete);
                             $stmt->bindParam(':categorie', $categorie);
                         }
 
                         // Add city search condition if provided
                         if ($rechercheVille != "") {
                             $requete .= ' AND Adr_Uti LIKE :adresse';
-                            $stmt = $db->prepare($requete);
+                            $stmt = $bdd->prepare($requete);
 
                             // Rebind parameters as needed
                             if ($_GET["categorie"] == "Tout") {
@@ -366,7 +366,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                             $requete .= 'ProduitCount ASC';
                         }
                         // Prepare the statement with the complete query
-                        $stmt = $db->prepare($requete);
+                        $stmt = $bdd->prepare($requete);
 
                         // Rebind parameters again for the final query
                         if ($_GET["categorie"] == "Tout") {
