@@ -41,9 +41,11 @@
     foreach ($Noms_Produits as $nomproduit){
         $nomproduit = $nomproduit["Nom_Produit"];
         If ($Nom_Produit == $nomproduit){
-            echo $htmlNomProduitExiste;
-            header('Location: mes_produits.php?erreur='.$htmlNomProduitExiste);
             $Produit_exist = true;
+            // Redirection avec message d'erreur
+            header('Location: mes_produits.php?erreur=' . urlencode($htmlNomProduitExiste));
+            exit; // Arrêter l'exécution après la redirection
+          
         }
     }
     if ($Produit_exist == false){
