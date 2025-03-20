@@ -118,30 +118,28 @@
 
                             $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
                             $dotenv->load();
-                            function dbConnect(){
-                                $utilisateur = $_ENV['DB_USER'];
-                                $serveur = $_ENV['DB_HOST'];
-                                $motdepasse = $_ENV['DB_PASSWORD'];
-                                $basededonnees = $_ENV['DB_NAME'];
-                                // Connect to s
-                                return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-                            }
-                            $bdd=dbConnect();
-                            
+
+                            $utilisateur = $_ENV['DB_USER'];
+                            $serveur = $_ENV['DB_HOST'];
+                            $motdepasse = $_ENV['DB_PASSWORD'];
+                            $basededonnees = $_ENV['DB_NAME'];
+
+                            $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                            $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
                             // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                             $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
                             $stmt = $bdd->prepare($requete);
-                                // "s" indique que la valeur est une chaîne de caractères
                             $stmt->execute();
-                            $result = $stmt->get_result();
-                            ?>
-                            <?php if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
+                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            if (!empty($result) && ($_SESSION["isAdmin"] == true)) { ?>
                                 <div class="container">
                                     <div class="titre">
                                         <label><h4>Producteurs :</h4></label><br>
                                     </div>
                                     <div class="row">
-                                        <?php while ($row = $result->fetch_assoc()) { ?>
+                                        <?php foreach ($result as $row) { ?>
                                             <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
                                                 <div class="card h-100">
                                                     <div class="card-body">
@@ -165,58 +163,46 @@
                                 </div>
                             <?php } else { ?>
                                 <?php echo $htmlErrorDevTeam; ?>
-                            <?php } 
-                            
-                            
-                        ?>
-                        <hr>
-                <div class="gallery-container">
-                <?php
-                    // Connexion à la base de données 
-                    require __DIR__ . '/vendor/autoload.php';
-                    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
-                    $dotenv->load();
-                    
-                    $bdd=dbConnect();
-                    
-                    // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
-                    $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
-                    $stmt = $bdd->prepare($requete);
-                        // "s" indique que la valeur est une chaîne de caractères
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                            <?php } ?>
 
-                    if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
-                        <div class="container">
-                            <div class="titre">
-                                <h4><?php echo $htmlUtilisateurs; ?></h4>
-                            </div>
-                            <div class="row">
-                                <?php while ($row = $result->fetch_assoc()) { ?>
-                                    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Compte de <?php echo $row["Nom_Uti"] . " " . $row["Prenom_Uti"]; ?></h5>
-                                                <p class="card-text">
-                                                    <?php echo $htmlNomDeuxPoints . $row["Nom_Uti"] . "<br>"; ?>
-                                                    <?php echo $htmlPrénomDeuxPoints . $row["Prenom_Uti"] . "<br>"; ?>
-                                                    <?php echo $htmlMailDeuxPoints . $row["Mail_Uti"] . "<br>"; ?>
-                                                    <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
-                                                </p>
-                                                <form method="post" action="traitements/del_acc.php">
-                                                    <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
-                                                    <input type="submit" name="submit" class="btn btn-danger" value="Supprimer le compte">
-                                                </form>
-                                            </div>
-                                        </div>
+                            <hr>
+                            <div class="gallery-container">
+                            <?php
+                            $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
+                            $stmt = $bdd->prepare($requete);
+                            $stmt->execute();
+                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            if (!empty($result) && ($_SESSION["isAdmin"] == true)) { ?>
+                                <div class="container">
+                                    <div class="titre">
+                                        <h4><?php echo $htmlUtilisateurs; ?></h4>
                                     </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php } else { ?>
-                        <?php echo $htmlErrorDevTeam; ?>
-                    <?php } 
-                    ?>
+                                    <div class="row">
+                                        <?php foreach ($result as $row) { ?>
+                                            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Compte de <?php echo $row["Nom_Uti"] . " " . $row["Prenom_Uti"]; ?></h5>
+                                                        <p class="card-text">
+                                                            <?php echo $htmlNomDeuxPoints . $row["Nom_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlPrénomDeuxPoints . $row["Prenom_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlMailDeuxPoints . $row["Mail_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
+                                                        </p>
+                                                        <form method="post" action="traitements/del_acc.php">
+                                                            <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
+                                                            <input type="submit" name="submit" class="btn btn-danger" value="Supprimer le compte">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <?php echo $htmlErrorDevTeam; ?>
+                            <?php } ?>
             <br>
             <div class="basDePage">
         
