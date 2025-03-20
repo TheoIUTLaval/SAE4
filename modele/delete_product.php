@@ -28,5 +28,5 @@
       $imgpath = "../asset/img/img_produit/".$Id_Produit.".png";
       //echo $imgpath;
       unlink( $imgpath ); 
-    header('Location: /../produits.php');
+    header('Location: ../produits.php');
 ?>
