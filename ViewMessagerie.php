@@ -138,7 +138,7 @@
                         $formDisabled=true;
                     }
                     ?>
-                    <div class="input-group nb-3">
+                    <div class=" nb-3">
                         <form method="post" id="zoneDEnvoi" class="d-flex">
                             <input type="text" name="content" id="zoneDeTexte" class="form-control" placeholder="Ecrire votre message pour votre à l'utilisateur" aria-label="Recipient's username" aria-describedby="button-addon2" <?php if ($formDisabled) { echo 'disabled';} ?>>
                             <button class="btn btn-outline-secondary" type="submit" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>
