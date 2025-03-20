@@ -207,10 +207,10 @@
                 <input type="hidden" name="Id_Prod" value="<?php echo $Id_Prod?>">
             
             <div class="content-container">
-                <div class="product">
+                <div class="product mt-4">
                     <!-- partie de gauche avec les produits -->
-                    <p><center><U><?php echo $htmlProduitsProposesDeuxPoints; ?></U></center></p>
-                    <div class="gallery-container">
+                    <p class="text-center"><u><?php echo $htmlProduitsProposesDeuxPoints; ?></u></p>
+                    <div class="row gallery-container">
                         <?php
                             $bdd=dbConnect();
                             //filtre type
@@ -273,13 +273,17 @@
                                     $unitePrixProduit = $returnQueryGetProducts[$i]["Nom_Unite_Prix"];
 
                                     if ($QteProduit>0){
-                                        echo '<div class="squareProduct" >';
-                                        echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
-                                        echo $htmlTypeDeuxPoints, $typeProduit . "<br>";
-                                        echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 100%; height: 85%;" ><br>';
-                                        echo '<input type="number" name="'.$Id_Produit.'" placeholder="max '.$QteProduit.'" max="'.$QteProduit.'" min="0" value="0"> '.$unitePrixProduit;
-                                        echo '</div> '; 
+                                        echo '<div class="col-md-4 mb-4">';
+                                        echo '<div class="card h-100">';
+                                        echo '<img class="card-img-top" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="height: 200px; object-fit: cover;">';
+                                        echo '<div class="card-body">';
+                                        echo '<h5 class="card-title">' . $nomProduit . '</h5>';
+                                        echo '<p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>';
+                                        echo '<p class="card-text"><strong>' . $htmlPrix . '</strong> ' . $prixProduit .' €/' . $unitePrixProduit . '</p>';
+                                        echo '<input type="number" class="form-control" name="'.$Id_Produit.'" placeholder="max ' . $QteProduit . '" max="'.$QteProduit.'" min="0" value="0"> ' . $unitePrixProduit;
+                                        echo '</div>'; 
+                                        echo '</div>'; 
+                                        echo '</div>';  
                                     }
                                     $i++;
                                 }
