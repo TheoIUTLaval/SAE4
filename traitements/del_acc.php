@@ -117,5 +117,5 @@ if ($delParAdmin == false) {
 } else {
   header('Location: ../ViewPanelAdmin.php');
 }
-
+}
 ?>
