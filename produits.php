@@ -223,14 +223,15 @@
                                     $i++;
                                 }
                             }
+                            
+                        ?>
+                    </div>
+                        <?php
                             if (isset($_SESSION['erreur'])) {
                                 echo '<div style="color: red; font-weight: bold;">' . htmlspecialchars($_SESSION['erreur']) . '</div>';
                                 unset($_SESSION['erreur']); // Supprimer le message après l'affichage
                             }
                         ?>
-                    </div>
-
-
 
                     <div class="basDePage">
         
