@@ -51,7 +51,7 @@
     <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png">
-            <div class="custom-container">
+            <div class="barretache">
     <div class="card shadow-lg">
         <div class="card-header text-center">
             <h4><?php echo $htmlAjouterProduit; ?></h4>
