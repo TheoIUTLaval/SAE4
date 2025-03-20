@@ -73,10 +73,12 @@
                     </div>
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
-                <button onclick="confirmDeleteAccount()"></button>
+                <button onclick="confirmDeleteAccount()"><?php echo $htmlSupprimerCompte?></button>
                 <script>
                     function confirmDeleteAccount() {
-                        $('#deleteAccountModal').modal('show');
+                        if (confirm("<?php echo $htmlConfirmerSuppressionCompte; ?>")) {
+                            window.location.href = 'traitements/del_acc.php';
+                        }
                     }
                 </script>
                 
