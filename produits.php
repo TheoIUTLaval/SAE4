@@ -43,7 +43,7 @@
 
     <div class="custom-container">
         <div class="leftColumn">
-			<img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
+                <img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
             <div class="barretache">
             <div class="card shadow-lg">
                 <div class="card-header text-center">
@@ -129,8 +129,6 @@
             </div>
             </div>
         </div>
-
-
 
             </div>
         </div>
