@@ -102,3 +102,10 @@ h2{
 .formulaire{
     margin-top: 5%;
 }
+
+.titre{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    color: #305514;
+}

@@ -133,7 +133,9 @@
                             ?>
                             <?php if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
                                 <div class="container">
-                                    <label><h4>Producteurs :</h4></label><br>
+                                    <div class="titre">
+                                        <label><h4>Producteurs :</h4></label><br>
+                                    </div>
                                     <div class="row">
                                         <?php while ($row = $result->fetch_assoc()) { ?>
                                             <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
@@ -186,7 +188,9 @@
 
                     if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
                         <div class="container">
-                            <label><h4><?php echo $htmlUtilisateurs; ?></h4></label><br>
+                            <div class="titre">
+                                <label><h4><?php echo $htmlUtilisateurs; ?></h4></label><br>
+                            </div>
                             <div class="row">
                                 <?php while ($row = $result->fetch_assoc()) { ?>
                                     <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
