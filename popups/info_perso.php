@@ -79,6 +79,10 @@
                     <?php echo $htmlSupprimerCompte; ?>
                 </button>
 
+                <form id="deleteAccountForm" action="traitements/del_acc.php" method="post" style="display:none;">
+                    <input type="hidden" name="deleteAccount" value="true">
+                </form>
+
                 <script>
                 function confirmDeleteAccount() {
                     Swal.fire({
@@ -97,10 +101,6 @@
                     });
                 }
                 </script>
-
-                <form id="deleteAccountForm" action="traitements/del_acc.php" method="post" style="display:none;">
-                    <input type="hidden" name="deleteAccount" value="true">
-                </form>
                 
                 <?php if((isset($_SESSION['isProd']) and $_SESSION['isProd'])){?> 
                 <a href="./ViewAddProfilPicture.php"><button><?php echo 'ajouter une photo de profil'?></button></a>
