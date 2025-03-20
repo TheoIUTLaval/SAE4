@@ -39,11 +39,11 @@
                     <!--  Set default values to current user information -->
                     <div>
                         <label for="new_nom"><?php echo $htmlNomDeuxPoints?></label>
-                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value="<?php echo htmlspecialchars($row["Nom_Uti"]) ?>">
+                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_nom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value="<?php echo isset($row["Nom_Uti"]) ? htmlspecialchars($row["Nom_Uti"]) : '' ?>">
                     </div>
                     <div>
                         <label for="new_prenom"><?php echo $htmlPrénomDeuxPoints?></label>
-                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value="<?php echo htmlspecialchars($row["Prenom_Uti"]) ?>">
+                        <input class="zoneDeTextePopup zoneDeTextePopupFixSize" type="text" name="new_prenom" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" value="<?php echo isset($row["Prenom_Uti"]) ? htmlspecialchars($row["Prenom_Uti"]) : '' ?>">
                     </div>
                     <div>
                         <label><?php echo $htmlAdrPostDeuxPoints?></label>
@@ -51,15 +51,15 @@
                     </div>
                     <div>
                         <label for="rue"><?php echo $htmlRueDeuxPoints?></label>
-                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="<?php echo $htmlConditionsRue; ?>" value="<?php echo htmlspecialchars($row["Rue_Uti"]) ?>" required>
+                        <input class="zoneDeTextePopup" type="text" name="rue" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="<?php echo $htmlConditionsRue; ?>" value="<?php echo isset($row["Rue_Uti"]) ? htmlspecialchars($row["Rue_Uti"]) : '' ?>" required>
                     </div>
                     <div>
                             <label for="code"><?php echo $htmlCodePostDeuxPoints?></label>
-                            <input class="zoneDeTextePopup" type="text" name="code" pattern="^\d{5}$" title="<?php echo $htmlConditionsCodePostal; ?>" value="<?php echo htmlspecialchars($row["CodePostal_Uti"]) ?>" required>
+                            <input class="zoneDeTextePopup" type="text" name="code" pattern="^\d{5}$" title="<?php echo $htmlConditionsCodePostal; ?>" value="<?php echo isset($row["CodePostal_Uti"]) ? htmlspecialchars($row["CodePostal_Uti"]) : '' ?>" required>
                     </div>
                     <div>
                         <label for="ville"><?php echo $htmlVilleDeuxPoints?></label>
-                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="<?php echo $htmlConditionsVille; ?>" value="<?php echo htmlspecialchars($row["Ville_Uti"]) ?>" required>
+                        <input class="zoneDeTextePopup" type="text" name="ville" pattern="[A-Za-z0-9îçôââêœîâôëçââÿââœçêôïëœœôââôêâçôéâêàôââîââçâœççœâôœêëâôè ]{0,100}" title="<?php echo $htmlConditionsVille; ?>" value="<?php echo isset($row["Ville_Uti"]) ? htmlspecialchars($row["Ville_Uti"]) : '' ?>" required>
                     </div>
                     <div>
                         <label for="ville"> mot de passe actuel </label>
