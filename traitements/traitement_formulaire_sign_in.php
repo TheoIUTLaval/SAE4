@@ -21,11 +21,11 @@ try {
 
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
+    $utilisateur = $_ENV['DB_USER'];
+    $serveur = $_ENV['DB_HOST'];
+    $motdepasse = $_ENV['DB_PASSWORD'];
+    $basededonnees = $_ENV['DB_NAME'];
     function dbConnect(){
-        $utilisateur = $_ENV['DB_USER'];
-        $serveur = $_ENV['DB_HOST'];
-        $motdepasse = $_ENV['DB_PASSWORD'];
-        $basededonnees = $_ENV['DB_NAME'];
         // Connect to database
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
@@ -54,7 +54,7 @@ try {
                 $_SESSION['Id_Uti'] = $Id_Uti;
                 
                 // Check user role
-                $bdd2=dbConnect();
+                $bdd2= dbConnect();
                 $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
                 $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
                 $reponse = $returnIsProducteur[0]["result"];
@@ -64,7 +64,7 @@ try {
                     $_SESSION["isProd"] = false;
                 }
 
-                $bdd3=dbConnect();
+                $bdd3= dbConnect();
                 $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
                 $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                 if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {
