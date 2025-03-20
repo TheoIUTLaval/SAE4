@@ -183,28 +183,37 @@
                     $stmt->execute();
                     $result = $stmt->get_result();
 
-                    if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
-                        echo"<label>".$htmlUtilisateurs."</label><br>";
-
-                        while ($row = $result->fetch_assoc()) {
-            
-                            echo '<form method="post" action="traitements/del_acc.php" class="squarePanelAdmin">
-                                <input type="submit" name="submit" id="submit" value="Supprimer le compte"><br>
-                                <input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-
-                            echo $htmlNomDeuxPoints, $row["Nom_Uti"] . "<br>";
-                            echo $htmlPrénomDeuxPoints, $row["Prenom_Uti"] . "<br>";
-                            echo $htmlMailDeuxPoints, $row["Mail_Uti"] . "<br>";
-                            echo $htmlAdresseDeuxPoints, $row["Adr_Uti"] . "<br></form>";
-                        }
-                        echo '</div>'; 
-                    } else {
-                        echo $htmlErrorDevTeam;
-                    }
+                    if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
+                        <div class="container">
+                            <label><h4><?php echo $htmlUtilisateurs; ?></h4></label><br>
+                            <div class="row">
+                                <?php while ($row = $result->fetch_assoc()) { ?>
+                                    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Compte de <?php echo $row["Nom_Uti"] . " " . $row["Prenom_Uti"]; ?></h5>
+                                                <p class="card-text">
+                                                    <?php echo $htmlNomDeuxPoints . $row["Nom_Uti"] . "<br>"; ?>
+                                                    <?php echo $htmlPrénomDeuxPoints . $row["Prenom_Uti"] . "<br>"; ?>
+                                                    <?php echo $htmlMailDeuxPoints . $row["Mail_Uti"] . "<br>"; ?>
+                                                    <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
+                                                </p>
+                                                <form method="post" action="traitements/del_acc.php">
+                                                    <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
+                                                    <input type="submit" name="submit" class="btn btn-danger" value="Supprimer le compte">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                        <?php echo $htmlErrorDevTeam; ?>
+                    <?php } 
                     $stmt->close();
                     $connexion->close();
-               
-               ?>
+                    ?>
             <br>
             <div class="basDePage">
         
