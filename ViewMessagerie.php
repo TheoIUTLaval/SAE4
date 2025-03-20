@@ -2,8 +2,7 @@
 <html lang="fr">
 <?php
     require "language/language.php";
-    
-?> 
+?>
 <head>
     <title><?php echo $htmlMarque; ?></title>
     <meta charset="UTF-8">
@@ -123,7 +122,7 @@
                     ?>
                 </div>
                 <hr>
-                <div class="contenuMessagerie">
+                <div class="contenuMessagerie" id="contenuMessagerie">
                     <?php
                     if (isset($_SESSION['Id_Uti'])){
                         if (isset($_GET['Id_Interlocuteur'])){
@@ -138,8 +137,8 @@
                         $formDisabled=true;
                     }
                     ?>
-                    <div class="  nb-3">
-                        <form method="post" id="zoneDEnvoi" class="d-flex">
+                    <div class="nb-3">
+                        <form method="post" id="zoneDEnvoi" class="d-flex" onsubmit="sendMessage(event)">
                             <input type="text" name="content" id="zoneDeTexte" class="form-control" placeholder="Ecrire votre message pour votre à l'utilisateur" aria-label="Recipient's username" aria-describedby="button-addon2" <?php if ($formDisabled) { echo 'disabled';} ?>>
                             <button class="btn btn-outline-secondary" type="submit" id="boutonEnvoyerMessage" <?php if ($formDisabled) { echo 'disabled';} ?>
                             style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"
@@ -148,15 +147,6 @@
                             Envoyer</button> 
                         </form>
                     </div>
-                    <?php
-                    if (isset($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], $_POST['content'])){
-                        if ($_POST['content']!=""){
-                            envoyerMessage($_SESSION['Id_Uti'], $_GET['Id_Interlocuteur'], htmlspecialchars($_POST['content']));
-                        }
-                        unset($_POST['content']);
-                        header("Refresh:0");
-                    }
-                    ?>
                 </div>
             </div>
         </div>
@@ -169,5 +159,21 @@
     </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            const form = document.getElementById('zoneDEnvoi');
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ViewMessagerie.php?Id_Interlocuteur=<?php echo $_GET['Id_Interlocuteur']; ?>', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('contenuMessagerie').innerHTML = xhr.responseText;
+                    form.reset();
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
 </body>
 </html>
