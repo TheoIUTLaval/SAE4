@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
     $basededonnees = $_ENV['DB_NAME'];
      
  
-  $bdd =new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+  $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
   
 
 if (isset($_POST["Id_Uti"])){
