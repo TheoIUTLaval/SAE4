@@ -227,12 +227,14 @@
                         ?>
                     </div>
                     <div class="exist">
-                    <?php
-                            if (isset($_SESSION['erreur'])) {
-                                echo '<div style="color: red; font-weight: bold;">' . htmlspecialchars($_SESSION['erreur']) . '</div>';
-                                unset($_SESSION['erreur']); // Supprimer le message après l'affichage
-                            }
-                        ?>
+                    <?php if (isset($_SESSION['erreur'])): ?>
+                        <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+                            <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
+                                <?php echo htmlspecialchars($_SESSION['erreur']); ?>
+                            </div>
+                        </div>
+                    <?php unset($_SESSION['erreur']); // Supprimer le message après l'affichage ?>
+                    <?php endif; ?>
                     </div>
                     <div class="basDePage">
         
