@@ -6,12 +6,19 @@ $pwd1 = $_POST['pwd1'];
 $pwd2 = $_POST['pwd2'];
 
 if ($pwd1 == $pwd2 && $pwd1 !== null) {
+    require __DIR__ . '/../vendor/autoload.php';
 
-    $utilisateur = "etu";
-    $serveur = "localhost";
-    $motdepasse = "Achanger!";
-    $basededonnees = "sae";
-    $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+    function dbConnect(){
+        $utilisateur = $_ENV['DB_USER'];
+        $serveur = $_ENV['DB_HOST'];
+        $motdepasse = $_ENV['DB_PASSWORD'];
+        $basededonnees = $_ENV['DB_NAME'];
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    }
+    $bdd=dbConnect();
 
     if(!isset($_SESSION)){
         session_start();

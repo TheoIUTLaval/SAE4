@@ -6,12 +6,20 @@
 $email = $_POST["email"];
 $_SESSION["mailTemp"]=$email;
 
-$utilisateur = "etu";
-$serveur = "localhost";
-$motdepasse = "Achanger!";
-$basededonnees = "sae";
-$bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+require __DIR__ . '/../vendor/autoload.php';
 
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+
+    function dbConnect(){
+        $utilisateur = $_ENV['DB_USER'];
+        $serveur = $_ENV['DB_HOST'];
+        $motdepasse = $_ENV['DB_PASSWORD'];
+        $basededonnees = $_ENV['DB_NAME'];
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    }
+$bdd=dbConnect();
 // Vérifiez d'abord si l'adresse e-mail existe déjà dans la table UTILISATEUR
 $checkEmailQuery = "SELECT COUNT(*) AS count FROM UTILISATEUR WHERE Mail_Uti = :mail";
 $checkEmailStmt = $bdd->prepare($checkEmailQuery);

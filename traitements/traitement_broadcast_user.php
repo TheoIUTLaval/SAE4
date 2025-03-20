@@ -2,13 +2,19 @@
 if(!isset($_SESSION)){
         session_start();
         }
-// Database connection
-$utilisateur = "etu";
-$serveur = "localhost";
-$motdepasse = "Achanger!";
-$basededonnees = "sae";
-// Connect to database
-$bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        require __DIR__ . '/../vendor/autoload.php';
+
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv->load();
+        function dbConnect(){
+            $utilisateur = $_ENV['DB_USER'];
+            $serveur = $_ENV['DB_HOST'];
+            $motdepasse = $_ENV['DB_PASSWORD'];
+            $basededonnees = $_ENV['DB_NAME'];
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        }
+        $bdd=dbConnect();
 $message = $_POST['message'];
 if (isset($_SESSION["Id_Uti"]) && isset($message)) {
   $message = $bdd->quote($message);

@@ -9,10 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "asset/img/img_producteur/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "etu";
-        $serveur = "localhost";
-        $motdepasse = "Achanger!";
-        $basededonnees = "sae";
+        require __DIR__ . '/../vendor/autoload.php';
+
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv->load();
+        function dbConnect(){
+            $utilisateur = $_ENV['DB_USER'];
+            $serveur = $_ENV['DB_HOST'];
+            $motdepasse = $_ENV['DB_PASSWORD'];
+            $basededonnees = $_ENV['DB_NAME'];
+            // Connect to database
+            return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+        }
+        $bdd=dbConnect();
         session_start();
 
 
