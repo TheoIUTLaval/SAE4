@@ -221,8 +221,8 @@
 
 
                     <!-- partie de gauche avec les produits -->
-                    <p><center><U><?php echo $htmlMesProduitsEnStock?></U></center></p>
-                    <div class="gallery-container">
+                    <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
+                    <div class="gallery-container row row-clos-1 row-clos-md-3 g-4 mt-3">
                         <?php
                             $bdd=dbConnect();
                             $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
@@ -239,7 +239,7 @@
 
                             $i=0;
                             if(count($returnQueryGetProducts)==0){
-                                echo $htmlAucunProduitEnStock;
+                                echo "<p class='text-center text-muted fs-5'> $htmlAucunProduitEnStock </p>";
                             }
                             else{
                                 while ($i<count($returnQueryGetProducts)){
@@ -252,29 +252,29 @@
                                     $Nom_Unite_Stock = $returnQueryGetProducts[$i]["Nom_Unite_Stock"];
                                     
                                     if ($QteProduit>0){
-                                        echo '<style>';
-                                        echo 'form { display: inline-block; margin-right: 1px; }'; // Ajustez la marge selon vos besoins
-                                        echo 'button { display: inline-block; }';
-                                        echo '</style>';
-
-                                        echo '<div class="square1" >';
-                                        echo $htmlProduitDeuxPoints, $nomProduit . "<br>";
-                                        echo $htmlTypeDeuxPoints, $typeProduit . "<br><br>";
-                                        echo '<img class="img-produit" src="asset/img/img_produit/' . $Id_Produit  . '.png" alt="'.$htmlImageNonFournie.'" style="width: 85%; height: 70%;" ><br>';
-                                        echo $htmlPrix, $prixProduit .' €/'.$unitePrixProduit. "<br>";
-                                        echo $htmlStockDeuxPoints, $QteProduit .' '.$Nom_Unite_Stock. "<br>";
+                                        echo '
+                                            <div class="col">
+                                                <div class="card shadow-sm h-100">
+                                                    <img src="asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">' . $nomProduit . '</h5>
+                                                        <p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>
+                                                        <p class="card-text"><strong>' . $htmlPrix . '</strong> ' . $prixProduit . ' €/ ' . $unitePrixProduit . '</p>
+                                                        <p class="card-text"><strong>' . $htmlStockDeuxPoints . '</strong> ' . $QteProduit . ' ' . $Nom_Unite_Stock . '</p>
+                                                        <div class="d-flex justify-content-between">
+                                            ';
                                         if ($Id_Produit==$Id_Produit_Update){
-                                            echo '<input type="submit" disabled="disabled" value="'.$htmlModification.'"/></button>';
+                                            echo '<button class="btn btn-secondary" disabled>'.$htmlModification.'</button>';
                                         }
                                         else{
                                             echo '<form action="product_modification.php" method="post">';
                                             echo '<input type="hidden" name="modifyIdProduct" value="'.$Id_Produit.'">';
-                                            echo '<button type="submit" name="action">'.$htmlModifier.'</button>';
+                                            echo '<button type="submit" class="btn btn-primary" name="action">'.$htmlModifier.'</button>';
                                             echo '</form>';
                                         }
                                         echo '<form action="SAE4/modele/delete_product.php" method="post">';
                                         echo '<input type="hidden" name="deleteIdProduct" value="'.$Id_Produit.'">';
-                                        echo '<button type="submit" name="action">'.$htmlSupprimer.'</button>';
+                                        echo '<button type="submit" class="btn btn-danger" name="action">'.$htmlSupprimer.'</button>';
                                         echo '</form>';
                                         echo '</div> '; 
                                     }
