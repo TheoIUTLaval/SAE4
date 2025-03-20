@@ -19,104 +19,87 @@ try {
   die('Erreur : ' . $e->getMessage());
 }
 
-if (isset($_POST["Id_Uti"])) {
-  $utilisateur = htmlspecialchars($_POST["Id_Uti"]); // l'admin supprime
-  $delParAdmin = true;
-} else {
-  $utilisateur = htmlspecialchars($_SESSION["Id_Uti"]);
-  $msg = "?msg=compte supprimer";
-  $delParAdmin = false;
-}
+$utilisateur = isset($_POST["Id_Uti"]) ? htmlspecialchars($_POST["Id_Uti"]) : htmlspecialchars($_SESSION["Id_Uti"]);
+$delParAdmin = isset($_POST["Id_Uti"]);
+$msg = $delParAdmin ? '' : "?msg=compte supprimer";
 
 $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
 $isProducteur->bindParam(':utilisateur', $utilisateur, PDO::PARAM_STR);
 $isProducteur->execute();
-$returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
-$reponse = $returnIsProducteur[0]["result"];
+$reponse = $isProducteur->fetchColumn();
 
-if ($reponse == NULL) {
+if ($reponse === NULL) {
+  handleNonProducteur($bdd, $utilisateur);
+} else {
+  handleProducteur($bdd, $utilisateur);
+}
+
+header('Location: ' . ($delParAdmin ? '../ViewPanelAdmin.php' : 'log_out.php' . $msg));
+
+function handleNonProducteur($bdd, $utilisateur) {
   $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti = :utilisateur;');
   $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
   $queryGetProduitCommande->execute();
-  $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
-  $iterateurProduit = 0;
-  $nbProduit = count($returnQueryGetProduitCommande);
-  while ($iterateurProduit < $nbProduit) {
-    $Id_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
-    $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+  $produitsCommandes = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 
-    $updateProduit = "UPDATE PRODUIT SET Qte_Produit = Qte_Produit + :Qte_Produit_Commande WHERE Id_Produit = :Id_Produit";
-    $bindUpdateProduit = $bdd->prepare($updateProduit);
-    $bindUpdateProduit->bindParam(':Qte_Produit_Commande', $Qte_Produit_Commande, PDO::PARAM_INT);
-    $bindUpdateProduit->bindParam(':Id_Produit', $Id_Produit, PDO::PARAM_INT);
-    $bindUpdateProduit->execute();
+  foreach ($produitsCommandes as $produitCommande) {
+    $updateProduit = $bdd->prepare('UPDATE PRODUIT SET Qte_Produit = Qte_Produit + :Qte_Produit_Commande WHERE Id_Produit = :Id_Produit');
+    $updateProduit->bindParam(':Qte_Produit_Commande', $produitCommande["Qte_Produit_Commande"], PDO::PARAM_INT);
+    $updateProduit->bindParam(':Id_Produit', $produitCommande["Id_Produit"], PDO::PARAM_INT);
+    $updateProduit->execute();
 
-    $test = $bdd->prepare('DELETE FROM CONTENU WHERE Id_Produit= :Id_Produit;');
-    $test->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
-    $test->execute();
-
-    $iterateurProduit++;
+    $delContenu = $bdd->prepare('DELETE FROM CONTENU WHERE Id_Produit= :Id_Produit;');
+    $delContenu->bindParam(":Id_Produit", $produitCommande["Id_Produit"], PDO::PARAM_STR);
+    $delContenu->execute();
   }
-  $test = $bdd->prepare('DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;');
-  $test->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
-  $test->execute();
 
-  $test = $bdd->prepare('DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;');
-  $test->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
-  $test->execute();
+  $queries = [
+    'DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;',
+    'DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;',
+    'DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;'
+  ];
 
-  $test = $bdd->prepare('DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;');
-  $test->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
-  $test->execute();
-} else {
+  foreach ($queries as $query) {
+    $stmt = $bdd->prepare($query);
+    $stmt->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+    $stmt->execute();
+  }
+}
+
+function handleProducteur($bdd, $utilisateur) {
   $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;');
   $queryIdProd->bindParam(":Id_Uti", $utilisateur, PDO::PARAM_STR);
   $queryIdProd->execute();
-  $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
-  $IdProd = $returnQueryIdProd[0]["Id_Prod"];
+  $IdProd = $queryIdProd->fetchColumn();
 
   $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;');
   $queryGetProduitCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
   $queryGetProduitCommande->execute();
-  $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
-  $iterateurProduit = 0;
-  $nbProduit = count($returnQueryGetProduitCommande);
-  while ($iterateurProduit < $nbProduit) {
-    $Id_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Id_Produit"];
+  $produits = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 
+  foreach ($produits as $produit) {
     $delContenu = $bdd->prepare('DELETE FROM CONTENU WHERE Id_Produit=:Id_Produit;');
-    $delContenu->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
+    $delContenu->bindParam(":Id_Produit", $produit["Id_Produit"], PDO::PARAM_STR);
     $delContenu->execute();
 
     $delProduit = $bdd->prepare('DELETE FROM PRODUIT WHERE Id_Produit=:Id_Produit;');
-    $delProduit->bindParam(":Id_Produit", $Id_Produit, PDO::PARAM_STR);
+    $delProduit->bindParam(":Id_Produit", $produit["Id_Produit"], PDO::PARAM_STR);
     $delProduit->execute();
-
-    $iterateurProduit++;
   }
-  $delCommande = $bdd->prepare('DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;');
-  $delCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-  $delCommande->execute();
 
-  $delCommande = $bdd->prepare('DELETE FROM COMMANDE WHERE Id_Prod = :IdProd;');
-  $delCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
-  $delCommande->execute();
+  $queries = [
+    'DELETE FROM COMMANDE WHERE Id_Uti= :utilisateur;',
+    'DELETE FROM COMMANDE WHERE Id_Prod = :IdProd;',
+    'DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;',
+    'DELETE FROM PRODUCTEUR WHERE Id_Uti=:utilisateur;',
+    'DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;'
+  ];
 
-  $delMessage = $bdd->prepare('DELETE FROM MESSAGE WHERE Emetteur= :utilisateur OR Destinataire= :utilisateur;');
-  $delMessage->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-  $delMessage->execute();
-  $delProducteur = $bdd->prepare('DELETE FROM PRODUCTEUR WHERE Id_Uti=:utilisateur;');
-  $delProducteur->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-  $delProducteur->execute();
-  $delUtilisateur = $bdd->prepare('DELETE FROM UTILISATEUR WHERE Id_Uti=:utilisateur;');
-  $delUtilisateur->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
-  $delUtilisateur->execute();
-}
-
-if ($delParAdmin == false) {
-  header('Location: log_out.php' . $msg);
-} else {
-  header('Location: ../ViewPanelAdmin.php');
+  foreach ($queries as $query) {
+    $stmt = $bdd->prepare($query);
+    $stmt->bindParam(strpos($query, 'Id_Prod') !== false ? ':IdProd' : ':utilisateur', strpos($query, 'Id_Prod') !== false ? $IdProd : $utilisateur, PDO::PARAM_STR);
+    $stmt->execute();
+  }
 }
 
 ?>
