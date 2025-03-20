@@ -44,59 +44,90 @@
     <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
-            <div class="contenuBarre">
-                <!-- some code -->
-
-
-
-                <center><p><strong><?php echo $htmlAjouterProduit; ?></strong></p>
+            <div class="barretache">
+    <div class="card shadow-lg">
+        <div class="card-header text-center">
+            <h4><strong><?php echo $htmlAjouterProduit; ?></strong></h4>
+        </div>
+        <div class="card-body">
             <form action="modele/insert_products.php" method="post" enctype="multipart/form-data">
-                <label for="pwd"><?php echo $htmlProduitDeuxPoints; ?> </label>
-                <input type="text" pattern="[A-Za-z0-9 ]{0,100}" name="nomProduit" placeholder="<?php echo $htmlNomDuProduit; ?>" required><br><br>
+                <!-- Nom du produit -->
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $htmlProduitDeuxPoints; ?></label>
+                    <input type="text" class="form-control" pattern="[A-Za-z0-9 ]{0,100}" name="nomProduit" placeholder="<?php echo $htmlNomDuProduit; ?>" required>
+                </div>
 
-                <select name="categorie">
-                    <option value="6"><?php echo $htmlAnimaux; ?></option>
-                    <option value="1"><?php echo $htmlFruit; ?></option>
-                    <option value="3"><?php echo $htmlGraine; ?></option>
-                    <option value="2"><?php echo $htmlLégume; ?></option>
-                    <option value="7"><?php echo $htmlPlanche; ?></option>
-                    <option value="4"><?php echo $htmlViande; ?></option>
-                    <option value="5"><?php echo $htmlVin; ?></option>
-			    </select>
-                <br>
-                <br><?php echo $htmlPrix; ?>
-                <input style="width: 50px;" type="number" min="0" name="prix" required>€
-                <label>
-                    <input type="radio" name="unitPrix" value="1" checked="true"> <?php echo $htmlLeKilo; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitPrix" value="4"> <?php echo $htmlLaPiece; ?>
-                </label>
-                <br>
-                <br><?php echo $htmlStockDeuxPoints; ?>
-                <input type="number" style="width: 50px;" min="0" name="quantite" required>
-                <label>
-                    <input type="radio" name="unitQuantite" value="1" checked="true"> <?php echo $htmlKg; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="2"> <?php echo $htmlL; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="3"> <?php echo $htmlM2; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="4"> <?php echo $htmlPiece; ?>
-                </label>
-                <br>
-                <br>
-                <strong><?php echo $htmlImageDeuxPoints; ?></strong>
-                <input type="file" name="image" accept=".png">
-                <br>
-                <br>
-                <br>
-                <input type="submit" value="<?php echo $htmlAjouterProduit; ?>">
+                <!-- Catégorie -->
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $htmlCategorie; ?></label>
+                    <select name="categorie" class="form-select">
+                        <option value="6"><?php echo $htmlAnimaux; ?></option>
+                        <option value="1"><?php echo $htmlFruit; ?></option>
+                        <option value="3"><?php echo $htmlGraine; ?></option>
+                        <option value="2"><?php echo $htmlLégume; ?></option>
+                        <option value="7"><?php echo $htmlPlanche; ?></option>
+                        <option value="4"><?php echo $htmlViande; ?></option>
+                        <option value="5"><?php echo $htmlVin; ?></option>
+                    </select>
+                </div>
+
+                <!-- Prix -->
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $htmlPrix; ?></label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="prix" min="0" required>
+                        <span class="input-group-text">€</span>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitPrix" value="1" checked>
+                        <label class="form-check-label"><?php echo $htmlLeKilo; ?></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitPrix" value="4">
+                        <label class="form-check-label"><?php echo $htmlLaPiece; ?></label>
+                    </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $htmlStockDeuxPoints; ?></label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="quantite" min="0" required>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitQuantite" value="1" checked>
+                        <label class="form-check-label"><?php echo $htmlKg; ?></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitQuantite" value="2">
+                        <label class="form-check-label"><?php echo $htmlL; ?></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitQuantite" value="3">
+                        <label class="form-check-label"><?php echo $htmlM2; ?></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="unitQuantite" value="4">
+                        <label class="form-check-label"><?php echo $htmlPiece; ?></label>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $htmlImageDeuxPoints; ?></label>
+                    <input type="file" class="form-control" name="image" accept=".png">
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success"><?php echo $htmlAjouterProduit; ?></button>
+                    <a href="produits.php" class="btn btn-secondary"><?php echo $htmlAnnulerModifProd; ?></a>
+                </div>
             </form>
-            </center>
+        </div>
+    </div>
+</div>
+
 
 
 
