@@ -4,15 +4,14 @@
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 
-    function dbConnect(){
-        $utilisateur = $_ENV['DB_USER'];
-        $serveur = $_ENV['DB_HOST'];
-        $motdepasse = $_ENV['DB_PASSWORD'];
-        $basededonnees = $_ENV['DB_NAME'];
-        // Connect to database
-        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
-    }
-    $bdd=dbConnect();
+    $utilisateur = $_ENV['DB_USER'];
+    $serveur = $_ENV['DB_HOST'];
+    $motdepasse = $_ENV['DB_PASSWORD'];
+    $basededonnees = $_ENV['DB_NAME'];
+    // Connect to database
+         
+    
+    $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     //var_dump($_POST);
     $Id_Produit = htmlspecialchars($_POST["IdProductAModifier"]);
     $Nom_Produit = htmlspecialchars($_POST["nomProduit"]);
@@ -42,10 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Spécifier le chemin du dossier de destination
         $targetDir = __DIR__ . "/../asset/img/img_produit/";
         // Obtenir le nom du fichier téléchargé
-        $utilisateur = "etu";
-        $serveur = "localhost";
-        $motdepasse = "Achanger!";
-        $basededonnees = "sae";
         if(!isset($_SESSION)){
             session_start();
             }
@@ -66,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<br>' $htmlImgTelecSucces  $newFileName<br>";
         } else {
             echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-            header('Location: mes_produits.php?erreur='. error_get_last()['message'] );
+            header('Location: produits.php?erreur='. error_get_last()['message'] );
         }
     } else {
         echo $htmlSelecImg."<br>";
