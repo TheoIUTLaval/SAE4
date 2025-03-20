@@ -130,39 +130,37 @@
                                 // "s" indique que la valeur est une chaîne de caractères
                             $stmt->execute();
                             $result = $stmt->get_result();
-
-                            if (($result->num_rows > 0) AND ($_SESSION["isAdmin"]==true)) {
-                                echo"<label><h4> producteurs :</h4></label><br>";
-
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="row mb-3">'; // Début de la ligne pour chaque utilisateur
-
-                                    echo '<div class="col-sm-12">'; // Chaque utilisateur sera dans une seule colonne (sur toute la largeur)
-                                    echo '<div class="card">'; // Début de la carte
-                                    echo '<div class="card-body">'; // Début du contenu de la carte
-
-                                    // Formulaire pour supprimer le compte de l'utilisateur
-                                    echo '<form method="post" action="traitements/del_acc.php">';
-                                    echo '<input type="submit" name="submit" id="submit" class="btn btn-danger" value="'.$htmlSupprimerCompte.'"><br>';
-                                    echo '<input type="hidden" name="Id_Uti" value="'.$row["Id_Uti"].'">';
-                                    echo '</form>';
-
-                                    // Informations de l'utilisateur affichées sous forme de texte dans la carte
-                                    echo '<h5 class="card-title">'.$htmlNomDeuxPoints.' '.$row["Nom_Uti"].'</h5>';
-                                    echo '<p class="card-text">'.$htmlPrénomDeuxPoints.' '.$row["Prenom_Uti"].'</p>';
-                                    echo '<p class="card-text">'.$htmlMailDeuxPoints.' '.$row["Mail_Uti"].'</p>';
-                                    echo '<p class="card-text">'.$htmlAdresseDeuxPoints.' '.$row["Adr_Uti"].'</p>';
-                                    echo '<p class="card-text">'.$htmlProfessionDeuxPoints.' '.$row["Prof_Prod"].'</p>';
-
-                                    echo '</div>'; // Fin du card-body
-                                    echo '</div>'; // Fin du card
-                                    echo '</div>'; // Fin de la colonne (col-sm-12)
-                                    
-                                    echo '</div>'; // Fin de la ligne (row)
-                                }
-                            } else {
-                                echo $htmlErrorDevTeam;
-                            }
+                            ?>
+                            <?php if (($result->num_rows > 0) && ($_SESSION["isAdmin"] == true)) { ?>
+                                <div class="container">
+                                    <label><h4>Producteurs :</h4></label><br>
+                                    <div class="row">
+                                        <?php while ($row = $result->fetch_assoc()) { ?>
+                                            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Compte de <?php echo $row["Nom_Uti"] . " " . $row["Prenom_Uti"]; ?></h5>
+                                                        <p class="card-text">
+                                                            <?php echo $htmlNomDeuxPoints . $row["Nom_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlPrénomDeuxPoints . $row["Prenom_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlMailDeuxPoints . $row["Mail_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
+                                                            <?php echo $htmlProfessionDeuxPoints . $row["Prof_Prod"] . "<br>"; ?>
+                                                        </p>
+                                                        <form method="post" action="traitements/del_acc.php">
+                                                            <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
+                                                            <input type="submit" name="submit" class="btn btn-danger" value="<?php echo $htmlSupprimerCompte; ?>">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <?php echo $htmlErrorDevTeam; ?>
+                            <?php } 
+                            
                             $stmt->close();
                             $connexion->close();
                         ?>
