@@ -30,7 +30,7 @@
 <?php
 if (isset($_POST['formClicked'])){
     unset($_POST['formClicked']);
-    require 'traitements/mdp_oublie/update.php';
+    require 'popups/mdp_oublie/update.php';
     $_SESSION['actualiser'] = true;
 }
 ?>

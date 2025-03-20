@@ -27,7 +27,7 @@
 <?php
 if (isset($_POST['formClicked'])){
     unset($_POST['formClicked']);
-    require 'traitements/mdp_oublie/code.php';
+    require 'popups/mdp_oublie/code.php';
     $_SESSION['actualiser'] = true;
 }
 ?>
