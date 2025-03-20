@@ -218,7 +218,9 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                 </div>
 
                 <div class='texte-center mt-4'>
-                    <input type="submit" class="btn btn-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #EBF4EC; background-color: #305514;"
+                    <input type="submit" class="btn btn-outline-primary" style ="border: 1px solid #EBF4EC; border-radius: 5px; padding: 5px; color: #EBF4EC"
+                    onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
+                    onmouseout="this.style.backgroundColor=''; this.style.color='#EBF4EC';"
                     value="<?php echo $htmlRechercher ?>">
                 </div>
             </form>
@@ -502,4 +504,9 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
 </div>
 <?php require "popups/gestion_popups.php"; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    function confirmDeleteAccount() {
+        return confirm("Are you sure you want to delete your account?");
+    }
+</script>
 </body>
