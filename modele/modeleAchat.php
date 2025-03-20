@@ -38,8 +38,9 @@
     elseif(count($returnQueryGetCommande)==0){
         echo $htmlAucuneCommandeCorrespondCriteres;
     }
-    else{
-        while ($iterateurCommande<count($returnQueryGetCommande)){
+
+    else { 
+        while ($iterateurCommande < count($returnQueryGetCommande)) {
             $Id_Commande = $returnQueryGetCommande[$iterateurCommande]["Id_Commande"];
             $Nom_Prod = $returnQueryGetCommande[$iterateurCommande]["Nom_Uti"];
             $Nom_Prod = mb_strtoupper($Nom_Prod);
@@ -49,52 +50,50 @@
             $Desc_Statut = mb_strtoupper($Desc_Statut);
             $Id_Statut = $returnQueryGetCommande[$iterateurCommande]["Id_Statut"];
             $idUti = $returnQueryGetCommande[$iterateurCommande]["Id_Uti"];
-
-
-            $total=0;
-            $queryGetProduitCommande = $bdd->prepare('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes  WHERE Id_Commande = :Id_Commande;');
+    
+            $total = 0;
+            $queryGetProduitCommande = $bdd->prepare('SELECT Nom_Produit, Qte_Produit_Commande, Prix_Produit_Unitaire, Nom_Unite_Prix FROM produits_commandes WHERE Id_Commande = :Id_Commande;');
             $queryGetProduitCommande->bindParam(":Id_Commande", $Id_Commande, PDO::PARAM_STR);
             $queryGetProduitCommande->execute();
             $returnQueryGetProduitCommande = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
-            $iterateurProduit=0;
-            $nbProduit=count($returnQueryGetProduitCommande);
-
-            if ($nbProduit>0){
-                echo '<div class="commande" >';
-                echo $htmlCommandeNum,  $iterateurCommande+1 ." : ".$htmlChez, $Prenom_Prod.' '.$Nom_Prod.' - '.$Adr_Uti;
-                echo '</br>';
-                echo $Desc_Statut;
-                echo '</br>';
-                if ($Id_Statut!=3 and $Id_Statut!=4){
-                echo '<form action="modele/delete_commande.php" method="post">';
-                echo '<input type="hidden" name="deleteValeur" value="'.$Id_Commande.'">';
-                
-                echo '<button type="submit">'.$htmlAnnulerCommande.'</button>';
-                echo '</form>';
+            $iterateurProduit = 0;
+            $nbProduit = count($returnQueryGetProduitCommande);
+    
+            if ($nbProduit > 0) {
+                // Début de la carte Bootstrap
+                echo '<div class="card mb-3">'; // carte principale avec une marge en bas
+                echo '<div class="card-header"><strong>Commande ' . ($iterateurCommande + 1) . ' :</strong> ' . $htmlChez . ' ' . $Prenom_Prod . ' ' . $Nom_Prod . ' - ' . $Adr_Uti . '</div>';
+                echo '<div class="card-body">';
+                echo '<p class="card-text"> <strong>' . $Desc_Statut . '</strong></p>';
+    
+                if ($Id_Statut != 3 && $Id_Statut != 4) {
+                    echo '<form action="modele/delete_commande.php" method="post">';
+                    echo '<input type="hidden" name="deleteValeur" value="' . $Id_Commande . '">';
+                    echo '<button type="submit" class="btn btn-danger">' . $htmlAnnulerCommande . '</button>';
+                    echo '</form>';
                 }
-            }
-
-            ?>
-            <input type="button" onclick="window.location.href='ViewMessagerie.php?Id_Interlocuteur=<?php echo $idUti; ?>'" value="<?php echo $htmlEnvoyerMessage; ?>">
-            <br>
-            <?php
-
-            while ($iterateurProduit<$nbProduit){
-                $Nom_Produit=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
-                $Qte_Produit_Commande=$returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
-                $Nom_Unite_Prix=$returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
-                $Prix_Produit_Unitaire=$returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
-                echo "- " . $Nom_Produit ." - ".$Qte_Produit_Commande.' '.$Nom_Unite_Prix.' * '.$Prix_Produit_Unitaire.'€ = '.intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande).'€';
-                echo "</br>";
-                $total=$total+intval($Prix_Produit_Unitaire)*intval($Qte_Produit_Commande);
-                $iterateurProduit++;
+    
+                // Bouton pour envoyer un message
+                echo '<input type="button" onclick="window.location.href=\'ViewMessagerie.php?Id_Interlocuteur=' . $idUti . '\'" value="' . $htmlEnvoyerMessage . '" class="btn btn-info mt-3">'; 
+                echo '<br>';
+    
+                while ($iterateurProduit < $nbProduit) {
+                    $Nom_Produit = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Produit"];
+                    $Qte_Produit_Commande = $returnQueryGetProduitCommande[$iterateurProduit]["Qte_Produit_Commande"];
+                    $Nom_Unite_Prix = $returnQueryGetProduitCommande[$iterateurProduit]["Nom_Unite_Prix"];
+                    $Prix_Produit_Unitaire = $returnQueryGetProduitCommande[$iterateurProduit]["Prix_Produit_Unitaire"];
+                    echo '<br><p class="card-text"> <strong> ' . $Nom_Produit . ' </strong> ' . $Qte_Produit_Commande . ' ' . $Nom_Unite_Prix . ' * ' . $Prix_Produit_Unitaire . '€ = ' . intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande) . '€</p>';
+                    $total += intval($Prix_Produit_Unitaire) * intval($Qte_Produit_Commande);
+                    $iterateurProduit++;
+                }
+    
+                // Affichage du total dans un div aligné à droite
+                echo '<div class="text-end"><strong>' . $htmlTotalDeuxPoints . ' ' . $total . '€</strong></div>';
+                echo '</div>'; // Ferme card-body
+                echo '</div>'; // Ferme card
             }
             $iterateurCommande++;
-            if ($nbProduit>0){
-                echo '<div class="aDroite">'.$htmlTotalDeuxPoints, $total.'€</div>';
-                echo '<br> '; 
-                echo '</div> '; 
-            }
         }
     }
-            ?>
+    ?>
+    
