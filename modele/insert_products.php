@@ -33,7 +33,9 @@
 
 
     $Produit_exist = false;
-    $Noms_Produits= "SELECT Nom_Produit FROM PRODUIT;";
+    $Noms_Produits= $bdd->prepare('SELECT Nom_Produit FROM PRODUIT WHERE Id_Prod = $IdProd;');
+    $Noms_Produits->execute();
+    
     foreach ($Noms_Produits as $nomproduit){
         $nomproduit = $nomproduit["Nom_Produit"];
         If ($Nom_Produit == $nomproduit){
