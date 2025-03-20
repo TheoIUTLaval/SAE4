@@ -44,64 +44,82 @@
     <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png" alt="Logo">
-            <div class="contenuBarre">
-                <!-- some code -->
+            <div class="contenuBarre mt-5">
 
+                <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
 
+                <div class="row g-4 mt-3">
+                    <?php
+                        $bdd = dbConnect();
+                        $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti = :utilisateur');
+                        $queryIdProd->bindParam(':utilisateur', $utilisateur, PDO::PARAM_INT);
+                        $queryIdProd->execute();
+                        $returnQueryIdProd = $queryIdProd->fetchAll(PDO::FETCH_ASSOC);
+                        $Id_Prod = $returnQueryIdProd[0]["Id_Prod"];
 
-                <center><p><strong><?php echo $htmlAjouterProduit; ?></strong></p>
-            <form action="modele/insert_products.php" method="post" enctype="multipart/form-data">
-                <label for="pwd"><?php echo $htmlProduitDeuxPoints; ?> </label>
-                <input type="text" pattern="[A-Za-z0-9 ]{0,100}" name="nomProduit" placeholder="<?php echo $htmlNomDuProduit; ?>" required><br><br>
+                        $queryGetProducts = $bdd->prepare('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod = :idProd');
+                        $queryGetProducts->bindParam(':idProd', $Id_Prod, PDO::PARAM_INT);
+                        $queryGetProducts->execute();
+                        $returnQueryGetProducts = $queryGetProducts->fetchAll(PDO::FETCH_ASSOC);
 
-                <select name="categorie">
-                    <option value="6"><?php echo $htmlAnimaux; ?></option>
-                    <option value="1"><?php echo $htmlFruit; ?></option>
-                    <option value="3"><?php echo $htmlGraine; ?></option>
-                    <option value="2"><?php echo $htmlLégume; ?></option>
-                    <option value="7"><?php echo $htmlPlanche; ?></option>
-                    <option value="4"><?php echo $htmlViande; ?></option>
-                    <option value="5"><?php echo $htmlVin; ?></option>
-			    </select>
-                <br>
-                <br><?php echo $htmlPrix; ?>
-                <input style="width: 50px;" type="number" min="0" name="prix" required>€
-                <label>
-                    <input type="radio" name="unitPrix" value="1" checked="true"> <?php echo $htmlLeKilo; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitPrix" value="4"> <?php echo $htmlLaPiece; ?>
-                </label>
-                <br>
-                <br><?php echo $htmlStockDeuxPoints; ?>
-                <input type="number" style="width: 50px;" min="0" name="quantite" required>
-                <label>
-                    <input type="radio" name="unitQuantite" value="1" checked="true"> <?php echo $htmlKg; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="2"> <?php echo $htmlL; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="3"> <?php echo $htmlM2; ?>
-                </label>
-                <label>
-                    <input type="radio" name="unitQuantite" value="4"> <?php echo $htmlPiece; ?>
-                </label>
-                <br>
-                <br>
-                <strong><?php echo $htmlImageDeuxPoints; ?></strong>
-                <input type="file" name="image" accept=".png">
-                <br>
-                <br>
-                <br>
-                <input type="submit" value="<?php echo $htmlAjouterProduit; ?>">
-            </form>
-            </center>
+                        if (count($returnQueryGetProducts) == 0) {
+                            echo "<p class='text-center text-muted fs-5'>$htmlAucunProduitEnStock</p>";
+                        } else {
+                            foreach ($returnQueryGetProducts as $product) {
+                                $Id_Produit = $product["Id_Produit"];
+                                $nomProduit = $product["Nom_Produit"];
+                                $typeProduit = $product["Desc_Type_Produit"];
+                                $prixProduit = $product["Prix_Produit_Unitaire"];
+                                $QteProduit = $product["Qte_Produit"];
+                                $unitePrixProduit = $product["Nom_Unite_Prix"];
+                                $Nom_Unite_Stock = $product["Nom_Unite_Stock"];
 
+                                if ($QteProduit > 0) {
+                                    echo '
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card shadow-sm h-100">
+                                            <img src="asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">' . $nomProduit . '</h5>
+                                                <p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>
+                                                <p class="card-text"><strong>' . $htmlPrix . '</strong> ' . $prixProduit . ' €/ ' . $unitePrixProduit . '</p>
+                                                <p class="card-text"><strong>' . $htmlStockDeuxPoints . '</strong> ' . $QteProduit . ' ' . $Nom_Unite_Stock . '</p>
+                                                <div class="d-flex justify-content-between">
+                                    ';
 
+                                    if ($Id_Produit == $Id_Produit_Update) {
+                                        echo '<button class="btn btn-secondary" disabled>' . $htmlModification . '</button>';
+                                    } else {
+                                        echo '
+                                        <form action="product_modification.php" method="post">
+                                            <input type="hidden" name="modifyIdProduct" value="' . $Id_Produit . '">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="bi bi-pencil-square"></i> ' . $htmlModifier . '
+                                            </button>
+                                        </form>';
+                                    }
 
+                                    echo '
+                                        <form action="SAE4/modele/delete_product.php" method="post">
+                                            <input type="hidden" name="deleteIdProduct" value="' . $Id_Produit . '">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="bi bi-trash"></i> ' . $htmlSupprimer . '
+                                            </button>
+                                        </form>
+                                    ';
+
+                                    echo '
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+                                }
+                            }
+                        }
+                    ?>
+                </div>
             </div>
-        </div>
+
         <div class="rightColumn">
         <div class="topBanner">
             <div class="divNavigation">
