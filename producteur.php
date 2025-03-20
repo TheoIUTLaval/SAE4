@@ -209,7 +209,7 @@
             <div class="content-container">
                 <div class="product mt-4">
                     <!-- partie de gauche avec les produits -->
-                    <strong><<p class="text-center"><h3><?php echo $htmlProduitsProposesDeuxPoints; ?></h3></p></strong>
+                    <strong><p class="text-center"><h3><?php echo $htmlProduitsProposesDeuxPoints; ?></h3></p></strong>
                     <div class="row gallery-container">
                         <?php
                             $bdd=dbConnect();
