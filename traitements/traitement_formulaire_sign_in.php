@@ -14,12 +14,19 @@ try {
     }
 
     // Database connection
-    $utilisateur = "etu";
-    $serveur = "localhost";
-    $motdepasse = "Achanger!";
-    $basededonnees = "sae";
+    require __DIR__ . '/../vendor/autoload.php';
 
-    $bdd = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+    function dbConnect(){
+        $utilisateur = $_ENV['DB_USER'];
+        $serveur = $_ENV['DB_HOST'];
+        $motdepasse = $_ENV['DB_PASSWORD'];
+        $basededonnees = $_ENV['DB_NAME'];
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    }
+    $bdd=dbConnect();
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Check if user email exists
@@ -44,7 +51,7 @@ try {
                 $_SESSION['Id_Uti'] = $Id_Uti;
                 
                 // Check user role
-                $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                $bdd2=dbConnect();
                 $isProducteur = $bdd2->query('CALL isProducteur('.$Id_Uti.');');
                 $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
                 $reponse = $returnIsProducteur[0]["result"];
@@ -54,7 +61,7 @@ try {
                     $_SESSION["isProd"] = false;
                 }
 
-                $bdd3 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+                $bdd3=dbConnect();
                 $isAdmin = $bdd3->query('CALL isAdministrateur('.$Id_Uti.');');
                 $returnIsAdmin = $isAdmin->fetchAll(PDO::FETCH_ASSOC);
                 if (!empty($returnIsAdmin) && isset($returnIsAdmin[0]["result"])) {

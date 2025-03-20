@@ -16,11 +16,19 @@ $Mail_Uti = $_POST['mail'];
 $_SESSION['Mail_Temp']=$Mail_Uti;
 
 // Connexion à la base de données 
-$utilisateur = "etu";
-$serveur = "localhost";
-$motdepasse = "Achanger!";
-$basededonnees = "sae";
-$connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+require __DIR__ . '/../vendor/autoload.php';
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+    function dbConnect(){
+        $utilisateur = $_ENV['DB_USER'];
+        $serveur = $_ENV['DB_HOST'];
+        $motdepasse = $_ENV['DB_PASSWORD'];
+        $basededonnees = $_ENV['DB_NAME'];
+        // Connect to database
+        return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    }
+    $bdd=dbConnect();
 
 // Récupération de la valeur maximum de Id_Uti
 $requete = "SELECT MAX(Id_Uti) AS id_max FROM UTILISATEUR";
@@ -68,7 +76,7 @@ if ($nb == 0) {
     // Fermeture de la connexion
     $connexion = null;
 
-    $bdd2 = new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
+    $bdd2=dbConnect();
     $isProducteur = $bdd2->query('CALL isProducteur('.$iduti.');');
     $returnIsProducteur = $isProducteur->fetchAll(PDO::FETCH_ASSOC);
     $reponse=$returnIsProducteur[0]["result"];
