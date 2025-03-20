@@ -76,7 +76,7 @@
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
                 <button class="btn btn-danger mt-3" onclick="confirmDeleteAccount()">
-                    <?php echo $htmlSupprimerCompte; ?>
+                    
                 </button>
 
                 <script>
