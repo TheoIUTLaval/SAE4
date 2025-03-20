@@ -139,8 +139,7 @@
 
 
 
-            </div>
-        </div>
+  
         <div class="rightColumn">
         <div class="topBanner">
             <div class="divNavigation">
