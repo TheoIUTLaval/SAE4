@@ -127,12 +127,12 @@
                                 return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
                             }
                             $bdd=dbConnect();
-                            if ($connexion->connect_error) {
-                                die("Erreur de connexion : " . $connexion->connect_error);
+                            if ($bdd->connect_error) {
+                                die("Erreur de connexion : " . $bdd->connect_error);
                             }
                             // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                             $requete = 'SELECT UTILISATEUR.Id_Uti, PRODUCTEUR.Prof_Prod, PRODUCTEUR.Id_Prod, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM PRODUCTEUR JOIN UTILISATEUR ON PRODUCTEUR.Id_Uti = UTILISATEUR.Id_Uti';
-                            $stmt = $connexion->prepare($requete);
+                            $stmt = $bdd->prepare($requete);
                                 // "s" indique que la valeur est une chaîne de caractères
                             $stmt->execute();
                             $result = $stmt->get_result();
@@ -170,24 +170,23 @@
                             <?php } 
                             
                             $stmt->close();
-                            $connexion->close();
+                            $bdd->close();
                         ?>
                         <hr>
                 <div class="gallery-container">
                 <?php
                     // Connexion à la base de données 
-                    $utilisateur = "etu";
-                    $serveur = "localhost";
-                    $motdepasse = "Achanger!";
-                    $basededonnees = "sae";
-                    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-                    // Vérifiez la connexion
-                    if ($connexion->connect_error) {
-                        die("Erreur de connexion : " . $connexion->connect_error);
+                    require __DIR__ . '/vendor/autoload.php';
+                    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
+                    $dotenv->load();
+                    
+                    $bdd=dbConnect();
+                    if ($bdd->connect_error) {
+                        die("Erreur de connexion : " . $bdd->connect_error);
                     }
                     // Préparez la requête SQL en utilisant des requêtes préparées pour des raisons de sécurité
                     $requete = 'SELECT UTILISATEUR.Id_Uti, UTILISATEUR.Prenom_Uti, UTILISATEUR.Nom_Uti, UTILISATEUR.Mail_Uti, UTILISATEUR.Adr_Uti FROM UTILISATEUR WHERE UTILISATEUR.Id_Uti  NOT IN (SELECT PRODUCTEUR.Id_Uti FROM PRODUCTEUR) AND UTILISATEUR.Id_Uti NOT IN (SELECT ADMINISTRATEUR.Id_Uti FROM ADMINISTRATEUR) AND UTILISATEUR.Id_Uti<>0;';
-                    $stmt = $connexion->prepare($requete);
+                    $stmt = $bdd->prepare($requete);
                         // "s" indique que la valeur est une chaîne de caractères
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -223,7 +222,7 @@
                         <?php echo $htmlErrorDevTeam; ?>
                     <?php } 
                     $stmt->close();
-                    $connexion->close();
+                    $bdd->close();
                     ?>
             <br>
             <div class="basDePage">
