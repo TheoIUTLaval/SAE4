@@ -6,9 +6,9 @@ $pwd1 = $_POST['pwd1'];
 $pwd2 = $_POST['pwd2'];
 
 if ($pwd1 == $pwd2 && $pwd1 !== null) {
-    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__ . '/../../vendor/autoload.php';
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
     $dotenv->load();
     function dbConnect(){
         $utilisateur = $_ENV['DB_USER'];
