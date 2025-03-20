@@ -73,7 +73,14 @@
                     </div>
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
-                <a href="traitements/del_acc.php"><button><?php echo $htmlSupprimerCompte?></button></a>
+                <button onclick="confirmDeleteAccount()"><?php echo $htmlSupprimerCompte?></button>
+                <script>
+                    function confirmDeleteAccount() {
+                        if (confirm("<?php echo $htmlConfirmerSuppressionCompte; ?>")) {
+                            window.location.href = 'traitements/del_acc.php';
+                        }
+                    }
+                </script>
                 
                 <?php if((isset($_SESSION['isProd']) and $_SESSION['isProd'])){?> 
                 <a href="./ViewAddProfilPicture.php"><button><?php echo 'ajouter une photo de profil'?></button></a>
