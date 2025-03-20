@@ -177,6 +177,16 @@
 
                     <!-- partie de gauche avec les produits -->
                     <p><center><U><?php echo $htmlMesProduitsEnStock; ?></U></center></p>
+                    <div class="exist">
+                    <?php if (isset($_SESSION['erreur'])): ?>
+                        <div class="d-flex justify-content-center " style="height: 100vh;">
+                            <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
+                                <?php echo htmlspecialchars($_SESSION['erreur']); ?>
+                            </div>
+                        </div>
+                    <?php unset($_SESSION['erreur']); // Supprimer le message après l'affichage ?>
+                    <?php endif; ?>
+                    </div>
                     <div class="gallery-container">
                         <?php
                             
@@ -226,16 +236,7 @@
                             
                         ?>
                     </div>
-                    <div class="exist">
-                    <?php if (isset($_SESSION['erreur'])): ?>
-                        <div class="d-flex justify-content-center " style="height: 100vh;">
-                            <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
-                                <?php echo htmlspecialchars($_SESSION['erreur']); ?>
-                            </div>
-                        </div>
-                    <?php unset($_SESSION['erreur']); // Supprimer le message après l'affichage ?>
-                    <?php endif; ?>
-                    </div>
+                    
                     <div class="basDePage">
         
             
