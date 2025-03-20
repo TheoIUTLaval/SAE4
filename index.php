@@ -400,7 +400,7 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
                                     $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
 
                                     echo '<img src="' . $imageSrc . '" class="card-img-top" alt="' . $htmlImageUtilisateur . '" style="height: 180px; object-fit: cover;">';
-                                    echo '<div class="card-body">';
+                                    echo '<div class="card-body" style="color: #305514;">'; 
                                     echo '<h5 class="card-title">' . $row["Prof_Prod"] . '</h5>';
                                     echo '<p class="card-text">';
                                     echo $row["Prenom_Uti"] . " " . mb_strtoupper($row["Nom_Uti"]) . "<br>";
