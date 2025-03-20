@@ -48,7 +48,7 @@
           $Id_Unite_Prix = $returnQueryGetProducts[0]["Id_Unite_Prix"];
           //var_dump($Id_Type_Produit);
         ?>
-    <div class="container">
+    <div class="custom-container">
         <div class="leftColumn">
 			<img class="logo" href="index.php" src="asset/img/logo.png">
             <div class="contenuBarre">
