@@ -31,13 +31,13 @@
                 </div>
                 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary"
+                    <button type="submit" class="btn btn-outline-primary" style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514"
                     onmouseover="this.style.backgroundColor='#305514'; this.style.color='#FFFFFF';"
                     onmouseout="this.style.backgroundColor=''; this.style.color='#305514';"
                     ><?php echo $htmlEnvoyerMessageATousUti; ?></button>
                 </div>
             </form>
-            
+    </div>
 
             <div class="basDePage">
         
