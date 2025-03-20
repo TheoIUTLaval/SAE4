@@ -76,7 +76,7 @@
                     <input class="boutonPopup" type="submit" name="formClicked" value="<?php echo $htmlModifier?>">
                 </form>
                 <button class="btn btn-danger mt-3" onclick="confirmDeleteAccount()">
-                    
+                    <?php echo $htmlSupprimerCompte; ?>
                 </button>
 
                 <script>
@@ -99,7 +99,7 @@
                 </script>
 
                 <form id="deleteAccountForm" action="traitements/del_acc.php" method="post" style="display:none;">
-                <input type="hidden" name="deleteAccount" value="true">
+                    <input type="hidden" name="deleteAccount" value="true">
                 </form>
                 
                 <?php if((isset($_SESSION['isProd']) and $_SESSION['isProd'])){?> 
