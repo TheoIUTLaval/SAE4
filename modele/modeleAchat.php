@@ -5,10 +5,10 @@
     $dotenv->load();
 
     function dbConnect(){
-        $utilisateur = $_ENV['DB_USER'];
-        $serveur = $_ENV['DB_HOST'];
-        $motdepasse = $_ENV['DB_PASS'];
-        $basededonnees = $_ENV['DB_NAME'];
+        $utilisateur = $_SERVER['DB_USER'];
+        $serveur = $_SERVER['DB_HOST'];
+        $motdepasse = $_SERVER['DB_PASS'];
+        $basededonnees = $_SERVER['DB_NAME'];
         // Connect to database
         return new PDO('mysql:host=' . $serveur . ';dbname=' . $basededonnees, $utilisateur, $motdepasse);
     }
