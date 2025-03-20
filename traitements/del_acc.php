@@ -29,6 +29,7 @@ $isProducteur = $bdd->prepare('CALL isProducteur(:utilisateur);');
 $isProducteur->bindParam(':utilisateur', $utilisateur, PDO::PARAM_STR);
 $isProducteur->execute();
 $reponse = $isProducteur->fetchColumn();
+$isProducteur->closeCursor();
 
 if ($reponse === NULL) {
   handleNonProducteur($bdd, $utilisateur);
@@ -40,8 +41,9 @@ header('Location: ' . ($delParAdmin ? '../ViewPanelAdmin.php' : 'log_out.php' . 
 
 function handleNonProducteur($bdd, $utilisateur) {
   $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit, Qte_Produit_Commande FROM produits_commandes WHERE Id_Uti = :utilisateur;');
-  $queryGetProduitCommande->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
   $queryGetProduitCommande->execute();
+  $produitsCommandes = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+  $queryGetProduitCommande->closeCursor();
   $produitsCommandes = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($produitsCommandes as $produitCommande) {
@@ -69,12 +71,14 @@ function handleNonProducteur($bdd, $utilisateur) {
 }
 
 function handleProducteur($bdd, $utilisateur) {
-  $queryIdProd = $bdd->prepare('SELECT Id_Prod FROM PRODUCTEUR WHERE Id_Uti=:Id_Uti;');
-  $queryIdProd->bindParam(":Id_Uti", $utilisateur, PDO::PARAM_STR);
   $queryIdProd->execute();
   $IdProd = $queryIdProd->fetchColumn();
-
-  $queryGetProduitCommande = $bdd->prepare('SELECT Id_Produit FROM PRODUIT WHERE Id_Prod = :IdProd;');
+  $queryIdProd->closeCursor();
+  $queryIdProd->execute();
+  $IdProd = $queryIdProd->fetchColumn();
+  $queryGetProduitCommande->execute();
+  $produits = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
+  $queryGetProduitCommande->closeCursor();
   $queryGetProduitCommande->bindParam(":IdProd", $IdProd, PDO::PARAM_STR);
   $queryGetProduitCommande->execute();
   $produits = $queryGetProduitCommande->fetchAll(PDO::FETCH_ASSOC);
