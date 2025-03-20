@@ -42,8 +42,8 @@
         $nomproduit = $nomproduit["Nom_Produit"];
         If ($Nom_Produit == $nomproduit){
             $Produit_exist = true;
-            // Redirection avec message d'erreur
-            header('Location: ../produits.php?erreur=' . urlencode($htmlNomProduitExiste));
+            $_SESSION['erreur'] = $htmlNomProduitExiste;
+            header('Location: ../produits.php');
             exit; // Arrêter l'exécution après la redirection
           
         }
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<br>".$htmlImgTelecSucces, $newFileName."<br>";
             } else {
                 echo $htmlImgTelecRate . error_get_last()['message'] . "<br>";
-                header('Location: produits.php?erreur='. error_get_last()['message']);
+                header('Location: ../produits.php?erreur='. error_get_last()['message']);
             }
 
     } else {
