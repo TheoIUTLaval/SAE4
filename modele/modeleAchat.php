@@ -76,8 +76,13 @@
                 }
     
                 // Bouton pour envoyer un message
-                echo '<input type="button" class="btn btn-outline-primary" !style ="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514" 
-                onclick="window.location.href=\'ViewMessagerie.php?Id_Interlocuteur=' . $idUti . '\'" value="' . $htmlEnvoyerMessage . '" class="btn btn-info mt-3">'; 
+                echo '<input type="button" class="btn btn-outline-primary" 
+                        style="border: 1px solid #305514; border-radius: 5px; padding: 5px; color: #305514;" 
+                        onmouseover="this.style.backgroundColor=\'#305514\'; this.style.color=\'#FFFFFF\';" 
+                        onmouseout="this.style.backgroundColor=\'\'; this.style.color=\'#305514\';" 
+                        onclick="window.location.href=\'ViewMessagerie.php?Id_Interlocuteur=' . $idUti . '\'" 
+                        value="' . $htmlEnvoyerMessage . '" class="btn btn-info mt-3">';
+
                 echo '<br>';
     
                 while ($iterateurProduit < $nbProduit) {
