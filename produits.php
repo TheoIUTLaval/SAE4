@@ -179,10 +179,7 @@
                     <p><center><U><?php echo $htmlMesProduitsEnStock; ?></U></center></p>
                     <div class="gallery-container">
                         <?php
-                            if (isset($_SESSION['erreur'])) {
-                                echo '<div style="color: red; font-weight: bold;">' . htmlspecialchars($_SESSION['erreur']) . '</div>';
-                                unset($_SESSION['erreur']); // Supprimer le message après l'affichage
-                            }
+                            
                             $bdd=dbConnect();
                             $queryGetProducts = $bdd->prepare(('SELECT Id_Produit, Nom_Produit, Desc_Type_Produit, Prix_Produit_Unitaire, Nom_Unite_Prix, Qte_Produit, Nom_Unite_Stock FROM Produits_d_un_producteur WHERE Id_Prod= :Id_Prod ;'));
                             $queryGetProducts->bindParam(":Id_Prod", $Id_Prod, PDO::PARAM_STR);
@@ -225,6 +222,10 @@
                                     }
                                     $i++;
                                 }
+                            }
+                            if (isset($_SESSION['erreur'])) {
+                                echo '<div style="color: red; font-weight: bold;">' . htmlspecialchars($_SESSION['erreur']) . '</div>';
+                                unset($_SESSION['erreur']); // Supprimer le message après l'affichage
                             }
                         ?>
                     </div>
