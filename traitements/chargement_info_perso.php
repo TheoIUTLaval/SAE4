@@ -1,4 +1,4 @@
-@@ -1,22 +1,30 @@
+
 <?php
 $utilisateur = "etu";
 $serveur = "localhost";
