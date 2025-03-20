@@ -7,7 +7,7 @@
     require "language/language.php";
     require __DIR__ . '/vendor/autoload.php';
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
     $dotenv->load();
     function dbConnect(){
         $utilisateur = $_ENV['DB_USER'];
