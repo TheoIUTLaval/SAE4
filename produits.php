@@ -246,7 +246,7 @@
                         $imagePath = 'asset/img/img_produit/' . $Id_Produit . '.png';
                         $defaultImage = 'asset/img/pas_deproduit.png';
                         $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
-                        var_dump(file_exists('asset/img/pas_deproduit.png'));
+                        var_dump($imageSrc);
                         echo '
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card shadow-sm h-100">
