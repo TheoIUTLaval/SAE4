@@ -143,65 +143,92 @@ function distance($lat1, $lng1, $lat2, $lng2, $miles = false)
         <img class="logo" href="index.php" src="asset/img/logo.png">
 
         <div class="contenuBarre">
-    <div class="text-center">
-        <strong>
-            <p><?php echo $htmlRechercherPar; ?></p>
-        </strong>
+            <div class="text-center">
+                <strong>
+                    <p><?php echo $htmlRechercherPar; ?></p>
+                </strong>
+            </div>
+
+            <form method="get" action="index.php">
+                <div class="form-group">
+                    <label for="categories"><?php echo $htmlParProfession ?></label>
+                    <select name="categorie" id="categories" class="from-control">
+                        <option value="Tout" <?php if ($_GET["categorie"] == "Tout") echo 'selected="selected"'; ?>><?php echo $htmlTout ?></option>
+                        <option value="Agriculteur" <?php if ($_GET["categorie"] == "Agriculteur") echo 'selected="selected"'; ?>><?php echo $htmlAgriculteur ?></option>
+                        <option value="Vigneron" <?php if ($_GET["categorie"] == "Vigneron") echo 'selected="selected"'; ?>><?php echo $htmlVigneron ?></option>
+                        <option value="Maraîcher" <?php if ($_GET["categorie"] == "Maraîcher") echo 'selected="selected"'; ?>><?php echo $htmlMaraîcher ?></option>
+                        <option value="Apiculteur" <?php if ($_GET["categorie"] == "Apiculteur") echo 'selected="selected"'; ?>><?php echo $htmlApiculteur ?></option>
+                        <option value="Éleveur de volaille" <?php if ($_GET["categorie"] == "Éleveur de volaille") echo 'selected="selected"'; ?>><?php echo $htmlÉleveurdevolailles ?></option>
+                        <option value="Viticulteur" <?php if ($_GET["categorie"] == "Viticulteur") echo 'selected="selected"'; ?>><?php echo $htmlViticulteur ?></option>
+                        <option value="Pépiniériste" <?php if ($_GET["categorie"] == "Pépiniériste") echo 'selected="selected"'; ?>><?php echo $htmlPépiniériste ?></option>
+                    </select>
+                </div>
+                <div class="from-group">
+                    <label for="rechercheVille"><?php echo $htmlParVille ?></label>
+                    <input type="text" name="rechercheVille" id="rechercheVille" class="form-control" pattern="[A-Za-z0-9 ]{0,100}"
+                    value="<?php echo $rechercheVille ?>" placeholder="<?php echo $htmlVille; ?>">
+                </div>
+
+                <?php
+                $queryAdrUti = $bdd->prepare(('SELECT Adr_Uti FROM UTILISATEUR WHERE Id_Uti= :utilisateur;'));
+                $queryAdrUti->bindParam(":utilisateur", $utilisateur, PDO::PARAM_STR);
+                $queryAdrUti->execute();
+                $returnQueryAdrUti = $queryAdrUti->fetchAll(PDO::FETCH_ASSOC);
+
+                if (count($returnQueryAdrUti) > 0) {
+                    $Adr_Uti_En_Cours = $returnQueryAdrUti[0]["Adr_Uti"];
+                ?>
+                <!-- Rayon autour de chez moi -->
+                <div class="form-group">
+                    <label for="rayon"><?php echo $htmlAutourDeChezMoi . ' (' . $Adr_Uti_En_Cours . ')'; ?></label>
+                    <input name="rayon" type="range" value="<?php echo $rayon; ?>" min="1" max="100" step="1"
+                        class="form-control-range" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
+                    <span id="monCurseurKm"><?php echo $htmlRayonDe ?><?php echo $rayon; if ($rayon >= 100) echo '+'; ?></span>
+                </div>
+
+
+                    <script>
+                        function AfficheRange2(newVal) {
+                            var monCurseurKm = document.getElementById("monCurseurKm");
+                            if ((newVal >= 100)) {
+                                monCurseurKm.innerHTML = "Rayon de " + newVal + "+ ";
+                            } else {
+                                monCurseurKm.innerHTML = "Rayon de " + newVal + " ";
+                            }
+                        }
+                    </script>
+                <?php echo $htmlKm ?>
+                    <br>
+                    <br>
+                    <?php
+
+                } else {
+                    $Adr_Uti_En_Cours = 'France';
+                }
+                ?>
+                
+
+                <div class="from-group">
+                    <label for="tri"><?php echo $htmlTri ?></label>
+                
+                    <select name="tri" id='tri' class='from-control' required>
+                        <option value="nombreDeProduits" <?php if ($tri == "nombreDeProduits") echo 'selected="selected"'; ?>><?php echo $htmlNombreDeProduits ?></option>
+                        <option value="ordreNomAlphabétique" <?php if ($tri == "ordreNomAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParNomAl ?></option>
+                        <option value="ordreNomAntiAlphabétique" <?php if ($tri == "ordreNomAntiAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParNomAntiAl ?></option>
+                        <option value="ordrePrenomAlphabétique" <?php if ($tri == "ordrePrenomAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParPrenomAl ?></option>
+                        <option value="ordrePrenomAntiAlphabétique" <?php if ($tri == "ordrePrenomAntiAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParPrenomAntiAl ?></option>
+                    </select>
+                </div>
+
+                <div class='texte-center mt-4'>
+                    <input type="submit" class="btn btn-primary" style ="border: 1px solid #EBF4EC; border-radius: 5px; padding: 5px; color: #EBF4EC; background-color: #305514;"
+                    value="<?php echo $htmlRechercher ?>">
+                </div>
+            </form>
+
+            
+        </div>
     </div>
-
-    <form method="get" action="index.php" class="mt-3">
-        <div class="form-group">
-            <label for="categories"><?php echo $htmlParProfession ?></label>
-            <select name="categorie" id="categories" class="form-control">
-                <option value="Tout" <?php if ($_GET["categorie"] == "Tout") echo 'selected="selected"'; ?>><?php echo $htmlTout ?></option>
-                <option value="Agriculteur" <?php if ($_GET["categorie"] == "Agriculteur") echo 'selected="selected"'; ?>><?php echo $htmlAgriculteur ?></option>
-                <option value="Vigneron" <?php if ($_GET["categorie"] == "Vigneron") echo 'selected="selected"'; ?>><?php echo $htmlVigneron ?></option>
-                <option value="Maraîcher" <?php if ($_GET["categorie"] == "Maraîcher") echo 'selected="selected"'; ?>><?php echo $htmlMaraîcher ?></option>
-                <option value="Apiculteur" <?php if ($_GET["categorie"] == "Apiculteur") echo 'selected="selected"'; ?>><?php echo $htmlApiculteur ?></option>
-                <option value="Éleveur de volaille" <?php if ($_GET["categorie"] == "Éleveur de volaille") echo 'selected="selected"'; ?>><?php echo $htmlÉleveurdevolailles ?></option>
-                <option value="Viticulteur" <?php if ($_GET["categorie"] == "Viticulteur") echo 'selected="selected"'; ?>><?php echo $htmlViticulteur ?></option>
-                <option value="Pépiniériste" <?php if ($_GET["categorie"] == "Pépiniériste") echo 'selected="selected"'; ?>><?php echo $htmlPépiniériste ?></option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="rechercheVille"><?php echo $htmlParVille ?></label>
-            <input type="text" name="rechercheVille" id="rechercheVille" class="form-control" pattern="[A-Za-z0-9 ]{0,100}"
-                value="<?php echo $rechercheVille ?>" placeholder="<?php echo $htmlVille; ?>">
-        </div>
-
-        <?php if (isset($Adr_Uti_En_Cours)) { ?>
-        <div class="form-group">
-            <label for="rayon"><?php echo $htmlAutourDeChezMoi . ' (' . $Adr_Uti_En_Cours . ')'; ?></label>
-            <input name="rayon" type="range" value="<?php echo $rayon; ?>" min="1" max="100" step="1"
-                class="form-control-range" onchange="AfficheRange2(this.value)" onkeyup="AfficheRange2(this.value)">
-            <span id="monCurseurKm"><?php echo $htmlRayonDe ?><?php echo $rayon; if ($rayon >= 100) echo '+'; ?></span>
-        </div>
-        <script>
-            function AfficheRange2(newVal) {
-                var monCurseurKm = document.getElementById("monCurseurKm");
-                monCurseurKm.innerHTML = "Rayon de " + newVal + (newVal >= 100 ? "+" : " ");
-            }
-        </script>
-        <?php } ?>
-
-        <div class="form-group">
-            <label for="tri"><?php echo $htmlTri ?></label>
-            <select name="tri" id='tri' class='form-control' required>
-                <option value="nombreDeProduits" <?php if ($tri == "nombreDeProduits") echo 'selected="selected"'; ?>><?php echo $htmlNombreDeProduits ?></option>
-                <option value="ordreNomAlphabétique" <?php if ($tri == "ordreNomAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParNomAl ?></option>
-                <option value="ordreNomAntiAlphabétique" <?php if ($tri == "ordreNomAntiAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParNomAntiAl ?></option>
-                <option value="ordrePrenomAlphabétique" <?php if ($tri == "ordrePrenomAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParPrenomAl ?></option>
-                <option value="ordrePrenomAntiAlphabétique" <?php if ($tri == "ordrePrenomAntiAlphabétique") echo 'selected="selected"'; ?>><?php echo $htmlParPrenomAntiAl ?></option>
-            </select>
-        </div>
-
-        <div class='text-center mt-4'>
-            <input type="submit" class="btn btn-primary" value="<?php echo $htmlRechercher ?>">
-        </div>
-    </form>
-</div>
-
     <div class="rightColumn">
     <div class="topBanner">
             <div class="divNavigation">
