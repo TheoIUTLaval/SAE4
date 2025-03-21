@@ -85,7 +85,7 @@
                 <script>
                 function confirmDeleteAccount() {
                     Swal.fire({
-                        title: "<?php echo 'htmlConfirmerSuppressionCompte'; ?>",
+                        title: "<?php echo 'Etes vous sur de vouloir suprimmer votre compte ?'; ?>",
                         text: "Cette action est irréversible ! Êtes-vous sûr de vouloir supprimer votre compte ?",
                         icon: "warning",
                         showCancelButton: true,
