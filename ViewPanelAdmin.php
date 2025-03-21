@@ -151,10 +151,30 @@
                                                             <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
                                                             <?php echo $htmlProfessionDeuxPoints . $row["Prof_Prod"] . "<br>"; ?>
                                                         </p>
-                                                        <form method="post" action="traitements/del_acc.php">
+                                                        <form id="deleteAccountForm<?php echo $row["Id_Uti"]; ?>" action="traitements/del_acc.php" method="post" style="display:none;">
                                                             <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
-                                                            <input type="submit" name="submit" class="btn btn-danger" value="<?php echo $htmlSupprimerCompte; ?>">
                                                         </form>
+
+                                                        <button class="btn btn-danger" onclick="confirmDeleteAccount(<?php echo $row["Id_Uti"]; ?>)"><?php echo $htmlSupprimerCompte; ?></button>
+
+                                                        <script>
+                                                        function confirmDeleteAccount(userId) {
+                                                            Swal.fire({
+                                                                title: "Etes vous sur de vouloir suprimmer votre compte ?",
+                                                                text: "Cette action est irréversible ! Êtes-vous sûr de vouloir supprimer votre compte ?",
+                                                                icon: "warning",
+                                                                showCancelButton: true,
+                                                                confirmButtonColor: "#d33",
+                                                                cancelButtonColor: "#3085d6",
+                                                                confirmButtonText: "Oui, supprimer",
+                                                                cancelButtonText: "Annuler"
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById('deleteAccountForm' + userId).submit();
+                                                                }
+                                                            });
+                                                        }
+                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
