@@ -249,7 +249,7 @@
                         echo '
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card shadow-sm h-100">
-                                <img src='.$imageSrc. '.png" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
+                                <img src="' . $imageSrc . '" class="card-img-top img-fluid" alt="' . $htmlImageNonFournie . '" style="height: 200px; object-fit: cover;">
                                 <div class="card-body">
                                     <h5 class="card-title">' . $nomProduit . '</h5>
                                     <p class="card-text"><strong>' . $htmlTypeDeuxPoints . '</strong> ' . $typeProduit . '</p>
