@@ -115,7 +115,7 @@
                 <!-- Image -->
                 <div class="mb-3">
                     <label class="form-label"><?php echo $htmlImageDeuxPoints; ?></label>
-                    <input type="file" class="form-control" name="image" accept=".png">
+                    <input type="file" class="form-control" name="image" accept=".png" required>
                 </div>
 
                 <!-- Boutons d'action -->
