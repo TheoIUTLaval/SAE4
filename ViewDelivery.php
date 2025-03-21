@@ -104,7 +104,7 @@ $returnQueryGetCommande = getCommandes($bdd, $utilisateur, $filtreCategorie);
                 <strong><?php echo $htmlCOMMANDE; ?>:</strong> <?php echo strtoupper($commande['Desc_Statut']); ?><br>
 
                 <?php if (!in_array($commande['Id_Statut'], [3, 4])): ?>
-                    <form action="change_status_commande.php" method="post">
+                    <form action="modele/change_status_commande.php" method="post">
                     <select name="categorie">
                         <option value=""><?php echo $htmlModifierStatut; ?></option>
                         <?php 
@@ -134,13 +134,13 @@ $returnQueryGetCommande = getCommandes($bdd, $utilisateur, $filtreCategorie);
                 <strong>Total:</strong> <?php echo $total; ?>€<br>
 
                 <!-- Bouton pour imprimer le PDF -->
-                <form action="imprimer_pdf.php" method="post" target="_blank">
+                <form action="modele/download_pdf.php" method="post" target="_blank">
                     <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
                     <button type="submit"><?php echo $htmlImprimerPDF; ?></button>
                 </form>
 
                 <!-- Bouton pour envoyer un message au producteur -->
-                <form action="envoyer_message.php" method="post">
+                <form action="ViewMessagerie.php" method="post">
                     <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
                     <button type="submit"><?php echo $htmlEnvoyerMessage; ?></button>
                 </form>
