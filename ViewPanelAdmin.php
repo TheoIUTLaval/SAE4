@@ -155,7 +155,7 @@
                                                             <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
                                                         </form>
 
-                                                        <button class="btn btn-danger" onclick="confirmDeleteAccount(<?php echo $row["Id_Uti"]; ?>)"><?php echo $htmlSupprimerCompte; ?></button>
+                                                        <button class="btn btn-danger" onclick="confirmDeleteAccount(<?php echo $row["Id_Uti"]; ?>)"><?php echo '$htmlSupprimerCompte'; ?></button>
 
                                                         <script>
                                                         function confirmDeleteAccount(userId) {
