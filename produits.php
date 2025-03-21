@@ -215,6 +215,11 @@
                     <!-- partie de gauche avec les produits -->
                     <div class="galerie-produit mt-5">
     <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
+    <div class="exist">
+            <?php if (isset($_SESSION['erreur'])): ?>
+                <div class="d-flex justify-content-center " style="margin-top: 10px; margin-bottom: 10px;">
+                    <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
+                        <?php echo htmlspecialchars($_SESSION['erreur']); ?>
 
     <div class="row g-4 mt-3">
         <?php
