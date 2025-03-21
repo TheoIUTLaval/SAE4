@@ -243,8 +243,8 @@
                     $Nom_Unite_Stock = $product["Nom_Unite_Stock"];
 
                     if ($QteProduit > 0) {
-                        $imagePath='asset/img/img_produit/' . $Id_Produit . '.png" class="card-img-top img-fluid"';
-                        $defaultImage='asset/img/pas_deproduit.png';
+                        $imagePath = 'asset/img/img_produit/' . $Id_Produit . '.png';
+                        $defaultImage = 'asset/img/pas_deproduit.png';
                         $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
                         echo '
                         <div class="col-12 col-md-6 col-lg-4">
