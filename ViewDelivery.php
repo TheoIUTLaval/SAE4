@@ -96,44 +96,56 @@ $returnQueryGetCommande = getCommandes($bdd, $utilisateur, $filtreCategorie);
 
         <div class="contenuPage">
             <?php if (empty($returnQueryGetCommande)): ?>
-                <p><?php echo $htmlAucuneCommande; ?></p>
+            <p><?php echo $htmlAucuneCommande; ?></p>
             <?php else: ?>
-                <?php foreach ($returnQueryGetCommande as $commande): ?>
-                    <div class="commande">
-                        <strong><?php echo $htmlClient; ?>:</strong> <?php echo "{$commande['Prenom_Uti']} {$commande['Nom_Uti']}"; ?><br>
-                        <strong><?php echo $htmlCOMMANDE; ?>:</strong> <?php echo strtoupper($commande['Desc_Statut']); ?><br>
+            <?php foreach ($returnQueryGetCommande as $commande): ?>
+                <div class="commande">
+                <strong><?php echo $htmlClient; ?>:</strong> <?php echo "{$commande['Prenom_Uti']} {$commande['Nom_Uti']}"; ?><br>
+                <strong><?php echo $htmlCOMMANDE; ?>:</strong> <?php echo strtoupper($commande['Desc_Statut']); ?><br>
 
-                        <?php if (!in_array($commande['Id_Statut'], [3, 4])): ?>
-                            <form action="change_status_commande.php" method="post">
-                                <select name="categorie">
-                                    <option value=""><?php echo $htmlModifierStatut; ?></option>
-                                    <?php 
-                                    foreach ($categories as $key => $label) {
-                                        if ($key > 0) echo "<option value='$key'>$label</option>";
-                                    }
-                                    ?>
-                                </select>
-                                <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
-                                <button type="submit"><?php echo $htmlConfirmer; ?></button>
-                            </form>
-                        <?php endif; ?>
-
-                        <?php
-                        $total = 0;
-                        $produitsCommande = getProduitsCommande($bdd, $commande['Id_Commande']);
+                <?php if (!in_array($commande['Id_Statut'], [3, 4])): ?>
+                    <form action="change_status_commande.php" method="post">
+                    <select name="categorie">
+                        <option value=""><?php echo $htmlModifierStatut; ?></option>
+                        <?php 
+                        foreach ($categories as $key => $label) {
+                        if ($key > 0) echo "<option value='$key'>$label</option>";
+                        }
                         ?>
-                        <?php if (!empty($produitsCommande)): ?>
-                            <?php foreach ($produitsCommande as $produit): ?>
-                                <p>- <?php echo "{$produit['Nom_Produit']} ({$produit['Qte_Produit_Commande']} {$produit['Nom_Unite_Prix']} x {$produit['Prix_Produit_Unitaire']}€) = " .
-                                    ($produit['Prix_Produit_Unitaire'] * $produit['Qte_Produit_Commande']) . "€"; ?>
-                                </p>
-                                <?php $total += $produit['Prix_Produit_Unitaire'] * $produit['Qte_Produit_Commande']; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                    </select>
+                    <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
+                    <button type="submit"><?php echo $htmlConfirmer; ?></button>
+                    </form>
+                <?php endif; ?>
 
-                        <strong>Total:</strong> <?php echo $total; ?>€<br>
-                    </div>
-                <?php endforeach; ?>
+                <?php
+                $total = 0;
+                $produitsCommande = getProduitsCommande($bdd, $commande['Id_Commande']);
+                ?>
+                <?php if (!empty($produitsCommande)): ?>
+                    <?php foreach ($produitsCommande as $produit): ?>
+                    <p>- <?php echo "{$produit['Nom_Produit']} ({$produit['Qte_Produit_Commande']} {$produit['Nom_Unite_Prix']} x {$produit['Prix_Produit_Unitaire']}€) = " .
+                        ($produit['Prix_Produit_Unitaire'] * $produit['Qte_Produit_Commande']) . "€"; ?>
+                    </p>
+                    <?php $total += $produit['Prix_Produit_Unitaire'] * $produit['Qte_Produit_Commande']; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <strong>Total:</strong> <?php echo $total; ?>€<br>
+
+                <!-- Bouton pour imprimer le PDF -->
+                <form action="imprimer_pdf.php" method="post" target="_blank">
+                    <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
+                    <button type="submit"><?php echo $htmlImprimerPDF; ?></button>
+                </form>
+
+                <!-- Bouton pour envoyer un message au producteur -->
+                <form action="envoyer_message.php" method="post">
+                    <input type="hidden" name="idCommande" value="<?php echo $commande['Id_Commande']; ?>">
+                    <button type="submit"><?php echo $htmlEnvoyerMessage; ?></button>
+                </form>
+                </div>
+            <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
