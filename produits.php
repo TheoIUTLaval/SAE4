@@ -217,7 +217,7 @@
     <h3 class="text-center text-decoration-underline"><?php echo $htmlMesProduitsEnStock; ?></h3>
     <div>
     <?php if (isset($_SESSION['erreur'])): ?>
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="d-flex justify-content-center align-items-center" style="margin-top: 10px;  margin-bottom: 10px;">
         <div class="alert alert-danger text-center" role="alert" style="font-weight: bold;">
             <?php echo htmlspecialchars($_SESSION['erreur']); ?>
         </div>
