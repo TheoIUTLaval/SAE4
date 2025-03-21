@@ -151,10 +151,33 @@
                                                             <?php echo $htmlAdresseDeuxPoints . $row["Adr_Uti"] . "<br>"; ?>
                                                             <?php echo $htmlProfessionDeuxPoints . $row["Prof_Prod"] . "<br>"; ?>
                                                         </p>
+                                                        <button class="btn btn-danger mt-3" onclick="confirmDeleteAccount()">
+                                                            <?php echo $htmlSupprimerCompte; ?>
+                                                        </button>
+
                                                         <form method="post" action="traitements/del_acc.php">
                                                             <input type="hidden" name="Id_Uti" value="<?php echo $row["Id_Uti"]; ?>">
                                                             <input type="submit" name="submit" class="btn btn-danger" value="<?php echo $htmlSupprimerCompte; ?>">
                                                         </form>
+
+                                                        <script>
+                                                        function confirmDeleteAccount() {
+                                                            Swal.fire({
+                                                                title: "<?php echo 'Etes vous sur de vouloir suprimmer votre compte ?'; ?>",
+                                                                text: "Cette action est irréversible ! Êtes-vous sûr de vouloir supprimer votre compte ?",
+                                                                icon: "warning",
+                                                                showCancelButton: true,
+                                                                confirmButtonColor: "#d33",
+                                                                cancelButtonColor: "#3085d6",
+                                                                confirmButtonText: "Oui, supprimer",
+                                                                cancelButtonText: "Annuler"
+                                                            }).then((result) => {
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById('deleteAccountForm').submit();
+                                                                }
+                                                            });
+                                                        }
+                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
