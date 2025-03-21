@@ -276,7 +276,7 @@
                                         echo '<div class="col-md-4 mb-4">';
                                         echo '<div class="card h-100">';
                                         $imagePath = "asset/img/img_produit/" . $Id_Produit . ".png";
-                                        $defaultImagePath = "asset/img/pas_deproduit.png";
+                                        $defaultImagePath = "asset/img/default_produit.png";
                                         $imageSrc= file_exists($imagePath) ? $imagePath : $defaultImagePath;
                                         echo '<img class="card-img-top" src='.$imageSrc.' alt="'.$htmlImageNonFournie.'" style="height: 200px; object-fit: cover;">';
                                         echo '<div class="card-body">';

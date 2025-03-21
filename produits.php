@@ -244,7 +244,7 @@
 
                     if ($QteProduit > 0) {
                         $imagePath = 'asset/img/img_produit/' . $Id_Produit . '.png';
-                        $defaultImage = 'asset/img/pas_deproduit.png';
+                        $defaultImage = 'asset/img/default_produit.png';
                         $imageSrc = file_exists($imagePath) ? $imagePath : $defaultImage;
                         echo '
                         <div class="col-12 col-md-6 col-lg-4">
